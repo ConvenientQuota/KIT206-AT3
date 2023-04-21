@@ -12,6 +12,7 @@ namespace AT3
           
         {
             Console.WriteLine("push test 1");
+            Console.WriteLine("Pull Test 1");
         }
     }
 }
