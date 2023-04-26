@@ -20,6 +20,8 @@ namespace AT3
         public int Age{get; set;}
         public string Cite { get; set; }
 
+        public List<Researcher> Researchers { get; set;}
+
 
     }
 

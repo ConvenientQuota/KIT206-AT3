@@ -32,4 +32,5 @@ namespace AT3
         public string Degree { get; set; }
         public string Supervisor { get; set; }
     }
+
 }
