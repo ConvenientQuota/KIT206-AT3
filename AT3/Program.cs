@@ -15,13 +15,6 @@ namespace AT3
             DisplayResearcher(researchers);
         }
 
-
-
-
-
-
-
-
         static void DisplayResearcher(List<Researcher> a)
         {
             foreach (Researcher researcher in a)

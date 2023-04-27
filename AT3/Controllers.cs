@@ -6,35 +6,38 @@ using System.Threading.Tasks;
 
 namespace AT3
 {
-    internal class Control
+    public class ResearcherController
     {
-        List<Researcher> researchers;
+        public List<Researcher> researchers {get;}
 
-        static void ResearcherController()
+        public ResearcherController()
         {
-
+            researchers = new List<Researcher>();
         }
 
-        static void addResearcher (Researcher researcher)
+        public void addResearcher(Researcher researcher)
         {
             researchers.Add(researcher);
         }
 
-        static void RemoveResearcher(Researcher researcher)
+        public void removeResearcher(Researcher researcher)
         {
             researchers.Remove(researcher);
         }
 
-        static List<Researcher> GetResearchers()
-        {
-            return researchers;
-        }
-        static void Researcher FilterByName(string name)
+        // get the by name
+        public Researcher filterByName(string name)
         {
             return researchers.FirstOrDefault(re => re.Name == name);
         }
 
-        static void DisplayResearcherDetials(Researcher researcher)
+        // filter the researchers by position
+        public List<Researcher> filterByLevel(EmployeeLevel level)
+        {
+            return researchers.Where(re => re.Level == level).ToList();
+        }
+
+        static void DisplayResearcherDetails(Researcher researcher)
         {
             Console.WriteLine(researcher.Name);
             Console.WriteLine(researcher.Title);
@@ -54,7 +57,43 @@ namespace AT3
             Console.WriteLine(researcher.Supervisions);
             Console.WriteLine(researcher.Degree);
         }
-        
+
+    }
+
+    public class PublicationController
+    {
+        public List<Publication> publications {get;}
+
+        public PublicationController()
+        {
+            publications = new List<Publication>();
+        }
+
+        // add publication
+        public void addPublication(Publication publication)
+        {
+            publications.Add(publication);
+        }
+
+        // remove publication
+        public void removePublication(Publication publication)
+        {
+            publications.Remove(publication);
+        }
+
+        public Publication filterByTitle(int title)
+        {
+            return publications.FirstOrDefault(pub => pub.Title == title);
+        }
+
+        public List<Publication> filterByYear(int year)
+        {
+            return publications.Where(pub => pub.PublicationYear == year).ToList();
+        }
+
+        public List<Publication> filterByType(int type)
+        {
+            return publications.Where(pub => pub.Type == type).ToList();
         }
     }
 }
