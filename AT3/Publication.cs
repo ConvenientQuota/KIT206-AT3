@@ -22,20 +22,11 @@ namespace AT3
 
         public List<Researcher> Researchers { get; set;}
 
+        public override string ToString()
+        {
+            return DOI + " " + Publications + " " + Title + " " + Authors + " " + PublicationYear + " " + Ranking + " " + Type + " " + CiteAs + " " + AvaliabilityDate + " " + Age + " " + Cite;
+        }
+
 
     }
-
-    /*
-    Public Staff() 
-    {
-
-    }
-
-    public Students() 
-    {
-
-    }
-
-    */
-
 }

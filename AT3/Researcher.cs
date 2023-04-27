@@ -31,6 +31,11 @@ namespace AT3
         public string Supervisions { get; set; }
         public string Degree { get; set; }
         public string Supervisor { get; set; }
+
+        public override string ToString()
+        {
+            return Name + " " + Title + " " + School + " " + Unit + " " + Campus + " " + Email + " " + Level + " " + commenceWithInstitute + " " + commenceCurrentPosition + " " + Tenure + " " + Publications + " " + Q1Percentage + " " + ThreeYearAverage + " " + Funding + " " + performancePublication + " " + performanceFunding + " " + Supervisions + " " + Degree + " " + Supervisor ;
+        }
     }
 
 }

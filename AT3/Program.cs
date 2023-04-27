@@ -9,10 +9,25 @@ namespace AT3
     internal class Program
     {
         static void Main(string[] args)
-          
         {
-            Console.WriteLine("push test 1");
-            Console.WriteLine("Pull Test 1");
+            List<Researcher> researchers = Data.GenerateResearcher();
+            Console.WriteLine("All current researchers\n");
+            DisplayResearcher(researchers);
+        }
+
+
+
+
+
+
+
+
+        static void DisplayResearcher(List<Researcher> a)
+        {
+            foreach (Researcher researcher in a)
+            {
+                Console.WriteLine(researcher);
+            }
         }
     }
 }
