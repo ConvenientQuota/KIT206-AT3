@@ -19,25 +19,27 @@ namespace AT3
             for (int i = 1; i <= 1; i++)
             {
                 {
-                    researchers.Add(new Researcher{ 
-                        Name = "Alex", 
-                        Title = "IDK", 
-                        School = "school1", 
-                        Unit = "LMK101", 
+                    researchers.Add(new Researcher
+                    {
+                        Name = "Alex",
+                        Title = "IDK",
+                        School = "school1",
+                        Unit = "LMK101",
                         Campus = "School",
-                        Email = "ExampleEmail@utas.edu.au", 
-                        Level = EmployeeLevel.A, 
-                        commenceWithInstitute = "jan/01/1990", 
-                        commenceCurrentPosition = "jan/01/1990", 
-                        Tenure = 1, 
-                        Publications = 1, 
-                        Q1Percentage = 1, 
-                        ThreeYearAverage = 3, 
-                        Funding = 23000, 
-                        performancePublication = 3, 
-                        Supervisions = "Monty", 
-                        Degree = "Bachealor of kelp", 
-                        Supervisor = "jones" });
+                        Email = "ExampleEmail@utas.edu.au",
+                        Level = EmployeeLevel.A,
+                        commenceWithInstitute = "jan/01/1990",
+                        commenceCurrentPosition = "jan/01/1990",
+                        Tenure = 1,
+                        Publications = 1,
+                        Q1Percentage = 1,
+                        ThreeYearAverage = 3,
+                        Funding = 23000,
+                        performancePublication = 3,
+                        Supervisions = "Monty",
+                        Degree = "Bachealor of kelp",
+                        Supervisor = "jones"
+                    });
 
                     researchers.Add(new Researcher
                     {
@@ -91,14 +93,14 @@ namespace AT3
         public static List<Publication> GeneratePublication()
         {
             List<Publication> publications = new List<Publication>();
-           for ( int i = 1;i <= 10; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 Publication publication = new Publication();
                 {
-                    publications.Add(new Publication { DOI = "lol", Publications = 1, Title = 1, Authors = 1, PublicationYear = 2000, Ranking = 2, Type = 3, CiteAs = 9, AvaliabilityDate = 3, Age = 20, Cite = "citationExample" });
+                    publications.Add(new Publication { DOI = "lol", Publications = 1, Title = 1, Authors = 1, PublicationYear = 2000, Ranking = 2, Type = 3, CiteAs = 9, AvailabilityDate = 3, Age = 20, Cite = "citationExample" });
                 }
             }
-           return publications; 
+            return publications;
         }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AT3
 {
     public class ResearcherController
     {
-        public List<Researcher> researchers {get;}
+        public List<Researcher> researchers { get; }
 
         public ResearcherController()
         {
@@ -25,10 +23,10 @@ namespace AT3
             researchers.Remove(researcher);
         }
 
-        // get the by name
-        public Researcher filterByName(string name)
+        // show only those staff whose give name or family name contains the text entered by the user
+        public List<Researcher> filterByName(string name)
         {
-            return researchers.FirstOrDefault(re => re.Name == name);
+            return researchers.Where(re => re.Name.Contains(name)).ToList();
         }
 
         // filter the researchers by position
@@ -62,7 +60,7 @@ namespace AT3
 
     public class PublicationController
     {
-        public List<Publication> publications {get;}
+        public List<Publication> publications { get; }
 
         public PublicationController()
         {
@@ -86,14 +84,19 @@ namespace AT3
             return publications.FirstOrDefault(pub => pub.Title == title);
         }
 
+        public Publication filterByAuthor(int author)
+        {
+            return publications.FirstOrDefault(pub => pub.Authors == author);
+        }
+
         public List<Publication> filterByYear(int year)
         {
             return publications.Where(pub => pub.PublicationYear == year).ToList();
         }
 
-        public List<Publication> filterByType(int type)
+        public List<Publication> reverseSortByYear()
         {
-            return publications.Where(pub => pub.Type == type).ToList();
+            return publications.OrderByDescending(pub => pub.PublicationYear).ToList();
         }
     }
 }

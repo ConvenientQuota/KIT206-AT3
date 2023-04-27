@@ -34,7 +34,7 @@ namespace AT3
 
         public override string ToString()
         {
-            return Name + " " + Title + " " + School + " " + Unit + " " + Campus + " " + Email + " " + Level + " " + commenceWithInstitute + " " + commenceCurrentPosition + " " + Tenure + " " + Publications + " " + Q1Percentage + " " + ThreeYearAverage + " " + Funding + " " + performancePublication + " " + performanceFunding + " " + Supervisions + " " + Degree + " " + Supervisor ;
+            return Name + " " + Title + " " + School + " " + Unit + " " + Campus + " " + Email + " " + Level + " " + commenceWithInstitute + " " + commenceCurrentPosition + " " + Tenure + " " + Publications + " " + Q1Percentage + " " + ThreeYearAverage + " " + Funding + " " + performancePublication + " " + performanceFunding + " " + Supervisions + " " + Degree + " " + Supervisor;
         }
     }
 
