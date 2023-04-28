@@ -11,8 +11,8 @@ namespace AT3
     public class Researcher
     {
 
+        //i hatw it when technology dosent work in your favour
         public string Name { get; set; }
-        // public int Id { get; set; }
         public string Title { get; set; }
         public string School { get; set; }
         public string Unit { get; set; }
