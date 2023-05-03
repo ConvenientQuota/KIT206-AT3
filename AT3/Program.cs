@@ -11,7 +11,7 @@ namespace AT3
         static void Main(string[] args)
         {
             ResearcherController control = new ResearcherController();
-            List<Researcher> researchers = Data.GenerateResearcher();
+            List<Researcher> researchers = FakeData.GenerateResearcher();
             Console.WriteLine("All current researchers\n");
             DisplayResearcher(researchers);
 
@@ -20,8 +20,8 @@ namespace AT3
             control.addResearcher(researcher1);
 
             //get all researchers
-            List<Researcher> researcher = control.addResearcher();
-            foreach (Researcher researcher in researchers)
+            List<Researcher>  allResearcher = control.researchers;
+            foreach (Researcher researcher in allResearcher)
             {
                 control.addResearcher(researcher);
             }
@@ -30,12 +30,25 @@ namespace AT3
             control.removeResearcher(researcher1);
 
             //Filter By Name
-            Researcher researcher2 = control.filterByName("Alex");
+            List<Researcher> researcher2 = control.filterByName("Alex");
             if (researcher2 != null)
             {
-                control.DisplayResearcherDetails(researcher2);
+                foreach (Researcher researcher in researcher2)
+                {
+                    ResearcherController.DisplayResearcherDetails(researcher);
+                }
             }
 
+            //Filter By Level
+
+            List<Researcher> researcher3 = control.filterByLevel(EmployeeLevel.A);
+            if (researcher3 != null)
+            {
+                foreach (Researcher researcher in researcher2)
+                {
+                    ResearcherController.DisplayResearcherDetails(researcher);
+                }
+            }
         }
 
 

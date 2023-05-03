@@ -35,7 +35,7 @@ namespace AT3
             return researchers.Where(re => re.Level == level).ToList();
         }
 
-        static void DisplayResearcherDetails(Researcher researcher)
+        public static void DisplayResearcherDetails(Researcher researcher)
         {
             Console.WriteLine(researcher.Name);
             Console.WriteLine(researcher.Title);
@@ -56,47 +56,5 @@ namespace AT3
             Console.WriteLine(researcher.Degree);
         }
 
-    }
-
-    public class PublicationController
-    {
-        public List<Publication> publications { get; }
-
-        public PublicationController()
-        {
-            publications = new List<Publication>();
-        }
-
-        // add publication
-        public void addPublication(Publication publication)
-        {
-            publications.Add(publication);
-        }
-
-        // remove publication
-        public void removePublication(Publication publication)
-        {
-            publications.Remove(publication);
-        }
-
-        public Publication filterByTitle(int title)
-        {
-            return publications.FirstOrDefault(pub => pub.Title == title);
-        }
-
-        public Publication filterByAuthor(int author)
-        {
-            return publications.FirstOrDefault(pub => pub.Authors == author);
-        }
-
-        public List<Publication> filterByYear(int year)
-        {
-            return publications.Where(pub => pub.PublicationYear == year).ToList();
-        }
-
-        public List<Publication> reverseSortByYear()
-        {
-            return publications.OrderByDescending(pub => pub.PublicationYear).ToList();
-        }
     }
 }

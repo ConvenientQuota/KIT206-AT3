@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace AT3
 {
-    abstract class Data
+    abstract class FakeData
     {
 
         public static List<Researcher> GenerateResearcher()
@@ -84,10 +84,8 @@ namespace AT3
                         Supervisor = "Rein"
                     });
                 }
-
             }
             return researchers;
-
         }
     }
 }
