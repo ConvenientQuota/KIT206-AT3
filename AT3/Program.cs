@@ -36,7 +36,6 @@ namespace AT3
                 control.DisplayResearcherDetails(researcher2);
             }
 
-            PublicationController
         }
 
 
