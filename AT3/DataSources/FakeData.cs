@@ -15,10 +15,6 @@ namespace AT3
         public static List<Researcher> GenerateResearcher()
         {
             List<Researcher> researchers = new List<Researcher>();
-
-            for (int i = 1; i <= 1; i++)
-            {
-                {
                     researchers.Add(new Researcher
                     {
                         Name = "Alex",
@@ -82,9 +78,7 @@ namespace AT3
                         Supervisions = "Devin",
                         Degree = "Bachealor of kelp",
                         Supervisor = "Rein"
-                    });
-                }
-            }
+                    });   
             return researchers;
         }
 

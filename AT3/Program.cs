@@ -14,85 +14,107 @@ namespace AT3
     {
 
         static void Main(string[] args)
-        {
-            DbAdaptor adaptor = new DbAdaptor();
-            adaptor.ReadData();
+        {  
+         /*
+          * Real data 
+          */
+           DbAdaptor adaptor = new DbAdaptor();
+           adaptor.ReadData();
 
-            /*
-             * Displaying Fake data
-             */
-            ResearcherController researcherController = new ResearcherController();
-            PublicationControllers publicationControllers = new PublicationControllers();
-            //Fake Researchers
-            List<Researcher> researchers = FakeData.GenerateResearcher();
-            Console.WriteLine("All current researchers\n");
-            DisplayResearcher(researchers);
+           /*
+            * Displaying Fake data
+            */
+           ResearcherController researcherController = new ResearcherController();
+           PublicationControllers publicationControllers = new PublicationControllers();
 
-            //Fake Publications
-            List<Publication> publication = FakeData.GeneratePublication();
-            Console.WriteLine("All current Publication\n");
-            DisplayPublicaiton(publication);
+           //Fake Researchers
+           List<Researcher> researchers = FakeData.GenerateResearcher();
+           Console.WriteLine("All current researchers\n");
+           DisplayResearcher(researchers);
 
-            //Adding Researchers and Publications
-            Researcher researcher1 = new Researcher();
-            researcherController.addResearcher(researcher1);
+           //Fake Publications
+           List<Publication> publication = FakeData.GeneratePublication();
+           Console.WriteLine("All current Publication\n");
+           DisplayPublicaiton(publication);
 
-            Publication publication1 = new Publication();
-            publicationControllers.addPublication(publication1);
+           //Adding Researchers and Publications
+           Researcher researcher1 = new Researcher();
+           researcherController.addResearcher(researcher1);
 
-            //get all researchers
-            List<Researcher>  allResearcher = FakeData.GenerateResearcher();
-            foreach (Researcher researcher in allResearcher)
+           Publication publication1 = new Publication();
+           publicationControllers.addPublication(publication1);
+
+           //Get all researchers
+           List<Researcher>  allResearcher = FakeData.GenerateResearcher();
+           foreach (Researcher researcher in allResearcher)
+           {
+               researcherController.addResearcher(researcher);
+           }
+
+           //Get all publications
+           List<Publication> allPublications = FakeData.GeneratePublication();
+            foreach (Publication Publication in allPublications)
             {
-                researcherController.addResearcher(researcher);
+                publicationControllers.addPublication(Publication);
             }
 
-            //remove researcher
-            Researcher researcherToRemove = researcherController.researchers[0];
-            researcherController.removeResearcher(researcherToRemove);
+           //Remove researcher
+           Researcher researcherToRemove = researcherController.researchers[0];
+           researcherController.removeResearcher(researcherToRemove);
+
+           //Remove Publication
+           Publication publicationToRemove = new Publication();
+           publicationControllers.removePublication(publicationToRemove);
             
 
-            //Filter By Name (change name)
-            List<Researcher> researcher2 = researcherController.filterByName("Alex");
-            if (researcher2 != null)
-            {
-                Console.WriteLine("\nResearchers matching description");
-                foreach (Researcher researcher in researcher2)
-                {
-                    ResearcherController.DisplayResearcherDetails(researcher);
-                }
-            }
+           //Filter By Name (change name)
+           List<Researcher> filterName = researcherController.filterByName("Alex");
+           if (filterName != null)
+           {
+               Console.WriteLine("\nResearchers matching description");
+               foreach (Researcher researcher in filterName)
+               {
+                   ResearcherController.DisplayResearcherDetails(researcher);
+               }
+           }
 
-            //Filter By Level
-      /*      List<Researcher> researcher3 = researcherController.filterByLevel(EmployeeLevel.A);
-            if (researcher3 != null)
-            {
-                Console.WriteLine("\n Researchers filtered by level");
-                foreach (Researcher researcher in researcher3)
-                {
-                    ResearcherController.DisplayResearcherDetails(researcher);
-                }
-            } */
-        }
+           //Publication Filter By Title
+           Publication titleFilter = publicationControllers.filterByTitle("Title"); // change controller title 'int' to 'string'
+           if (titleFilter != null)
+           {
+               PublicationControllers.ReferenceEquals(titleFilter, publicationControllers); // Fix
+           }
 
-        /**
-         * Functions for displaying researcher/publication detials using ToString function
-         */
-        static void DisplayResearcher(List<Researcher> a)
-        {
-            foreach (Researcher researcher in a)
-            {
-                Console.WriteLine(researcher.ToString());
-            }
-        }
+           //Filter By Level
+           List<Researcher> filterLevel = researcherController.filterByLevel(EmployeeLevel.A);
+           if (filterLevel != null)
+           {
+               Console.WriteLine("\n Researchers filtered by level");
+               foreach (Researcher researcher in filterLevel)
+               {
+                   ResearcherController.DisplayResearcherDetails(researcher);
+               }
+           } 
+       }
 
-        static void DisplayPublicaiton(List<Publication> publications)
-        {
-            foreach (Publication publication in publications)
-            {
-                Console.WriteLine(publication.ToString());
-            }
-        }
+       /**
+        * Functions for displaying researcher/publication detials using ToString function
+        */
+       static void DisplayResearcher(List<Researcher> a)
+       {
+           foreach (Researcher researcher in a)
+           {
+               Console.WriteLine(researcher.ToString());
+           }
+       }
+
+       static void DisplayPublicaiton(List<Publication> publications)
+       {
+           foreach (Publication publication in publications)
+           {
+               Console.WriteLine(publication.ToString());
+           }
+       }
 
     }
 }

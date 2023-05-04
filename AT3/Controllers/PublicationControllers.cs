@@ -44,6 +44,10 @@ namespace AT3
             {
                 return publications.OrderByDescending(pub => pub.PublicationYear).ToList();
             }
+
+        /*
+         * LINQ equivalent
+         */
     }
 }
 
