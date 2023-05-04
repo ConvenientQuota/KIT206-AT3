@@ -28,7 +28,7 @@ namespace AT3
                 publications.Remove(publication);
             }
 
-            public Publication filterByTitle(int title)
+            public Publication filterByTitle(string title)
             {
                 return publications.FirstOrDefault(pub => pub.Title == title);
             }
@@ -57,7 +57,7 @@ namespace AT3
             publications = new List<Publication>();
         } */
 
-        public void LINQaddPublication(Publication publication)
+        public void LinqAddPublication(Publication publication)
         {
             publications.Add(publication);
         }

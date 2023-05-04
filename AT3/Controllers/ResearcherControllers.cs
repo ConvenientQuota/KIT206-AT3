@@ -59,5 +59,42 @@ namespace AT3
             Console.WriteLine(researcher.Degree);
         }
 
+        /*
+         * LINQ equivalent
+         */
+
+        /*   public LINQPublicationControllers()
+        {
+            publications = new List<Publication>();
+        } */
+
+        public void LinqAddResearcher(Researcher researcher)
+        {
+            researchers.Add(researcher);
+        }
+
+        //Enables the ability to remove Researchers from database
+        public void LinqRemoveResearcher(Researcher researcher)
+        {
+            researchers.Remove(researcher);
+        }
+
+        // show only those staff whose give name or family name contains the text entered by the user
+        public List<Researcher> LinqFilterByName(string name)
+        {
+            return (
+                from re in researchers
+                where re.Name.Contains(name)
+                select re).ToList();
+        }
+
+        // filter the researchers by position
+        public List<Researcher> LinqFilterByLevel(EmployeeLevel level)
+        {
+            return (
+                from re in researchers
+                where re.Level == level
+                select re).ToList();
+        }
     }
 }
