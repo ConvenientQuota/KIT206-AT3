@@ -19,8 +19,8 @@ namespace AT3
         public int AvailabilityDate { get; set; }
         public int Age { get; set; }
         public string Cite { get; set; }
+        public DateTime AvailabeleFrom { get; set; }
 
-        public List<Researcher> Researchers { get; set; }
 
         public override string ToString()
         {
