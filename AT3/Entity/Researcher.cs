@@ -10,6 +10,7 @@ namespace AT3
 
     public class Researcher
     {
+        /*   Researcher Details    */
         public string Name { get; set; }
         public string Title { get; set; }
         public string School { get; set; }
