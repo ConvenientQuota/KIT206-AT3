@@ -15,6 +15,9 @@ namespace AT3
 
         static void Main(string[] args)
         {
+            ResearcherController researcherController = new ResearcherController();
+            PublicationControllers publicationControllers = new PublicationControllers();
+
             DbAdaptor adaptor = new DbAdaptor();
 
             //Loading all researchers
@@ -40,12 +43,32 @@ namespace AT3
                 Console.WriteLine(publication.PublicationYear);
             }
 
+            /*
+             * Linq Publication controllers
+             */
+
+            //Add publications
+            Publication removeExample = publicationControllers.LinqAddPublication(new Publication("Title", new List<String> { "Author1" }, 2020));
+
+            //Remove publication
+            publicationControllers.LinqRemovePublication(removeExample);
+
+            //Filter publications by title
+            Publication titleFilter = publicationControllers.LinqfilterByTitle("Title");
+
+            //Filter by author
+            Publication authorFilter = publicationControllers.LinqFilterByAuthor(2); 
+
+            //Filter By year
+            List<Publication> yearFilter = publicationControllers.LinqfilterByYear(2020);
+
+            //Reverse sort by year
+            List<Publication> sortDecending = publicationControllers.LinqReverseSortByYear();
 
             /*
              * Fake Data
              * 
-              ResearcherController researcherController = new ResearcherController();
-              PublicationControllers publicationControllers = new PublicationControllers();
+
 
               //Fake Researchers
               List<Researcher> researchers = FakeData.GenerateResearcher();
