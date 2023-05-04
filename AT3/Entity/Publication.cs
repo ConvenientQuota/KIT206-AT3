@@ -10,8 +10,9 @@ namespace AT3
     {
         public string DOI { get; set; }
         public int Publications { get; set; }
-        public int Title { get; set; }
+        public string Title { get; set; }
         public int Authors { get; set; }
+        public int Year { get; set; }
         public int PublicationYear { get; set; }
         public int Ranking { get; set; }
         public int Type { get; set; }
@@ -19,7 +20,7 @@ namespace AT3
         public int AvailabilityDate { get; set; }
         public int Age { get; set; }
         public string Cite { get; set; }
-        public DateTime AvailabeleFrom { get; set; }
+        public DateTime AvailableFrom { get; set; }
 
 
         public override string ToString()

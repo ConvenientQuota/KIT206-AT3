@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,118 +16,114 @@ namespace AT3.DataSources
         private const string pass = "kit206";
         private const string server = "alacritas.cis.utas.edu.au";
 
-        private MySqlConnection conn;
+        private static MySqlConnection conn = null;
 
-        public DbAdaptor()
+        public static T parseEnum<T>(string str)
         {
-            /*
-             * Create the connection object (does not actually make the connection yet)
-             * Note that the RAP case study database has the same values for its name, user name and password (to keep things simple)
-             */
-            string connectionString = String.Format("Database={0};Data Source={1};User Id={2};Password={3}", db, server, user, pass);
-            conn = new MySqlConnection(connectionString);
+            return (T)Enum.Parse(typeof(T), str);
+        }
+
+        public static MySqlConnection dbAdaptor()
+        {
+        if (conn == null)
+            {
+                string connectionString = String.Format("Database={0};Data Source={1};User Id={2};Password={3};", db, server, user, pass);
+                conn = new MySqlConnection(connectionString);  
+            }
+            return conn;
         }
 
 
         /*
          * Using the ExecuteReader method to select from a single table
          */
-        public void ReadData()
+        public static List<Researcher> LoadAll()
         {
-            MySqlDataReader rdr = null;
+            List<Researcher> researchers = new List<Researcher>();
 
+            MySqlConnection conn = dbAdaptor();
+            MySqlDataReader reader = null;
             try
             {
-                // Open the connection
                 conn.Open();
 
-                // 1. Instantiate a new command with a query and connection
-                MySqlCommand cmd = new MySqlCommand("select given_name, family_name from researcher", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT  given_name, title, family_name from researcher;", conn);
+                reader = cmd.ExecuteReader();
+                while(reader.Read()){
+                    researchers.Add(new Researcher {Name = reader.GetString(1), Title = reader.GetString(2)+ " " + reader.GetString(3) });
 
-                // 2. Call Execute reader to get query results
-                rdr = cmd.ExecuteReader();
-
-                // print the CategoryName of each record
-                while (rdr.Read())
-                {
-                    //This illustrates how the raw data can be obtained using an indexer [] or a particular data type can be obtained using a GetTYPENAME() method.
-                    Console.WriteLine("{0} {1}", rdr[0], rdr.GetString(1));
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             finally
             {
-                // close the reader
-                if (rdr != null)
+                if (reader != null)
                 {
-                    rdr.Close();
+                    reader.Close();
                 }
-
-                // Close the connection
                 if (conn != null)
                 {
                     conn.Close();
                 }
             }
+
+            return researchers;
         }
 
 
-        /*
-         * Using the ExecuteReader method to select from a single table
-         */
-        public void ReadIntoDataSet()
+
+public static List<Publication> AddPublication(int id)
+    {
+        List<Publication> publications = new List<Publication>();
+
+        MySqlConnection conn = dbAdaptor();
+        MySqlDataReader reader = null;
+
+        try
         {
-            try
-            {
-                var researcherDataSet = new DataSet();
-                var researcherAdapter = new MySqlDataAdapter("select * from researcher", conn);
-                researcherAdapter.Fill(researcherDataSet, "researcher");
+            conn.Open();
 
-                foreach (DataRow row in researcherDataSet.Tables["researcher"].Rows)
-                {
-                    //Again illustrating that indexer (based on column name) gives access to whatever data
-                    //type was obtained from a given column, but can call ToString() on an entry if needed.
-                    Console.WriteLine("Name: {0} {1}", row["given_name"], row["family_name"].ToString());
-                }
-            }
-            finally
+                MySqlCommand cmd = new MySqlCommand("SELECT DOI, Title, PublicationYear " +
+                                         "FROM publication AS pub, researcher_publication AS respub " +
+                                         "WHERE pub.doi=respub.doi AND researcher_id=?id", conn);
+
+
+            cmd.Parameters.AddWithValue("id", id);
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
             {
-                // Close the connection
-                if (conn != null)
-                {
-                    conn.Close();
-                }
+                    //You have specified an invalid column ordinal. Error
+                    publications.Add(new Publication
+                    {
+                        DOI = reader.GetString(0),
+                        Title = reader.GetString(1),
+                        PublicationYear = reader.GetInt32(2)
+                    }) ;
             }
         }
-
-
-        /*
-         * Using the ExecuteScalar method
-         * returns number of records
-         */
-        public int GetNumberOfRecords()
+        catch (MySqlException e)
         {
-            int count = -1;
-            try
-            {
-                // Open the connection
-                conn.Open();
-
-                // 1. Instantiate a new command
-                MySqlCommand cmd = new MySqlCommand("select COUNT(*) from researcher", conn);
-
-                // 2. Call ExecuteScalar to send command
-                // This convoluted approach is safe since cannot predict actual return type
-                count = int.Parse(cmd.ExecuteScalar().ToString());
-            }
-            finally
-            {
-                // Close the connection
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-            return count;
+            Console.WriteLine("Error connecting to database: " + e);
         }
+        finally
+        {
+            if (reader != null)
+            {
+                reader.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
+        return publications;
     }
+
+     }    
+
 }

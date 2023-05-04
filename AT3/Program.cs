@@ -14,16 +14,34 @@ namespace AT3
     {
 
         static void Main(string[] args)
-        {  
-         /*
-          * Real data 
-          */
-           DbAdaptor adaptor = new DbAdaptor();
-           adaptor.ReadData();
+        {
+            //Loading all researchers
+            List<Researcher> researchers = DbAdaptor.LoadAll();
 
-           /*
-            * Displaying Fake data
-            */
+            Console.WriteLine("List of Researchers");
+
+            foreach (Researcher researcher in researchers)
+            {
+                Console.WriteLine("{0} ({1})", researcher.Name, researcher.Title);
+            }
+
+            Console.WriteLine();
+
+            //Loading publications
+            int researcherId = 1;
+            List<Publication> publications = DbAdaptor.AddPublication(researcherId);
+
+            foreach (Publication publication in publications)
+            {
+                Console.WriteLine(publication.DOI);
+                Console.WriteLine(publication.Title);
+                Console.WriteLine(publication.PublicationYear);
+            }
+         
+        
+         /*
+          * Fake Data
+          * 
            ResearcherController researcherController = new ResearcherController();
            PublicationControllers publicationControllers = new PublicationControllers();
 
@@ -94,8 +112,8 @@ namespace AT3
                {
                    ResearcherController.DisplayResearcherDetails(researcher);
                }
-           } 
-       }
+           } */
+       } 
 
        /**
         * Functions for displaying researcher/publication detials using ToString function
