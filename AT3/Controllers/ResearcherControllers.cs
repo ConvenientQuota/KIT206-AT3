@@ -13,11 +13,13 @@ namespace AT3
             researchers = new List<Researcher>();
         }
 
+        //Enables the ability to add Researchers to database
         public void addResearcher(Researcher researcher)
         {
             researchers.Add(researcher);
         }
 
+        //Enables the ability to remove Researchers from database
         public void removeResearcher(Researcher researcher)
         {
             researchers.Remove(researcher);
@@ -35,6 +37,7 @@ namespace AT3
             return researchers.Where(re => re.Level == level).ToList();
         }
 
+        //Displays the selected Researcher's details 
         public static void DisplayResearcherDetails(Researcher researcher)
         {
             Console.WriteLine(researcher.Name);

@@ -15,17 +15,20 @@ namespace AT3
             {
                 publications = new List<Publication>();
             }
+
+            //Enables the ability to add Publication(s) to the Publication list
             public void addPublication(Publication publication)
             {
                 publications.Add(publication);
             }
 
+            //Enables the ability to remove Publication(s) from the Publication list
             public void removePublication(Publication publication)
             {
                 publications.Remove(publication);
             }
 
-            public Publication filterByTitle(String title)
+            public Publication filterByTitle(int title)
             {
                 return publications.FirstOrDefault(pub => pub.Title == title);
             }

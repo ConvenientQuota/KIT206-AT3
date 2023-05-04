@@ -8,6 +8,7 @@ namespace AT3
 {
     public class Publication
     {
+        /*     Publication Details           */
         public string DOI { get; set; }
         public int Publications { get; set; }
         public string Title { get; set; }
