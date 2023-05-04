@@ -32,11 +32,6 @@ namespace AT3.DataSources
             }
             return conn;
         }
-
-
-        /*
-         * Using the ExecuteReader method to select from a single table
-         */
         public static List<Researcher> LoadAll()
         {
             List<Researcher> researchers = new List<Researcher>();
@@ -123,7 +118,5 @@ public static List<Publication> AddPublication(int id)
 
         return publications;
     }
-
      }    
-
 }
