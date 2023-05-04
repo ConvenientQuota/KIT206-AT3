@@ -28,7 +28,7 @@ namespace AT3
                 publications.Remove(publication);
             }
 
-            public Publication filterByTitle(string title)
+            public Publication filterByTitle(String title)
             {
                 return publications.FirstOrDefault(pub => pub.Title == title);
             }

@@ -1,4 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.BC;
+using Org.BouncyCastle.Asn1.X500;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,12 +25,14 @@ namespace AT3.DataSources
             return (T)Enum.Parse(typeof(T), str);
         }
 
+
+
         public static MySqlConnection dbAdaptor()
         {
-        if (conn == null)
+            if (conn == null)
             {
                 string connectionString = String.Format("Database={0};Data Source={1};User Id={2};Password={3};", db, server, user, pass);
-                conn = new MySqlConnection(connectionString);  
+                conn = new MySqlConnection(connectionString);
             }
             return conn;
         }
@@ -42,11 +46,11 @@ namespace AT3.DataSources
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT  given_name, title, family_name from researcher;", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT given_name, title, family_name from researcher;", conn);
                 reader = cmd.ExecuteReader();
-                while(reader.Read()){
-                    researchers.Add(new Researcher {Name = reader.GetString(1), Title = reader.GetString(2)+ " " + reader.GetString(3) });
-
+                while (reader.Read())
+                {
+                    researchers.Add(new Researcher { Name = reader.GetString(0) + " " + reader.GetString(2), Title = reader.GetString(1) });
                 }
             }
             catch (Exception ex)
@@ -70,53 +74,53 @@ namespace AT3.DataSources
 
 
 
-public static List<Publication> AddPublication(int id)
-    {
-        List<Publication> publications = new List<Publication>();
-
-        MySqlConnection conn = dbAdaptor();
-        MySqlDataReader reader = null;
-
-        try
+        public static List<Publication> AddPublication(int id)
         {
-            conn.Open();
+            List<Publication> publications = new List<Publication>();
+
+            MySqlConnection conn = dbAdaptor();
+            MySqlDataReader reader = null;
+
+            try
+            {
+                conn.Open();
 
                 MySqlCommand cmd = new MySqlCommand("SELECT DOI, Title, PublicationYear " +
                                          "FROM publication AS pub, researcher_publication AS respub " +
                                          "WHERE pub.doi=respub.doi AND researcher_id=?id", conn);
 
 
-            cmd.Parameters.AddWithValue("id", id);
-            reader = cmd.ExecuteReader();
+                cmd.Parameters.AddWithValue("id", id);
+                reader = cmd.ExecuteReader();
 
-            while (reader.Read())
-            {
+                while (reader.Read())
+                {
                     //You have specified an invalid column ordinal. Error
                     publications.Add(new Publication
                     {
                         DOI = reader.GetString(0),
                         Title = reader.GetString(1),
                         PublicationYear = reader.GetInt32(2)
-                    }) ;
+                    });
+                }
             }
-        }
-        catch (MySqlException e)
-        {
-            Console.WriteLine("Error connecting to database: " + e);
-        }
-        finally
-        {
-            if (reader != null)
+            catch (MySqlException e)
             {
-                reader.Close();
+                Console.WriteLine("Error connecting to database: " + e);
             }
-            if (conn != null)
+            finally
             {
-                conn.Close();
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
             }
-        }
 
-        return publications;
+            return publications;
+        }
     }
-     }    
 }

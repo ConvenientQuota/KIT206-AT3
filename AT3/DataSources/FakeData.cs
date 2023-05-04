@@ -88,7 +88,7 @@ namespace AT3
            
                 Publication publication = new Publication();
                 {
-                    publications.Add(new Publication { DOI = "lol", Publications = 1, Title = 1, Authors = 1, PublicationYear = 2000, Ranking = 2, Type = 3, CiteAs = 9, AvailabilityDate = 3, Age = 20, Cite = "citationExample" });
+                    publications.Add(new Publication { DOI = "lol", Publications = 1, Title = "A", Authors = 1, PublicationYear = 2000, Ranking = 2, Type = 3, CiteAs = 9, AvailabilityDate = 3, Age = 20, Cite = "citationExample" });
                 }
             
             return publications;
