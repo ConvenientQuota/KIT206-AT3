@@ -42,10 +42,8 @@ namespace AT3
                 Console.WriteLine(publication.Title);
                 Console.WriteLine(publication.PublicationYear);
             }
-
             /*
-             * Linq Publication controllers
-             */
+          
 
             //Add publications
             Publication removeExample = publicationControllers.LinqAddPublication(new Publication("Title", new List<String> { "Author1" }, 2020));
@@ -64,7 +62,7 @@ namespace AT3
 
             //Reverse sort by year
             List<Publication> sortDecending = publicationControllers.LinqReverseSortByYear();
-
+            */
             /*
              * Fake Data
              * 

@@ -1,6 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.BC;
-using Org.BouncyCastle.Asn1.X500;
 using System;
 using System.Collections.Generic;
 using System.Data;
