@@ -44,7 +44,8 @@ namespace AT3.DataSources
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT id, type, given_name, family_name, title, unit, campus, email, photo, degree, supervisor_id, level, utas_start, current_start from researcher;", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT Id, type, given_name, family_name, title,  " +
+                    "unit, campus, email, photo, degree, supervisor_id, level, utas_start, current_start, from researcher;", conn);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
