@@ -27,11 +27,12 @@ namespace AT3
 
             foreach (Researcher researcher in researchers)
             {
-                Console.WriteLine(researcher.Name, researcher.Title);
+                /// add things to this
+                Console.WriteLine(researcher.Name, researcher.Id, researcher.Title);
             }
 
             Console.WriteLine();
-
+/*
             //Loading publications
             int researcherId = 1;
             List<Publication> publications = DbAdaptor.AddPublication(researcherId);

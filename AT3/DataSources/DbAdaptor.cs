@@ -44,11 +44,11 @@ namespace AT3.DataSources
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT given_name, title, family_name from researcher;", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT id, type, given_name, family_name, title, unit, campus, email, photo, degree, supervisor_id, level, utas_start, current_start from researcher;", conn);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    researchers.Add(new Researcher { Name = reader.GetString(0) + " " + reader.GetString(2), Title = reader.GetString(1) });
+                    researchers.Add(new Researcher {Name = reader.GetInt32(0) + " " + reader.GetString(2) + " " + reader.GetString(3) + " " + reader.GetString(4) + " " + reader.GetString(5)});
                 }
             }
             catch (Exception ex)
@@ -96,7 +96,7 @@ namespace AT3.DataSources
                     //You have specified an invalid column ordinal. Error
                     publications.Add(new Publication
                     {
-                        DOI = reader.GetString(0),
+                        DOI = reader.GetString(1),
                         Title = reader.GetString(1),
                         PublicationYear = reader.GetInt32(2)
                     });
