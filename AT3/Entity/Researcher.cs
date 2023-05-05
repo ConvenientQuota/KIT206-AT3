@@ -12,6 +12,7 @@ namespace AT3
     {
         /*   Researcher Details    */
         public string Name { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string School { get; set; }
         public string Unit { get; set; }
