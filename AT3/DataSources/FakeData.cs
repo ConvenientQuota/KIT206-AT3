@@ -21,7 +21,7 @@ namespace AT3
                         Title = "IDK",
                         School = "school1",
                         Unit = "LMK101",
-                        Campus = "School",
+                       // campus = "School",
                         Email = "ExampleEmail@utas.edu.au",
                         Level = EmployeeLevel.A,
                         commenceWithInstitute = "jan/01/1990",
