@@ -11,6 +11,11 @@ namespace AT3.DataSources
 {
     internal class DbAdaptor
     {
+        private static bool localDB = true;
+        private const string localUser = "root";
+        private const string localPass = "990818";
+        private const string localServer = "192.168.92.109";
+
         private const string db = "kit206";
         private const string user = "kit206";
         private const string pass = "kit206";
@@ -29,8 +34,14 @@ namespace AT3.DataSources
         {
             if (conn == null)
             {
-                string connectionString = String.Format("Database={0};Data Source={1};User Id={2};Password={3};", db, server, user, pass);
-                conn = new MySqlConnection(connectionString);
+                MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
+                builder.Server = localDB? localServer : server;
+                builder.Database = db;
+                builder.UserID = localDB ? localUser : user;
+                builder.Password = localDB ? localPass :pass;
+                builder.Port = 3306;
+                Console.WriteLine(builder.ConnectionString);
+                conn = new MySqlConnection(builder.ConnectionString);
             }
             return conn;
         }
@@ -44,8 +55,7 @@ namespace AT3.DataSources
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT Id, type, given_name, family_name, title,  " +
-                    "unit, campus, email, photo, degree, supervisor_id, level, utas_start, current_start, from researcher;", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM researcher;", conn);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {

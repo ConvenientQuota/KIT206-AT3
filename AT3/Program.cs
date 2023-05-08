@@ -30,8 +30,6 @@ namespace AT3
                 /// add things to this
                 Console.WriteLine(researcher.Name, researcher.Id, researcher.Title);
             }
-
-            Console.WriteLine();
 /*
             //Loading publications
             int researcherId = 1;
@@ -137,6 +135,7 @@ namespace AT3
                       ResearcherController.DisplayResearcherDetails(researcher);
                   }
               } */
+            Console.ReadLine() ;
         }
 
         /**
