@@ -37,7 +37,8 @@ namespace AT3
             return researchers.Where(re => re.Level == level).ToList();
         }
 
-        //Displays the selected Researcher's details 
+        //Displays the selected Researcher's details e
+
         public static void DisplayResearcherDetails(Researcher researcher)
         {
             Console.WriteLine(researcher.Name);

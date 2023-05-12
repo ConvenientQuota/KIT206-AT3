@@ -144,6 +144,7 @@ namespace AT3
                       ResearcherController.DisplayResearcherDetails(researcher);
                   }
               } */
+            Console.ReadLine() ;
         }
 
         /**
