@@ -11,10 +11,10 @@ namespace AT3.DataSources
 {
     internal class DbAdaptor
     {
-        private static bool localDB = true;
+     /*   private static bool localDB = true;
         private const string localUser = "root";
         private const string localPass = "990818";
-        private const string localServer = "192.168.92.109";
+        private const string localServer = "192.168.92.109"; */
 
         private const string db = "kit206";
         private const string user = "kit206";
@@ -34,14 +34,16 @@ namespace AT3.DataSources
         {
             if (conn == null)
             {
-                MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
-                builder.Server = localDB? localServer : server;
-                builder.Database = db;
-                builder.UserID = localDB ? localUser : user;
-                builder.Password = localDB ? localPass :pass;
-                builder.Port = 3306;
-                Console.WriteLine(builder.ConnectionString);
-                conn = new MySqlConnection(builder.ConnectionString);
+                /*    MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
+                    builder.Server = localDB? localServer : server;
+                    builder.Database = db;
+                    builder.UserID = localDB ? localUser : user;
+                    builder.Password = localDB ? localPass :pass;
+                    builder.Port = 3306;
+                    Console.WriteLine(builder.ConnectionString);
+                    conn = new MySqlConnection(builder.ConnectionString); */
+                string connectionString = String.Format("Database={0};Data Source={1};User Id={2};Password={3}", db, server, user, pass);
+                conn = new MySqlConnection(connectionString);
             }
             return conn;
         }
