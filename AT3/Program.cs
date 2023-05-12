@@ -22,16 +22,23 @@ namespace AT3
 
             //Loading all researchers
             List<Researcher> researchers = DbAdaptor.LoadAll();
+            //Loading all publications
+            List<Publication> publications = DbAdaptor.LoadPublication();
 
             Console.WriteLine("List of Researchers");
 
             foreach (Researcher researcher in researchers)
             {
                 /// add things to this
-                Console.WriteLine(researcher.Name, researcher.Id, researcher.Title);
+                Console.WriteLine(researcher.Name);
             }
 
-            Console.WriteLine();
+            Console.WriteLine("\nPublications");
+
+            foreach (Publication publication in publications)
+            {
+                Console.WriteLine(publication.DOI);
+            }
 /*
             //Loading publications
             int researcherId = 1;

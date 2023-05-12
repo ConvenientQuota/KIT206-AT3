@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.X500;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -35,6 +34,9 @@ namespace AT3.DataSources
             }
             return conn;
         }
+       /**
+        * Researcher method to load all researchers and their details
+        */
         public static List<Researcher> LoadAll()
         {
             List<Researcher> researchers = new List<Researcher>();
@@ -45,12 +47,37 @@ namespace AT3.DataSources
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT Id, type, given_name, family_name, title,  " +
-                    "unit, campus, email, photo, degree, supervisor_id, level, utas_start, current_start, from researcher;", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM researcher;", conn);
                 reader = cmd.ExecuteReader();
+
+
                 while (reader.Read())
                 {
-                    researchers.Add(new Researcher {Name = reader.GetInt32(0) + " " + reader.GetString(2) + " " + reader.GetString(3) + " " + reader.GetString(4) + " " + reader.GetString(5)});
+                    //Conversions
+                    int? supervisor_id = reader.IsDBNull(10) ? null : (int?)reader.GetInt32(10);
+                    string degree = reader.IsDBNull(9) ? "N/A " : reader.GetString(9);
+                    char? Level = reader.IsDBNull(11) ? null : (char?)reader.GetChar(11);
+
+                    researchers.Add(new Researcher
+                    {
+                    Name = 
+                    reader.GetString(0) + " " +// ID
+                    reader.GetString(1) + " " +// Type
+                    reader.GetString(2) + " " +// given_name
+                    reader.GetString(3) + " " +// family_name
+                    reader.GetString(4) + " " +// Title
+                    reader.GetString(5) + " " +// Unit
+                    reader.GetString(6) + " " +// Campus
+                    reader.GetString(7) + " " +// Email
+                    reader.GetString(8) + " " +//Photo
+                    degree + " " +
+                    (supervisor_id.HasValue ? supervisor_id.Value.ToString() : "N/A " +
+                    (Level.HasValue ? Level.Value.ToString() : "N/A ")) + " " +
+                    reader.GetString(12) + " " + //utas_start
+                    reader.GetString(13) // Current_start
+
+
+                    }) ;
                 }
             }
             catch (Exception ex)
@@ -72,9 +99,10 @@ namespace AT3.DataSources
             return researchers;
         }
 
-
-
-        public static List<Publication> AddPublication(int id)
+   /**
+    * Publication method to print all publications and their details
+    */
+        public static List<Publication> LoadPublication()
         {
             List<Publication> publications = new List<Publication>();
 
@@ -85,12 +113,7 @@ namespace AT3.DataSources
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT DOI, Title, PublicationYear " +
-                                         "FROM publication AS pub, researcher_publication AS respub " +
-                                         "WHERE pub.doi=respub.doi AND researcher_id=?id", conn);
-
-
-                cmd.Parameters.AddWithValue("id", id);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication", conn);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -98,9 +121,15 @@ namespace AT3.DataSources
                     //You have specified an invalid column ordinal. Error
                     publications.Add(new Publication
                     {
-                        DOI = reader.GetString(1),
-                        Title = reader.GetString(1),
-                        PublicationYear = reader.GetInt32(2)
+                        DOI = 
+                        reader.GetString(0) + " " + //DOI
+                        reader.GetString(1) + " " + //Title
+                        reader.GetString(2) + " " + //Ranking
+                        reader.GetString(3) + " " + //Authors
+                        reader.GetString(4) + " " +//Year 
+                        reader.GetString(5) + " " + //Type
+                        reader.GetString(6) + " " + //cite_as
+                        reader.GetString(7) //Avaliable
                     });
                 }
             }
@@ -123,4 +152,6 @@ namespace AT3.DataSources
             return publications;
         }
     }
+
+
 }

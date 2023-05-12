@@ -44,7 +44,7 @@ namespace AT3
             Console.WriteLine(researcher.Title);
             Console.WriteLine(researcher.School);
             Console.WriteLine(researcher.Unit);
-            Console.WriteLine(researcher.Campus);
+            Console.WriteLine(researcher.campus);
             Console.WriteLine(researcher.Email);
             Console.WriteLine(researcher.Level);
             Console.WriteLine(researcher.commenceWithInstitute);
