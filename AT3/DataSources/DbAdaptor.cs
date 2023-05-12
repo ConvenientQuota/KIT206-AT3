@@ -108,7 +108,13 @@ namespace AT3.DataSources
                     conn.Close();
                 }
             }
+            Console.WriteLine("List of Researchers");
 
+            foreach (Researcher researcher in researchers)
+            {
+                /// add things to this
+                Console.WriteLine(researcher.Name);
+            }
             return researchers;
         }
 
@@ -160,6 +166,12 @@ namespace AT3.DataSources
                 {
                     conn.Close();
                 }
+            }
+
+            foreach (Publication publication in publications)
+            {
+                
+                Console.WriteLine(publication.DOI);
             }
 
             return publications;

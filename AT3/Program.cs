@@ -25,34 +25,8 @@ namespace AT3
             //Loading all publications
             List<Publication> publications = DbAdaptor.LoadPublication();
 
-            Console.WriteLine("List of Researchers");
 
-            foreach (Researcher researcher in researchers)
-            {
-                /// add things to this
-                Console.WriteLine(researcher.Name);
-            }
-
-            Console.WriteLine("\nPublications");
-
-            foreach (Publication publication in publications)
-            {
-                Console.WriteLine(publication.DOI);
-            }
-/*
-            //Loading publications
-            int researcherId = 1;
-            List<Publication> publications = DbAdaptor.AddPublication(researcherId);
-
-            foreach (Publication publication in publications)
-            {
-                Console.WriteLine(publication.DOI);
-                Console.WriteLine(publication.Title);
-                Console.WriteLine(publication.PublicationYear);
-            }
             /*
-          
-
             //Add publications
             Publication removeExample = publicationControllers.LinqAddPublication(new Publication("Title", new List<String> { "Author1" }, 2020));
 
@@ -150,8 +124,8 @@ namespace AT3
         /**
          * Functions for displaying researcher/publication detials using ToString function
          */
-        static void DisplayResearcher(List<Researcher> a)
-        {
+   //     static void DisplayResearcher(List<Researcher> a)
+      /*  {
             foreach (Researcher researcher in a)
             {
                 Console.WriteLine(researcher.ToString());
@@ -164,7 +138,7 @@ namespace AT3
             {
                 Console.WriteLine(publication.ToString());
             }
-        }
+        }*/
 
     }
 }
