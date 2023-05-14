@@ -21,11 +21,14 @@ namespace AT3
             DbAdaptor adaptor = new DbAdaptor();
 
             //Loading all researchers
-            List<Researcher> researchers = DbAdaptor.LoadAll();
+       //     DbAdaptor.LoadAll();
             //Loading all publications
-            List<Publication> publications = DbAdaptor.LoadPublication();
+       //     DbAdaptor.LoadPublication();
+            //Selecting a researcher based on their 'id'
+       //     int id = 123460;
+            DbAdaptor.ResearcherId(id);
 
-
+            DbAdaptor.FindPublication(10.1007 / 11839088_42);
             /*
             //Add publications
             Publication removeExample = publicationControllers.LinqAddPublication(new Publication("Title", new List<String> { "Author1" }, 2020));
