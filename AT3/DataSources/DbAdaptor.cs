@@ -59,7 +59,7 @@ namespace AT3.DataSources
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    researchers.Add(new Researcher {Name = reader.GetInt32(0) + " " + reader.GetString(2) + " " + reader.GetString(3) + " " + reader.GetString(4) + " " + reader.GetString(5)});
+                    researchers.Add(new Researcher {Name = reader.GetInt32(0) + " " + reader.GetString(1) + " " + reader.GetString(2) + " " + reader.GetString(3) + " " + reader.GetString(4) + " " + reader.GetString(5) + " " + reader.GetString(6) + " " });
                 }
             }
             catch (Exception ex)
