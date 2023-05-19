@@ -21,29 +21,15 @@ namespace AT3
             DbAdaptor adaptor = new DbAdaptor();
 
             //Loading all researchers
-            List<Researcher> researchers = DbAdaptor.LoadAll();
+            DbAdaptor.LoadAll();
+            //Loading all publications
+            DbAdaptor.LoadPublication();
+            //Selecting a researcher based on their 'id'
+            int id = 123460;
+            DbAdaptor.ResearcherId(id);
 
-            Console.WriteLine("List of Researchers");
-
-            foreach (Researcher researcher in researchers)
-            {
-                /// add things to this
-                Console.WriteLine(researcher.Name, researcher.Id, researcher.Title);
-            }
-/*
-            //Loading publications
-            int researcherId = 1;
-            List<Publication> publications = DbAdaptor.AddPublication(researcherId);
-
-            foreach (Publication publication in publications)
-            {
-                Console.WriteLine(publication.DOI);
-                Console.WriteLine(publication.Title);
-                Console.WriteLine(publication.PublicationYear);
-            }
+            DbAdaptor.FindPublication(10.1007 / 11839088_42);
             /*
-          
-
             //Add publications
             Publication removeExample = publicationControllers.LinqAddPublication(new Publication("Title", new List<String> { "Author1" }, 2020));
 
@@ -135,7 +121,7 @@ namespace AT3
                       ResearcherController.DisplayResearcherDetails(researcher);
                   }
               } */
-            Console.ReadLine() ;
+           // Console.ReadLine() ;
         }
 
         /**
