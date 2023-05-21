@@ -9,7 +9,7 @@ namespace AT3
     public class Publication
     {
         /*     Publication Details           */
-        public double DOI { get; set; }
+        public string DOI { get; set; }
         public int Publications { get; set; }
         public string Title { get; set; }
         public int Authors { get; set; }
