@@ -248,7 +248,7 @@ namespace AT3.DataSources
                 conn.Close();
             } 
         }
-        public static List<Publication> FindPublication(double doi)
+        public static List<Publication> FindPublication(string doi)
         {
             List<Publication> publications = new List<Publication>();
 
