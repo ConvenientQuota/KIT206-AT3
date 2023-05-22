@@ -16,7 +16,7 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="37,54,0,0" VerticalAlignment="Top" Width="200"/>
+        <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="37,54,0,0" VerticalAlignment="Top" Width="200" SelectionChanged="ResearcherComboBox_SelectionChanged"/>
         <ListView Name="ResearcherListView" ItemsSource="{Binding Researchers}" HorizontalAlignment="Left" Height="214" Margin="37,24,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" SelectionChanged="ResearcherListView_SelectionChanged">
             <ListView.View>
                 <GridView>

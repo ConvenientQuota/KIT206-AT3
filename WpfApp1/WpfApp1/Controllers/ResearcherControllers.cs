@@ -10,6 +10,8 @@ namespace AT3.Controllers
     {
         public List<Researcher> researchers { get; }
 
+       
+
         public ResearcherController()
         {
             researchers = new List<Researcher>();

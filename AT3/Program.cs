@@ -23,12 +23,13 @@ namespace AT3
             //Loading all researchers
             DbAdaptor.LoadAll();
             //Loading all publications
-            //DbAdaptor.LoadPublication();
+            DbAdaptor.LoadPublication();
             //Selecting a researcher based on their 'id'
-            //int id = 123460;
-            //DbAdaptor.ResearcherId(id);
+            int id = 123460;
+           DbAdaptor.ResearcherId(id);
+            string doi = "prefix/sample9";
+           DbAdaptor.FindPublication(doi);
 
-            //DbAdaptor.FindPublication(10.1007 / 11839088_42);
             /*
             //Add publications
             Publication removeExample = publicationControllers.LinqAddPublication(new Publication("Title", new List<String> { "Author1" }, 2020));
