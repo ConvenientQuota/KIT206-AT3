@@ -140,14 +140,24 @@ namespace AT3.DataSources
                     //You have specified an invalid column ordinal. Error
                     publications.Add(new Publication
                     {
-                        DOI = reader.GetDouble(0),
-                        Title = reader.GetString(1),
-                        Ranking = reader.GetInt32(2),
-                        Authors = reader.GetInt32(3),
-                        Year = reader.GetInt32(4),
-                        Type = reader.GetInt32(5),
-                        CiteAs = reader.GetInt32(6),
-                        AvailableFrom = reader.GetDateTime(7)
+                        /*     DOI = reader.GetString(0),
+                             Title = reader.GetString(1),
+                             Ranking = reader.GetInt32(2),
+                             Authors = reader.GetInt32(3),          Doesnt work
+                             Year = reader.GetInt32(4),
+                             Type = reader.GetInt32(5),
+                             CiteAs = reader.GetInt32(6),
+                             AvailableFrom = reader.GetDateTime(7) */
+
+                        DOI =
+                        reader.GetString(0) + " " + //DOI
+                        reader.GetString(1) + " " + //Title
+                        reader.GetString(2) + " " + //Ranking
+                        reader.GetString(3) + " " + //Authors
+                        reader.GetString(4) + " " +//Year 
+                        reader.GetString(5) + " " + //Type
+                        reader.GetString(6) + " " + //cite_as
+                        reader.GetString(7) //Avaliable
                     });
                 }
             }
@@ -238,7 +248,7 @@ namespace AT3.DataSources
                 conn.Close();
             } 
         }
-        public static List<Publication> FindPublication(double DOI)
+        public static List<Publication> FindPublication(string doi)
         {
             List<Publication> publications = new List<Publication>();
 
@@ -248,42 +258,44 @@ namespace AT3.DataSources
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE DOI = @doi;", conn);
-                cmd.Parameters.AddWithValue("@id", DOI);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE doi = @doi;", conn);
+                cmd.Parameters.AddWithValue("@doi", doi);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    //You have specified an invalid column ordinal. Error
-                    publications.Add(new Publication
+                    // Create a new Publication object and set its properties
+                    Publication publication = new Publication
                     {
-                        DOI = reader.GetDouble(0),
-                        Title = reader.GetString(1),
-                        Ranking = reader.GetInt32(2),
-                        Authors = reader.GetInt32(3),
-                        Year = reader.GetInt32(4),
-                        Type = reader.GetInt32(5),
-                        CiteAs = reader.GetInt32(6),
-                        AvailableFrom = reader.GetDateTime(7)
-                    });
+                        DOI = reader.GetString(0),      // DOI
+                        Title = reader.GetString(1),    // Title
+                        Ranking = reader.GetInt32(2),  // Ranking
+                        Authors = reader.GetInt32(3),  // Authors
+                        Year = reader.GetInt32(4),     // Year
+                        Type = reader.GetInt32(5),     // Type
+                        CiteAs = reader.GetInt32(6),   // Cite As
+                    //    Available = reader.GetString(7) // Available
+                    };
 
-                    Console.WriteLine("\nPublication Found\n");
-                    Console.WriteLine($"DOI: {publications.Last().DOI}");
-                    Console.WriteLine($"Title: {publications.Last().Title}");
-                    Console.WriteLine($"Ranking: {publications.Last().Ranking}");
-                    Console.WriteLine($"Authors: {publications.Last().Authors}");
-                    Console.WriteLine($"Year: {publications.Last().Year}");
-                    Console.WriteLine($"Type: {publications.Last().Type}");
-                    Console.WriteLine($"Cite As: {publications.Last().CiteAs}");
-                    Console.WriteLine($"Available: {publications.Last().AvailableFrom}");
+                    publications.Add(publication);
+
                 }
-  
+
+                Console.WriteLine("\nPublication Found\n");
+                //Print the publication
+                Console.WriteLine( publications);
             }
+
             finally
             {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
                 conn.Close();
             }
-          return publications;
+
+            return publications;
         }
         /**
          * 
