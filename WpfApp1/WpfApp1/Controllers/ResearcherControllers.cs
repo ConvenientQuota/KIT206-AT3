@@ -44,7 +44,7 @@ namespace AT3.Controllers
         public static void DisplayResearcherDetails(Researcher researcher)
         {
             Console.WriteLine(researcher.Name);
-           /* Console.WriteLine(researcher.Title);
+            Console.WriteLine(researcher.Title);
             Console.WriteLine(researcher.School);
             Console.WriteLine(researcher.Unit);
             Console.WriteLine(researcher.campus);
@@ -60,7 +60,7 @@ namespace AT3.Controllers
             Console.WriteLine(researcher.performancePublication);
             Console.WriteLine(researcher.Supervisions);
             Console.WriteLine(researcher.Degree);
-            */
+            
         }
 
         /*

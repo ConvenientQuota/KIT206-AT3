@@ -16,11 +16,19 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="37,54,0,0" VerticalAlignment="Top" Width="200"/>
+        <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.5, 0.5" Height="25" SelectionChanged="ResearcherListView_SelectionChanged">
+            <ComboBoxItem>Student Only</ComboBoxItem>
+            <ComboBoxItem>A</ComboBoxItem>
+            <ComboBoxItem>B</ComboBoxItem>
+            <ComboBoxItem>C</ComboBoxItem>
+            <ComboBoxItem>D</ComboBoxItem>
+            <ComboBoxItem>E</ComboBoxItem>
+            <ComboBoxItem>All</ComboBoxItem>
+        </ComboBox>
         <ListView Name="ResearcherListView" ItemsSource="{Binding Researchers}" HorizontalAlignment="Left" Height="214" Margin="37,24,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" SelectionChanged="ResearcherListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
