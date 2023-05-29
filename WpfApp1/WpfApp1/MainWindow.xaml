@@ -32,10 +32,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView Name="PublicationListView" HorizontalAlignment="Left" Height="214" Margin="60,24,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Grid.Column="1">
+        <ListView Name="PublicationListView" ItemsSource="{Binding Publications}" HorizontalAlignment="Center" Height="214" Margin="0,24,0,0" Grid.Row="1" VerticalAlignment="Top" Width="300" Grid.Column="1" SelectionChanged="PublicationListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}"/>
                 </GridView>
             </ListView.View>
         </ListView>

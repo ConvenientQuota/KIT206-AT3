@@ -61,6 +61,11 @@ namespace WpfApp1
         private void ResearcherComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-        } 
+        }
+
+        private void PublicationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
