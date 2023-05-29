@@ -22,10 +22,12 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             DataContext = this;
             InitializeComponent();
+
         }
 
         private List<Researcher> researchers;
@@ -50,9 +52,15 @@ namespace WpfApp1
             }
         }
 
-        private void ResearcherListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+      /*  private void ResearcherListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+
         }
+
+        private void ResearcherComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        } */
     }
 }

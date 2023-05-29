@@ -4,17 +4,25 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\
+=======
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\
+>>>>>>> 13b06eb0c7ea1f9bd21f94fa8f7dab97f39e7401
 WpfApp1
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\App.xaml
+=======
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\App.xaml
+>>>>>>> 13b06eb0c7ea1f9bd21f94fa8f7dab97f39e7401
 1219584333
 
 10-673940310
-141186207057
+13-1310406943
 MainWindow.xaml;
 
-False
+True
 

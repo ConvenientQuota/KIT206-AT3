@@ -35,6 +35,7 @@ C:\Users\harki\OneDrive - University of Tasmania\2023\Kit 206 Software Desgin an
 C:\Users\harki\OneDrive - University of Tasmania\2023\Kit 206 Software Desgin and Development\WPF\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
 C:\Users\harki\OneDrive - University of Tasmania\2023\Kit 206 Software Desgin and Development\WPF\WpfApp1\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Users\harki\OneDrive - University of Tasmania\2023\Kit 206 Software Desgin and Development\WPF\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
+<<<<<<< HEAD
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\bin\Debug\WpfApp1.exe.config
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\bin\Debug\WpfApp1.exe
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\bin\Debug\WpfApp1.pdb
@@ -56,3 +57,13 @@ C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
+=======
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.AssemblyReference.cache
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.SuggestedBindingRedirects.cache
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\MainWindow.g.cs
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\App.g.cs
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.exe
+C:\Users\Home\source\repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
+>>>>>>> 13b06eb0c7ea1f9bd21f94fa8f7dab97f39e7401

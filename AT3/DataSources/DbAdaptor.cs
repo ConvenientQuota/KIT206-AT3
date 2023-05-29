@@ -149,7 +149,7 @@ namespace AT3.DataSources
                              CiteAs = reader.GetInt32(6),
                              AvailableFrom = reader.GetDateTime(7) */
 
-                        DOI =
+                        Doi =
                         reader.GetString(0) + " " + //DOI
                         reader.GetString(1) + " " + //Title
                         reader.GetString(2) + " " + //Ranking
@@ -180,7 +180,7 @@ namespace AT3.DataSources
             foreach (Publication publication in publications)
             {
 
-                Console.WriteLine(publication.DOI);
+                Console.WriteLine(publication.Doi);
             }
 
             return publications;
@@ -202,7 +202,6 @@ namespace AT3.DataSources
                 cmd.Parameters.AddWithValue("@id", id);
                 reader = cmd.ExecuteReader();
 
-               
                 if (reader.Read())
                 {
                     //Conversions
@@ -212,7 +211,7 @@ namespace AT3.DataSources
 
                     Researcher researcher = new Researcher
                     {
-                        Name =
+                    Name =
                     reader.GetString(0) + " " +// ID
                     reader.GetString(1) + " " +// Type
                     reader.GetString(2) + " " +// given_name
@@ -227,13 +226,10 @@ namespace AT3.DataSources
                     (Level.HasValue ? Level.Value.ToString() : "N/A ")) + " " +
                     reader.GetString(12) + " " + //utas_start
                     reader.GetString(13) // Current_start
-
-
                     };
                     Console.WriteLine("\nResearcher Found\n");
                     Console.WriteLine(researcher.Name);
-                    return researcher;
-                    
+                    return researcher;  
                 }
                 else
                 {
@@ -243,15 +239,12 @@ namespace AT3.DataSources
             }
             finally
             {
-               
                 if (reader != null) reader.Close();
                 conn.Close();
             } 
         }
-        public static List<Publication> FindPublication(string doi)
+        public static Publication FindPublication(string doi)
         {
-            List<Publication> publications = new List<Publication>();
-
             MySqlConnection conn = dbAdaptor();
             MySqlDataReader reader = null;
 
@@ -262,30 +255,29 @@ namespace AT3.DataSources
                 cmd.Parameters.AddWithValue("@doi", doi);
                 reader = cmd.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
                     // Create a new Publication object and set its properties
                     Publication publication = new Publication
                     {
-                        DOI = reader.GetString(0),      // DOI
-                        Title = reader.GetString(1),    // Title
-                        Ranking = reader.GetInt32(2),  // Ranking
-                        Authors = reader.GetInt32(3),  // Authors
-                        Year = reader.GetInt32(4),     // Year
-                        Type = reader.GetInt32(5),     // Type
-                        CiteAs = reader.GetInt32(6),   // Cite As
-                    //    Available = reader.GetString(7) // Available
+                    Doi = reader.GetString(0) + " " + // 
+                    reader.GetString(1) + " " +// 
+                    reader.GetString(2) + " " +//
+                    reader.GetString(3) + " " +// 
+                    reader.GetString(4) + " " +// 
+                    reader.GetString(5) + " " +// 
+                    reader.GetString(6) + " " + reader.GetString(7)
                     };
-
-                    publications.Add(publication);
-
+                    Console.WriteLine("\nPublication Found\n");
+                    Console.WriteLine(publication.Doi);
+                    return publication;
                 }
-
-                Console.WriteLine("\nPublication Found\n");
-                //Print the publication
-                Console.WriteLine( publications);
+                else
+                {
+                Console.WriteLine("\nPublication Not Found\n");
+                    return null;
+                }
             }
-
             finally
             {
                 if (reader != null)
@@ -294,8 +286,6 @@ namespace AT3.DataSources
                 }
                 conn.Close();
             }
-
-            return publications;
         }
         /**
          * 
