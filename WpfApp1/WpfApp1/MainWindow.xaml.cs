@@ -52,7 +52,7 @@ namespace WpfApp1
             }
         }
 
-      /*  private void ResearcherListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ResearcherListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
 
@@ -61,6 +61,6 @@ namespace WpfApp1
         private void ResearcherComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-        } */
+        } 
     }
 }

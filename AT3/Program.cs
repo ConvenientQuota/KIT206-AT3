@@ -26,8 +26,10 @@ namespace AT3
 
             //DbAdaptor.LoadPublication();
             //Selecting a researcher based on their 'id'
-            //int id = 123460;
-            //DbAdaptor.ResearcherId(id);
+            int id = 123460;
+           DbAdaptor.ResearcherId(id);
+            string doi = "prefix/sample9";
+           DbAdaptor.FindPublication(doi);
 
             //DbAdaptor.FindPublication(10.1007 / 11839088_42);
 
