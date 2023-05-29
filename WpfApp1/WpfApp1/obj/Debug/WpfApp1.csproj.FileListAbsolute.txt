@@ -19,3 +19,11 @@ C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.exe
 C:\Users\harki\source\Repos\KIT206-AT3\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\Users\Home\source\repos\New folder\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.AssemblyReference.cache
+C:\Users\Home\source\repos\New folder\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.SuggestedBindingRedirects.cache
+C:\Users\Home\source\repos\New folder\WpfApp1\WpfApp1\obj\Debug\MainWindow.g.cs
+C:\Users\Home\source\repos\New folder\WpfApp1\WpfApp1\obj\Debug\App.g.cs
+C:\Users\Home\source\repos\New folder\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.cache
+C:\Users\Home\source\repos\New folder\WpfApp1\WpfApp1\obj\Debug\WpfApp1_MarkupCompile.lref
+C:\Users\Home\source\repos\New folder\WpfApp1\WpfApp1\obj\Debug\WpfApp1.exe
+C:\Users\Home\source\repos\New folder\WpfApp1\WpfApp1\obj\Debug\WpfApp1.pdb

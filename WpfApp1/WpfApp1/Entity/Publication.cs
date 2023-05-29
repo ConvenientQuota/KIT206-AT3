@@ -9,7 +9,7 @@ namespace AT3.Entity
     public class Publication
     {
         /*     Publication Details           */
-        public double DOI { get; set; }
+        public string Doi { get; set; }
         public int Publications { get; set; }
         public string Title { get; set; }
         public int Authors { get; set; }
@@ -26,7 +26,7 @@ namespace AT3.Entity
 
         public override string ToString()
         {
-            return DOI + " " + Publications + " " + Title + " " + Authors + " " + PublicationYear + " " + Ranking + " " + Type + " " + CiteAs + " " + AvailabilityDate + " " + Age + " " + Cite;
+            return Doi + " " + Publications + " " + Title + " " + Authors + " " + PublicationYear + " " + Ranking + " " + Type + " " + CiteAs + " " + AvailabilityDate + " " + Age + " " + Cite;
         }
 
 
