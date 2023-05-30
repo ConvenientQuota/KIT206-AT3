@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace AT3.Entity
 {
-    public enum EmployeeLevel { A, B, C, D, E }
-    public enum Campus { Hobart, Launceston, CradleCoast}
+    public enum EmployeeLevel
+    {
+        A, B, C, D, E, Student
+    }
+    public enum Campus
+    {
+        Hobart, Launceston, Cradle
+    }
 
     public class Researcher
     {
@@ -18,6 +24,7 @@ namespace AT3.Entity
         public string Title { get; set; }
         public string School { get; set; }
         public string Unit { get; set; }
+        public Uri Photo { get; set; }
         public Campus campus { get; set; }
         public string Email { get; set; }
         public EmployeeLevel Level { get; set; }

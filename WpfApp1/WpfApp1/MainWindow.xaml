@@ -14,9 +14,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.5, 0.5" Height="25" SelectionChanged="ResearcherListView_SelectionChanged">
+        <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.5, 0.5" Height="25" SelectionChanged="ResearcherListView_SelectionChanged" Grid.ColumnSpan="3">
             <ComboBoxItem>Student Only</ComboBoxItem>
             <ComboBoxItem>A</ComboBoxItem>
             <ComboBoxItem>B</ComboBoxItem>
@@ -25,14 +25,14 @@
             <ComboBoxItem>E</ComboBoxItem>
             <ComboBoxItem>All</ComboBoxItem>
         </ComboBox>
-        <ListView Name="ResearcherListView" ItemsSource="{Binding Researchers}" HorizontalAlignment="Left" Height="214" Margin="37,24,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" SelectionChanged="ResearcherListView_SelectionChanged">
+        <ListView Name="ResearcherListView" ItemsSource="{Binding Researchers}" HorizontalAlignment="Center" Height="214" Margin="0,23,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" SelectionChanged="ResearcherListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView Name="PublicationListView" ItemsSource="{Binding Publications}" HorizontalAlignment="Center" Height="214" Margin="0,24,0,0" Grid.Row="1" VerticalAlignment="Top" Width="300" Grid.Column="1" SelectionChanged="PublicationListView_SelectionChanged">
+        <ListView Name="PublicationListView" ItemsSource="{Binding Publications}" HorizontalAlignment="Center" Height="214" Margin="0,23,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" SelectionChanged="PublicationListView_SelectionChanged" Grid.Column="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Title}"/>
