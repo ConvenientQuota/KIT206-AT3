@@ -15,8 +15,8 @@ namespace AT3.Entity
         public int Authors { get; set; }
         public int Year { get; set; }
         public int PublicationYear { get; set; }
-        public int Ranking { get; set; }
-        public int Type { get; set; }
+        public OutputRanking Ranking { get; set; }
+        public OutputType Type { get; set; }
         public int CiteAs { get; set; }
         public int AvailabilityDate { get; set; }
         public int Age { get; set; }
@@ -30,5 +30,15 @@ namespace AT3.Entity
         }
 
 
+    }
+
+    public enum OutputType
+    {
+        Conference, Workshop, Other
+    }
+
+    public enum OutputRanking
+    {
+        Q1, Q2, Q3, Q4
     }
 }

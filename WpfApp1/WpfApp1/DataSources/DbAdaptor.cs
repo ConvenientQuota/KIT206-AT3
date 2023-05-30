@@ -263,10 +263,10 @@ namespace AT3.DataSources
                     {
                         DOI = reader.GetDouble(0),
                         Title = reader.GetString(1),
-                        Ranking = reader.GetInt32(2),
+                        //Ranking = reader.GetInt32(2),
                         Authors = reader.GetInt32(3),
                         Year = reader.GetInt32(4),
-                        Type = reader.GetInt32(5),
+                        //Type = reader.GetInt32(5),
                         CiteAs = reader.GetInt32(6),
                         AvailableFrom = reader.GetDateTime(7)
                     });
