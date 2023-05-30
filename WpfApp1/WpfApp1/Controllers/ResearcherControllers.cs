@@ -3,6 +3,9 @@ using System;
 using AT3.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.Windows.Documents;
+using System.Windows;
 
 namespace AT3.Controllers
 {
@@ -10,7 +13,7 @@ namespace AT3.Controllers
     {
         public List<Researcher> researchers { get; }
 
-       
+        private static List<Researcher> tempResearcherList;
 
         public ResearcherController()
         {
@@ -101,6 +104,25 @@ namespace AT3.Controllers
                 from re in researchers
                 where re.Level == level
                 select re).ToList();
+        }
+
+        public static List<Researcher> FilterByType(bool isStudent, ObservableCollection<Researcher> researchers)
+        {
+            if (isStudent)
+            {
+                var filtered = from Researcher re in researchers
+                               where re.Level == EmployeeLevel.Student
+                               select re;
+                tempResearcherList = new List<Researcher>(filtered);
+            }
+            else
+            {
+                var filtered = from Researcher re in researchers
+                               where re.Level != EmployeeLevel.Student
+                               select re;
+                tempResearcherList = new List<Researcher>(filtered);
+            }
+            return tempResearcherList;
         }
 
         public static List<Researcher> LoadResearchers()
