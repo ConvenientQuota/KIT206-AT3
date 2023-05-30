@@ -65,22 +65,12 @@ namespace WpfApp1
 
         private void PublicationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (PublicationListView.SelectedItem is Researcher researcher)
+            if (ResearcherComboBox.SelectedItem is Researcher selectedResearcher)
             {
-                List<Publication> publications = PublicationControllers.ResearchersPublications(researcher.Name);
+                string researcherName = selectedResearcher.Name; //Name of selected researcher 
 
-                if (publications.Count > 0)
-                {
-                    Console.WriteLine("\nPublications for Researcher: " + researcher.Name + "\n");
-                    foreach (Publication publication in publications)
-                    {
-                        Console.WriteLine(publication.ToString());
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("\nNo publications found for Researcher: " + researcher.Name + "\n");
-                }
+                List<Publication> researcherPublications = PublicationControllers.ResearchersPublications(researcherName); // Prints out publications of the selected researcher
+
             }
 
         }
