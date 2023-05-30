@@ -48,8 +48,7 @@ namespace AT3.DataSources
             }
             return conn;
         }
-        /**
-         * Researcher method to load all researchers and their details
+        /**Researcher method to load all researchers and their details
          */
         public static List<Researcher> LoadAll()
         {
@@ -122,8 +121,7 @@ namespace AT3.DataSources
             return researchers;
         }
 
-        /**
-         * Publication method to print all publications and their details
+        /**Publication method to print all publications and their details
          */
         public static List<Publication> LoadPublication()
         {
@@ -180,9 +178,7 @@ namespace AT3.DataSources
             return publications;
         }
 
-       /*
-        * 
-        * Function for looking for a specific researcher depending on their 'id' 
+       /* Function for looking for a specific researcher depending on their 'id' 
         */
         public static Researcher ResearcherId(int id)
         {
@@ -267,6 +263,7 @@ namespace AT3.DataSources
                     reader.GetString(5) + " " +// 
                     reader.GetString(6) + " " + reader.GetString(7)
                     };
+
                     Console.WriteLine("\nPublication Found\n");
                     Console.WriteLine(publication.Doi);
                     return publication;
@@ -287,7 +284,7 @@ namespace AT3.DataSources
             }
         }
 
-        public static List<Publication> FindPublicationsByResearcher(string researcherName)
+        public static List<Publication> ResearchersPublications(string researcherName)
         {
             List<Publication> publications = new List<Publication>();
 
@@ -328,7 +325,7 @@ namespace AT3.DataSources
                 }
                 else
                 {
-                    Console.WriteLine("\nNo publications found for Researcher: " + researcherName + "\n");
+                    Console.WriteLine("\nPublications not found for Researcher: " + researcherName + "\n");
                 }
 
                 return publications;
@@ -342,9 +339,10 @@ namespace AT3.DataSources
                 conn.Close();
             }
         }
-        /**
+        
+        /**Add researcher function
          * 
-         * Add researcher function
+         * 
          
             public static List<Researcher> AddResearcher(string id, string type, string given_name, string family_name,string title, string unit, string campus, string email, string photo, string degree, int? supervisorId, char? level, string utasStart,string currentStart)
             {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AT3.Entity;
 using AT3.DataSources;
+using MySql.Data.MySqlClient;
 
 namespace AT3.Controllers
 {
@@ -96,6 +97,11 @@ namespace AT3.Controllers
         public static List<Publication> LoadPublications()
         {
             return DbAdaptor.LoadPublication();
+        }
+
+        public static List<Publication> ResearchersPublications(string researcherName)
+        {
+            return DbAdaptor.ResearchersPublications(researcherName);
         }
     }
 }

@@ -86,6 +86,23 @@ namespace WpfApp1
 
         private void PublicationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (PublicationListView.SelectedItem is Researcher researcher)
+            {
+                List<Publication> publications = PublicationControllers.ResearchersPublications(researcher.Name);
+
+                if (publications.Count > 0)
+                {
+                    Console.WriteLine("\nPublications for Researcher: " + researcher.Name + "\n");
+                    foreach (Publication publication in publications)
+                    {
+                        Console.WriteLine(publication.ToString());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nNo publications found for Researcher: " + researcher.Name + "\n");
+                }
+            }
 
         }
     }
