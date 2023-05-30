@@ -174,7 +174,7 @@ namespace AT3.DataSources
             foreach (Publication publication in publications)
             {
 
-                Console.WriteLine(publication.DOI);
+                Console.WriteLine(publication.Doi);
             }
 
             return publications;
@@ -242,7 +242,52 @@ namespace AT3.DataSources
                 conn.Close();
             } 
         }
-        public static List<Publication> FindPublication(double DOI)
+        public static Publication FindPublication(string doi)
+        {
+            MySqlConnection conn = dbAdaptor();
+            MySqlDataReader reader = null;
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE doi = @doi;", conn);
+                cmd.Parameters.AddWithValue("@doi", doi);
+                reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Create a new Publication object and set its properties
+                    Publication publication = new Publication
+                    {
+                        Doi = reader.GetString(0) + " " + // 
+                    reader.GetString(1) + " " +// 
+                    reader.GetString(2) + " " +//
+                    reader.GetString(3) + " " +// 
+                    reader.GetString(4) + " " +// 
+                    reader.GetString(5) + " " +// 
+                    reader.GetString(6) + " " + reader.GetString(7)
+                    };
+                    Console.WriteLine("\nPublication Found\n");
+                    Console.WriteLine(publication.Doi);
+                    return publication;
+                }
+                else
+                {
+                    Console.WriteLine("\nPublication Not Found\n");
+                    return null;
+                }
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+                conn.Close();
+            }
+        }
+
+        public static List<Publication> FindPublicationsByResearcher(string researcherName)
         {
             List<Publication> publications = new List<Publication>();
 
@@ -252,42 +297,50 @@ namespace AT3.DataSources
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE DOI = @doi;", conn);
-                cmd.Parameters.AddWithValue("@id", DOI);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE authors LIKE CONCAT('%', @authors, '%');", conn);
+                cmd.Parameters.AddWithValue("@authors", researcherName);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    //You have specified an invalid column ordinal. Error
-                    publications.Add(new Publication
+                    // FIX THIS
+                    Publication publication = new Publication
                     {
-                        DOI = reader.GetDouble(0),
-                        Title = reader.GetString(1),
-                        //Ranking = reader.GetInt32(2),
-                        Authors = reader.GetInt32(3),
-                        Year = reader.GetInt32(4),
-                        //Type = reader.GetInt32(5),
-                        CiteAs = reader.GetInt32(6),
-                        AvailableFrom = reader.GetDateTime(7)
-                    });
+                        Doi = reader.GetString(0) + " " + // 
+                    reader.GetString(1) + " " +// 
+                    reader.GetString(2) + " " +//
+                    reader.GetString(3) + " " +// 
+                    reader.GetString(4) + " " +// 
+                    reader.GetString(5) + " " +// 
+                    reader.GetString(6) + " " + reader.GetString(7)
+                    };
 
-                    Console.WriteLine("\nPublication Found\n");
-                    Console.WriteLine($"DOI: {publications.Last().DOI}");
-                    Console.WriteLine($"Title: {publications.Last().Title}");
-                    Console.WriteLine($"Ranking: {publications.Last().Ranking}");
-                    Console.WriteLine($"Authors: {publications.Last().Authors}");
-                    Console.WriteLine($"Year: {publications.Last().Year}");
-                    Console.WriteLine($"Type: {publications.Last().Type}");
-                    Console.WriteLine($"Cite As: {publications.Last().CiteAs}");
-                    Console.WriteLine($"Available: {publications.Last().AvailableFrom}");
+                    publications.Add(publication);
                 }
-  
+
+                if (publications.Count > 0)
+                {
+                    Console.WriteLine("\nPublications for Researcher: " + researcherName + "\n");
+                    foreach (Publication publication in publications)
+                    {
+                        Console.WriteLine(publication.ToString());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nNo publications found for Researcher: " + researcherName + "\n");
+                }
+
+                return publications;
             }
             finally
             {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
                 conn.Close();
             }
-          return publications;
         }
         /**
          * 
