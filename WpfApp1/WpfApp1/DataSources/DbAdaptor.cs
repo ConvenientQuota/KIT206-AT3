@@ -76,10 +76,11 @@ namespace AT3.DataSources
                         Name =
                         
                     //reader.GetString(0) + " " +// ID
-                    //reader.GetString(1) + " " +// Type
+                    
                     reader.GetString(4) + " " +// Title
                     reader.GetString(2) + " " +// given_name
-                    reader.GetString(3) + " " // family_name
+                    reader.GetString(3) + " " +// family_name
+                    reader.GetString(1) + " " // Type
                     /*
                     reader.GetString(4) + " " +// Title
                     reader.GetString(5) + " " +// Unit
