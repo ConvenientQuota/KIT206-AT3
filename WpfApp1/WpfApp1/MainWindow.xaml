@@ -5,35 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="69*"/>
+            <RowDefinition Height="365*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="26*"/>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="37*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.5, 0.5" Height="25" SelectionChanged="ResearcherComboBox_SelectionChanged">
+        <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="74,49,0,0" VerticalAlignment="Top" Width="122" RenderTransformOrigin="0.5, 0.5" Height="25" SelectionChanged="ResearcherComboBox_SelectionChanged" Grid.Row="1">
             <ComboBoxItem>Student</ComboBoxItem>
             <ComboBoxItem>Staff</ComboBoxItem>
             <ComboBoxItem>All</ComboBoxItem>
         </ComboBox>
-        <ListView Name="ResearcherListView" ItemsSource="{Binding Researchers}" HorizontalAlignment="Center" Height="214" Margin="0,23,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" SelectionChanged="ResearcherListView_SelectionChanged">
+        <ListView Name="ResearcherListView" ItemsSource="{Binding Researchers}" HorizontalAlignment="Center" Height="385" VerticalAlignment="Top" Width="184" SelectionChanged="ResearcherListView_SelectionChanged" Grid.Row="1" Margin="0,79,0,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView Name="PublicationListView" ItemsSource="{Binding Publications}" HorizontalAlignment="Center" Height="214" Margin="0,23,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" SelectionChanged="PublicationListView_SelectionChanged" Grid.Column="2">
+        <ListView Name="PublicationListView" ItemsSource="{Binding Publications}" HorizontalAlignment="Center" Height="123" Margin="0,341,0,0" Grid.Row="1" VerticalAlignment="Top" Width="276" SelectionChanged="PublicationListView_SelectionChanged" Grid.Column="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Title}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Rectangle Height="471" Grid.Row="1" Stroke="Black" VerticalAlignment="Center" Margin="6,0,6,0"/>
+        <Label Content="Show By:" HorizontalAlignment="Left" Height="25" Margin="12,49,0,0" Grid.Row="1" VerticalAlignment="Top" Width="56"/>
+        <Label Content="Filter By Name:" Margin="12,19,0,447" Grid.Row="1" HorizontalAlignment="Left" Width="88"/>
+        <StackPanel Name="ResearcherDetails" Orientation="Vertical" Grid.Column="1" Grid.Row="2">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Name: "></Label>
+                <Label Content="{Binding Path=Name}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Title: "></Label>
+                <Label Content="{Binding Path=Title}"></Label>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

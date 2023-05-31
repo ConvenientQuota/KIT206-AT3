@@ -12,7 +12,7 @@ namespace AT3.Entity
         public string Doi { get; set; }
         public int Publications { get; set; }
         public string Title { get; set; }
-        public int Authors { get; set; }
+        public List<string> Authors { get; set; }
         public int Year { get; set; }
         public int PublicationYear { get; set; }
         public OutputRanking Ranking { get; set; }
@@ -27,6 +27,11 @@ namespace AT3.Entity
         public override string ToString()
         {
             return Doi + " " + Publications + " " + Title + " " + Authors + " " + PublicationYear + " " + Ranking + " " + Type + " " + CiteAs + " " + AvailabilityDate + " " + Age + " " + Cite;
+        }
+
+        public Publication()
+        {
+            Authors = new List<string>();
         }
 
 
