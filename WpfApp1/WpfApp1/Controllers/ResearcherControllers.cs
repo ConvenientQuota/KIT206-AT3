@@ -108,22 +108,26 @@ namespace AT3.Controllers
 
         public static List<Researcher> FilterByType(bool isStudent, ObservableCollection<Researcher> researchers)
         {
+            List<Researcher> tempResearcherList;
             if (isStudent)
             {
                 var filtered = from Researcher re in researchers
                                where re.Level == EmployeeLevel.Student
                                select re;
-                tempResearcherList = new List<Researcher>(filtered);
+                tempResearcherList = filtered.ToList();
             }
             else
             {
                 var filtered = from Researcher re in researchers
                                where re.Level != EmployeeLevel.Student
                                select re;
-                tempResearcherList = new List<Researcher>(filtered);
+                tempResearcherList = filtered.ToList();
             }
             return tempResearcherList;
         }
+
+
+
 
         public static List<Researcher> LoadResearchers()
         {
