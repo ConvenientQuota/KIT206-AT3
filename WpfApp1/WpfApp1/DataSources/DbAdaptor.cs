@@ -68,6 +68,7 @@ namespace AT3.DataSources
                     string degree = reader.IsDBNull(9) ? "N/A " : reader.GetString(9);
                     char? Level = reader.IsDBNull(11) ? null : (char?)reader.GetChar(11);
                     EmployeeLevel employeeLevel;
+                    Campus campus;
 
                     switch (Level) { 
                         case 'A':
@@ -90,24 +91,32 @@ namespace AT3.DataSources
                             break;
                     }
 
+                    switch (reader.GetString(6)) {
+                        case "Hobart":
+                            campus = Campus.Hobart;
+                            break;
+                        case "Launceston":
+                            campus = Campus.Launceston;
+                            break;
+                        default:
+                            campus = Campus.Cradle;
+                            break;
+                    }
+
                     researchers.Add(new Researcher
                     {
-                        Name =
-
-                    //reader.GetString(0) + " " +// ID
-
-                    reader.GetString(4) + " " +// Title
-                    reader.GetString(2) + " " +// given_name
-                    reader.GetString(3) + " ",// family_name
-
-                        Level = employeeLevel
+                        Id = reader.GetInt32(0),
+                        Name = reader.GetString(2) + " " + reader.GetString(3),// given_name + family_name
+                        Level = employeeLevel,
+                        Title = reader.GetString(4),
+                        Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
+                        Unit = reader.GetString(5),
+                        campus = campus,
+                        Email = reader.GetString(7),
+                        Photo = new Uri(reader.GetString(8)),
+                        Degree = degree,
 
                         /*
-                        reader.GetString(4) + " " +// Title
-                        reader.GetString(5) + " " +// Unit
-                        reader.GetString(6) + " " +// Campus
-                        reader.GetString(7) + " " +// Email
-                        reader.GetString(8) + " " +//Photo
                         degree + " " +
                         (supervisor_id.HasValue ? supervisor_id.Value.ToString() : "N/A " +
                         (Level.HasValue ? Level.Value.ToString() : "N/A ")) + " " +
