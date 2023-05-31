@@ -74,7 +74,7 @@ namespace AT3.DataSources
                         
                     //reader.GetString(0) + " " +// ID
                     
-                    reader.GetString(4) + " " +// Title
+                    //reader.GetString(4) + " " +// Title
                     reader.GetString(2) + " " +// given_name
                     reader.GetString(3) + " " // family_name
                     //reader.GetString(1) + " " // Type

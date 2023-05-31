@@ -44,8 +44,24 @@
                 <Label Content="{Binding Path=Name}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Title: "></Label>
+                <Label Content="Title: "/>
                 <Label Content="{Binding Path=Title}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Id: "/>
+                <Label Content="{Binding Path=Id}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Email: "/>
+                <Label Content="{Binding Path=Email}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Unit: "/>
+                <Label Content="{Binding Path=Unit}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Campus: "/>
+                <Label Content="{Binding Path=Campus}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
