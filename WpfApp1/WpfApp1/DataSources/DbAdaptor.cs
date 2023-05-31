@@ -28,9 +28,6 @@ namespace AT3.DataSources
         {
             return (T)Enum.Parse(typeof(T), str);
         }
-
-
-
         public static MySqlConnection dbAdaptor()
         {
             if (conn == null)
@@ -339,6 +336,18 @@ namespace AT3.DataSources
                 }
                 conn.Close();
             }
+        }
+            
+        // white box test for uc16
+        public static bool testResearchSelect() {
+            Researcher researcher;
+            // some 
+            //researcher = ResearcherId(id);
+
+            //researcher = ResearcherId(id);
+
+            //researcher = ResearcherId(id);
+            return true;
         }
         
         /**Add researcher function

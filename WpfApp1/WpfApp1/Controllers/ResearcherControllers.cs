@@ -108,17 +108,17 @@ namespace AT3.Controllers
 
         public static List<Researcher> FilterByType(bool isStudent, ObservableCollection<Researcher> researchers)
         {
-            if (isStudent == true)
-            {
+            if (isStudent)
+            {             
                 var filtered = from Researcher re in researchers
-                               where re.Level == EmployeeLevel.Student
+                               where re.Name.Contains("Student")
                                select re;
                 tempResearcherList = filtered.ToList();
             }
             else
             {
                 var filtered = from Researcher re in researchers
-                               where re.Level != EmployeeLevel.Student
+                               where !re.Name.Contains("Student")
                                select re;
                 tempResearcherList = filtered.ToList();
             }
