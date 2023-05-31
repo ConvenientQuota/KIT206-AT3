@@ -113,14 +113,14 @@ namespace AT3.Controllers
                 var filtered = from Researcher re in researchers
                                where re.Level == EmployeeLevel.Student
                                select re;
-                tempResearcherList = new List<Researcher>(filtered);
+                tempResearcherList = filtered.ToList();
             }
             else
             {
                 var filtered = from Researcher re in researchers
                                where re.Level != EmployeeLevel.Student
                                select re;
-                tempResearcherList = new List<Researcher>(filtered);
+                tempResearcherList = filtered.ToList();
             }
             return tempResearcherList;
         }

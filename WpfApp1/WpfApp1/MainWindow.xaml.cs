@@ -56,14 +56,35 @@ namespace WpfApp1
             }
         }
 
-        public ObservableCollection<Researcher> Re
+        public ObservableCollection<Researcher> Researcher
         {
-            get { return new ObservableCollection<Researcher>(DbAdaptor.LoadAll()); }
+            get { return new ObservableCollection<Researcher>(ResearcherController.LoadResearchers()); }
         }
+
+        public ObservableCollection<Publication> Publication
+        {
+            get
+            {
+                if(ResearcherListView.SelectedItem != null)
+                {
+                    List<Publication> publications = (List<Publication>)PublicationControllers.SearchByResearcher((Researcher)ResearcherListView.SelectedItem);
+                    ObservableCollection<Publication> publist = new ObservableCollection<Publication>(publications);
+                    return publist;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
 
         private void ResearcherListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if(e.AddedItems.Count > 0)
+            {
+                ResearcherDetails.DataContext = e.AddedItems[0];
+            }
 
         }
 
@@ -73,15 +94,15 @@ namespace WpfApp1
             {
                 if (e.AddedItems[0].ToString().EndsWith("Student"))
                 {
-                    ResearcherListView.ItemsSource = ResearcherController.FilterByType(true, Re);
+                    ResearcherListView.ItemsSource = ResearcherController.FilterByType(true, Researcher);
                 }
                 else if (e.AddedItems[0].ToString().EndsWith("Staff"))
                 {
-                    ResearcherListView.ItemsSource = ResearcherController.FilterByType(false, Re);
+                    ResearcherListView.ItemsSource = ResearcherController.FilterByType(false, Researcher);
                 }
                 else
                 {
-                    ResearcherListView.ItemsSource = Re;
+                    ResearcherListView.ItemsSource = Researcher;
                 }
             }
         }
@@ -92,10 +113,9 @@ namespace WpfApp1
             {
                 string researcherName = selectedResearcher.Name; // Name of selected researcher 
 
-                List<Publication> researcherPublications = PublicationControllers.ResearchersPublications(researcherName); // Prints out publications of the selected researcher
+                 List<Publication> researcherPublications = PublicationControllers.ResearchersPublications(researcherName); // Prints out publications of the selected researcher
 
-            }
-
+             } 
         }
     }
 }
