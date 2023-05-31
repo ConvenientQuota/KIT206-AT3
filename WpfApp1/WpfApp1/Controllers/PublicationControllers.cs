@@ -13,6 +13,7 @@ namespace AT3.Controllers
     public class PublicationControllers
     {
             public List<Publication> publications { get; }
+        private static List<Publication> publication;
 
             public PublicationControllers()
             {
@@ -36,7 +37,7 @@ namespace AT3.Controllers
                 return publications.FirstOrDefault(pub => pub.Title == title);
             }
 
-            public Publication filterByAuthor(int author)
+            public Publication filterByAuthor(List<string> author)
             {
                 return publications.FirstOrDefault(pub => pub.Authors == author);
             }
@@ -75,7 +76,7 @@ namespace AT3.Controllers
             return publications.FirstOrDefault(pub => pub.Title == title);
         }
 
-        public Publication LinqFilterByAuthor(int author)
+        public Publication LinqFilterByAuthor(List<string> author)
         {
             return publications.FirstOrDefault(pub => pub.Authors == author);
         }
@@ -102,6 +103,27 @@ namespace AT3.Controllers
         public static List<Publication> ResearchersPublications(string researcherName)
         {
             return DbAdaptor.ResearchersPublications(researcherName);
+        }
+
+        public static List<Publication> SearchByResearcher(Researcher researcher)
+        {
+            if(researcher == null)
+            {
+                return publication;
+            }
+
+            if(publication == null)
+            {
+                publication = LoadPublications();
+            }
+
+            var pubsByAuthor = from pub in publication
+                               from author in pub.Authors
+                               where author.Equals(researcher.Name)
+                               select pub;
+
+            return (List<Publication>) pubsByAuthor.ToList();
+
         }
     }
 }

@@ -110,7 +110,7 @@ namespace AT3.Controllers
         {
             List<Researcher> tempResearcherList;
             if (isStudent)
-            {
+            {             
                 var filtered = from Researcher re in researchers
                                where re.Level == EmployeeLevel.Student
                                select re;
