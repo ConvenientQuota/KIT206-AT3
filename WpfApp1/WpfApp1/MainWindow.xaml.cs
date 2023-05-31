@@ -30,6 +30,8 @@ namespace WpfApp1
             DataContext = this;
             InitializeComponent();
 
+            DbAdaptor.testResearchSelect();
+
         }
 
         private List<Researcher> researchers;
@@ -88,7 +90,7 @@ namespace WpfApp1
         {
             if (ResearcherComboBox.SelectedItem is Researcher selectedResearcher)
             {
-                string researcherName = selectedResearcher.Name; //Name of selected researcher 
+                string researcherName = selectedResearcher.Name; // Name of selected researcher 
 
                 List<Publication> researcherPublications = PublicationControllers.ResearchersPublications(researcherName); // Prints out publications of the selected researcher
 
