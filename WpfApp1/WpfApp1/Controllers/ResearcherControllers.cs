@@ -111,14 +111,14 @@ namespace AT3.Controllers
             if (isStudent)
             {             
                 var filtered = from Researcher re in researchers
-                               where re.Name.Contains("Student")
+                               where re.Level == EmployeeLevel.Student
                                select re;
                 tempResearcherList = new List<Researcher>(filtered);
             }
             else
             {
                 var filtered = from Researcher re in researchers
-                               where !re.Name.Contains("Student")
+                               where re.Level != EmployeeLevel.Student
                                select re;
                 tempResearcherList = new List<Researcher>(filtered);
             }
