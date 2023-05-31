@@ -29,9 +29,6 @@ namespace WpfApp1
         {
             DataContext = this;
             InitializeComponent();
-
-            DbAdaptor.testResearchSelect();
-
         }
 
         private List<Researcher> researchers;
@@ -84,6 +81,10 @@ namespace WpfApp1
             if(e.AddedItems.Count > 0)
             {
                 ResearcherDetails.DataContext = e.AddedItems[0];
+                String name = ((Researcher)e.AddedItems[0]).Name;
+                // get the publications for the researcher
+                List<Publication> publications = PublicationControllers.ResearchersPublications(name);
+                PublicationListView.ItemsSource = publications;
             }
 
         }

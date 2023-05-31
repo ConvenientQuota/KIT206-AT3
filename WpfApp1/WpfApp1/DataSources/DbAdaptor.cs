@@ -316,16 +316,50 @@ namespace AT3.DataSources
 
                 if (reader.Read())
                 {
-                    // Create a new Publication object and set its properties
+                    OutputRanking outputRanking;
+                    OutputType outputType;
+
+                    switch (reader.GetString(2)) {
+                        case "Q1":
+                            outputRanking = OutputRanking.Q1;
+                            break;
+                        case "Q2":
+                            outputRanking = OutputRanking.Q2;
+                            break;
+                        case "Q3":
+                            outputRanking = OutputRanking.Q3;
+                            break;
+                        case "Q4":
+                            outputRanking = OutputRanking.Q4;
+                            break;
+                        default:
+                            outputRanking = OutputRanking.NA;
+                            break;
+                    }
+
+                    switch (reader.GetString(5)) {
+                        case "Conference":
+                            outputType = OutputType.Conference;
+                            break;
+                        case "Workshop":
+                            outputType = OutputType.Workshop;
+                            break;
+                        default:
+                            outputType = OutputType.Other;
+                            break;
+                    }
+                    //You have specified an invalid column ordinal. Error
                     Publication publication = new Publication
                     {
-                        Doi = reader.GetString(0) + " " + // 
-                    reader.GetString(1) + " " +// 
-                    reader.GetString(2) + " " +//
-                    reader.GetString(3) + " " +// 
-                    reader.GetString(4) + " " +// 
-                    reader.GetString(5) + " " +// 
-                    reader.GetString(6) + " " + reader.GetString(7)
+                        Doi = reader.GetString(0),
+                        Title = reader.GetString(1),
+                        Ranking = outputRanking,
+                        // the authors may contains space in the name
+                        Authors = reader.GetString(3).Split(',').ToList(),
+                        Year = reader.GetInt32(4),
+                        Type = outputType,
+                        Cite = reader.GetString(6),
+                        AvailableFrom = reader.GetDateTime(7)
                     };
 
                     Console.WriteLine("\nPublication Found\n");
@@ -364,19 +398,51 @@ namespace AT3.DataSources
 
                 while (reader.Read())
                 {
-                    // FIX THIS
-                    Publication publication = new Publication
-                    {
-                        Doi = reader.GetString(0) + " " + // 
-                    reader.GetString(1) + " " +// 
-                    reader.GetString(2) + " " +//
-                    reader.GetString(3) + " " +// 
-                    reader.GetString(4) + " " +// 
-                    reader.GetString(5) + " " +// 
-                    reader.GetString(6) + " " + reader.GetString(7)
-                    };
+                    OutputRanking outputRanking;
+                    OutputType outputType;
 
-                    publications.Add(publication);
+                    switch (reader.GetString(2)) {
+                        case "Q1":
+                            outputRanking = OutputRanking.Q1;
+                            break;
+                        case "Q2":
+                            outputRanking = OutputRanking.Q2;
+                            break;
+                        case "Q3":
+                            outputRanking = OutputRanking.Q3;
+                            break;
+                        case "Q4":
+                            outputRanking = OutputRanking.Q4;
+                            break;
+                        default:
+                            outputRanking = OutputRanking.NA;
+                            break;
+                    }
+
+                    switch (reader.GetString(5)) {
+                        case "Conference":
+                            outputType = OutputType.Conference;
+                            break;
+                        case "Workshop":
+                            outputType = OutputType.Workshop;
+                            break;
+                        default:
+                            outputType = OutputType.Other;
+                            break;
+                    }
+                    //You have specified an invalid column ordinal. Error
+                    publications.Add(new Publication
+                    {
+                        Doi = reader.GetString(0),
+                        Title = reader.GetString(1),
+                        Ranking = outputRanking,
+                        // the authors may contains space in the name
+                        Authors = reader.GetString(3).Split(',').ToList(),
+                        Year = reader.GetInt32(4),
+                        Type = outputType,
+                        Cite = reader.GetString(6),
+                        AvailableFrom = reader.GetDateTime(7)
+                    });
                 }
 
                 if (publications.Count > 0)
@@ -384,7 +450,7 @@ namespace AT3.DataSources
                     Console.WriteLine("\nPublications for Researcher: " + researcherName + "\n");
                     foreach (Publication publication in publications)
                     {
-                        Console.WriteLine(publication.ToString());
+                        Console.WriteLine(publication.Title);
                     }
                 }
                 else
