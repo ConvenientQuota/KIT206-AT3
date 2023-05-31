@@ -49,19 +49,19 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Id: "/>
-                <Label Content="{Binding Path=Id}"/>
+                <Label Content="{Binding Path=Id}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Email: "/>
-                <Label Content="{Binding Path=Email}"/>
+                <Label Content="{Binding Path=Email}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Unit: "/>
-                <Label Content="{Binding Path=Unit}"/>
+                <Label Content="{Binding Path=Unit}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Campus: "/>
-                <Label Content="{Binding Path=Campus}"/>
+                <Label Content="{Binding Path=Campus}"></Label>
             </StackPanel>
         </StackPanel>
     </Grid>

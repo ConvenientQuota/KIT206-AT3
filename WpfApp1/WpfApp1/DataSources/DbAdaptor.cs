@@ -116,14 +116,6 @@ namespace AT3.DataSources
                         Photo = new Uri(reader.GetString(8)),
                         Degree = degree,
 
-                        /*
-                        degree + " " +
-                        (supervisor_id.HasValue ? supervisor_id.Value.ToString() : "N/A " +
-                        (Level.HasValue ? Level.Value.ToString() : "N/A ")) + " " +
-                        reader.GetString(12) + " " + //utas_start
-                        reader.GetString(13) // Current_start
-                        */
-
                     }) ;
                 }
             }
