@@ -162,17 +162,50 @@ namespace AT3.DataSources
 
                 while (reader.Read())
                 {
+                    OutputRanking outputRanking;
+                    OutputType outputType;
+
+                    switch (reader.GetString(2)) {
+                        case "Q1":
+                            outputRanking = OutputRanking.Q1;
+                            break;
+                        case "Q2":
+                            outputRanking = OutputRanking.Q2;
+                            break;
+                        case "Q3":
+                            outputRanking = OutputRanking.Q3;
+                            break;
+                        case "Q4":
+                            outputRanking = OutputRanking.Q4;
+                            break;
+                        default:
+                            outputRanking = OutputRanking.NA;
+                            break;
+                    }
+
+                    switch (reader.GetString(5)) {
+                        case "Conference":
+                            outputType = OutputType.Conference;
+                            break;
+                        case "Workshop":
+                            outputType = OutputType.Workshop;
+                            break;
+                        default:
+                            outputType = OutputType.Other;
+                            break;
+                    }
                     //You have specified an invalid column ordinal. Error
                     publications.Add(new Publication
                     {
-                       // DOI = reader.GetDouble(0),
+                        Doi = reader.GetString(0),
                         Title = reader.GetString(1),
-                       /* Ranking = reader.GetInt32(2),
-                        Authors = reader.GetInt32(3),
+                        Ranking = outputRanking,
+                        // the authors may contains space in the name
+                        Authors = reader.GetString(3).Split(',').ToList(),
                         Year = reader.GetInt32(4),
-                        Type = reader.GetInt32(5),
-                        CiteAs = reader.GetInt32(6),
-                        AvailableFrom = reader.GetDateTime(7) */
+                        Type = outputType,
+                        Cite = reader.GetString(6),
+                        AvailableFrom = reader.GetDateTime(7)
                     });
                 }
             }
