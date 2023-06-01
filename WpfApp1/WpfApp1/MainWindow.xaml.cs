@@ -98,31 +98,32 @@ namespace WpfApp1
                     ResearcherListView.ItemsSource = ResearcherController.FilterByType(true, Researcher);
                     PublicationListView.ItemsSource = null;
                     ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
                 }
                 else if (e.AddedItems[0].ToString().EndsWith("Staff"))
                 {
                     ResearcherListView.ItemsSource = ResearcherController.FilterByType(false, Researcher);
                     PublicationListView.ItemsSource = null;
                     ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
                 }
                 else
                 {
                     ResearcherListView.ItemsSource = Researcher;
                     PublicationListView.ItemsSource = null;
                     ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
                 }
             }
         }
 
         private void PublicationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ResearcherComboBox.SelectedItem is Researcher selectedResearcher)
+            if (e.AddedItems.Count > 0)
             {
-                string researcherName = selectedResearcher.Name; // Name of selected researcher 
-
-                 List<Publication> researcherPublications = PublicationControllers.ResearchersPublications(researcherName); // Prints out publications of the selected researcher
-
-             } 
+                PublicationDetails.DataContext = e.AddedItems[0];
+                Console.WriteLine(((Publication)e.AddedItems[0]).Title);
+             }
         }
     }
 }
