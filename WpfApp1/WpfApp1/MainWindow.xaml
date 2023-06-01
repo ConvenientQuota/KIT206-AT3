@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200">
+        Title="MainWindow" Height="900" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="11*"/>
-            <RowDefinition Height="217*"/>
+            <RowDefinition Height="167*"/>
+            <RowDefinition Height="717*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="26*"/>
@@ -18,7 +18,6 @@
         </Grid.ColumnDefinitions>
         <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="152,120,0,0" VerticalAlignment="Top" Width="122" RenderTransformOrigin="0.5, 0.5" Height="25" SelectionChanged="ResearcherComboBox_SelectionChanged" Grid.Row="1">
             <ComboBoxItem>Student</ComboBoxItem>
-            <ComboBoxItem>Staff</ComboBoxItem>
             <ComboBoxItem>A</ComboBoxItem>
             <ComboBoxItem>B</ComboBoxItem>
             <ComboBoxItem>C</ComboBoxItem>
@@ -26,6 +25,8 @@
             <ComboBoxItem>E</ComboBoxItem>
             <ComboBoxItem>All</ComboBoxItem>
         </ComboBox>
+        <Image x:Name="ResearcherPhoto" Source="{Binding Path=Photo}" Grid.Column="1" Margin="230,20,98,20">
+        </Image>
         <ListView Name="ResearcherListView" ItemsSource="{Binding Researchers}" HorizontalAlignment="Left" Height="434" VerticalAlignment="Top" Width="254" SelectionChanged="ResearcherListView_SelectionChanged" Grid.Row="1" Margin="25,161,0,0">
             <ListView.View>
                 <GridView>
@@ -42,7 +43,7 @@
         </ListView>
         <Rectangle Height="623" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Margin="2,10,10,0"/>
         <Label Content="Show By:" HorizontalAlignment="Left" Height="25" Margin="26,120,0,0" Grid.Row="1" VerticalAlignment="Top" Width="68"/>
-        <Label Content="Filter By Name:" Margin="26,44,0,582" Grid.Row="1" HorizontalAlignment="Left" Width="94"/>
+        <Label Content="Filter By Name:" Margin="42,44,0,582" Grid.Row="1" HorizontalAlignment="Left" Width="94"/>
         <StackPanel Name="ResearcherDetails" Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="0,20,0,0">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Name: "></Label>
@@ -109,6 +110,10 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="Cite as: "></Label>
                 <Label Content="{Binding Path=Cite}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Ranking: "></Label>
+                <Label Content="{Binding Path=Ranking}"></Label>
             </StackPanel>
             <Label Content="Authors"></Label>
             <ListBox Height="100" ItemsSource="{Binding Authors}" Width="380"/>

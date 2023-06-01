@@ -85,6 +85,16 @@ namespace WpfApp1
                 // get the publications for the researcher
                 List<Publication> publications = PublicationControllers.ResearchersPublications(name);
                 PublicationListView.ItemsSource = publications;
+
+                var photo = new Image();
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = (e.AddedItems[0] as Researcher).Photo;
+                bitmap.EndInit();
+                ImageSource imageSource = bitmap;
+
+                ResearcherPhoto.Source = imageSource;
             }
 
         }
@@ -151,7 +161,7 @@ namespace WpfApp1
             {
                 PublicationDetails.DataContext = e.AddedItems[0];
                 Console.WriteLine(((Publication)e.AddedItems[0]).Title);
-             }
+            }
         }
     }
 }
