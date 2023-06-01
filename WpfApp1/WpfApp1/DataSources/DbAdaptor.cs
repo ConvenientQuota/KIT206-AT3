@@ -118,6 +118,7 @@ namespace AT3.DataSources
                         Photo = new Uri(reader.GetString(8)),
                         Degree = degree,
                         commenceWithInstitute = reader.GetDateTime(12),
+                        commenceCurrentPosition = reader.GetDateTime(13),
                     });
                 }
             }
@@ -317,6 +318,7 @@ namespace AT3.DataSources
                         Photo = new Uri(reader.GetString(8)),
                         Degree = degree,
                         commenceWithInstitute = reader.GetDateTime(12),
+                        commenceCurrentPosition = reader.GetDateTime(13),
                     };
                     Console.WriteLine("\nResearcher Found\n");
                     Console.WriteLine(r.Name);
