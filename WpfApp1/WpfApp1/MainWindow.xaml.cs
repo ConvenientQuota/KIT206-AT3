@@ -94,14 +94,27 @@ namespace WpfApp1
             if (e.AddedItems.Count > 0)
             {
                 ResearcherDetails.DataContext = e.AddedItems[0];
-                string name = ((Researcher)e.AddedItems[0]).Name;
+                Researcher r = (Researcher)e.AddedItems[0];
+                string name = r.Name;
 
                 // Get the publications for the researcher
                 List<Publication> publications = PublicationControllers.ResearchersPublications(name);
 
+                // count the avg number of publications in 3 year
+                int count = 0;
+                foreach (Publication publication in publications)
+                {
+                    if (publication.Year >= DateTime.Now.Year - 3)
+                    {
+                        count++;
+                    }
+                }
+
+                r.ThreeYearAverage = Math.Round((double)count / 3.0, 2);
+
                 // Sort the publications by year and title
                 List<Publication> sortedPublications = SortPublicationsByRecentFirst(publications);
-
+            
                 // Set the sorted publications as the item source
                 PublicationListView.ItemsSource = sortedPublications;
 

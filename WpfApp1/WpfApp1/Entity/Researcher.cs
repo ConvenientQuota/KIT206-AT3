@@ -48,7 +48,7 @@ namespace AT3.Entity
         public int Tenure { get; set; }
         public int Publications { get; set; }
         public int Q1Percentage { get; set; }
-        public int ThreeYearAverage { get; set; }
+        public double ThreeYearAverage { get; set; }
         public int Funding { get; set; }
         public int performancePublication { get; set; }
         public int performanceFunding { get; set; }
