@@ -98,18 +98,21 @@ namespace WpfApp1
                     ResearcherListView.ItemsSource = ResearcherController.FilterByType(true, Researcher);
                     PublicationListView.ItemsSource = null;
                     ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
                 }
                 else if (e.AddedItems[0].ToString().EndsWith("Staff"))
                 {
                     ResearcherListView.ItemsSource = ResearcherController.FilterByType(false, Researcher);
                     PublicationListView.ItemsSource = null;
                     ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
                 }
                 else
                 {
                     ResearcherListView.ItemsSource = Researcher;
                     PublicationListView.ItemsSource = null;
                     ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
                 }
             }
         }
