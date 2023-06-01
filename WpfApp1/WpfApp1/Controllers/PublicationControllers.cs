@@ -126,8 +126,7 @@ namespace AT3.Controllers
 
         }
 
-        /* Publications within the same year shall be sorted alphabetically based on title.
-         */
+
 
     }
 }
