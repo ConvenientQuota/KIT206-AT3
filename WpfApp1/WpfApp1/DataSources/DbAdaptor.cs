@@ -7,6 +7,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AT3.Entity;
+using System.Xml.Linq;
+using System.Windows.Controls;
+using System.Xml;
+using AT3.Controllers;
 
 namespace AT3.DataSources
 {
@@ -45,6 +49,35 @@ namespace AT3.DataSources
             }
             return conn;
         }
+
+        // load xml data from the Fundings_Rankings.xml
+        public static void LoadXML(List<Researcher> researchers) {
+            XmlDocument xml = new XmlDocument();
+            xml.Load("C:\\Users\\Desktop\\student\\KIT206-AT3\\WpfApp1\\WpfApp1\\DataSources\\Fundings_Rankings.xml");
+            //Console.WriteLine(xml.ToString());
+
+            XmlNodeList projectNode = xml.SelectNodes("/Projects/Project");
+
+            foreach (XmlNode node in projectNode)
+            {
+                int fund = int.Parse(node["Funding"].InnerText);
+                Console.WriteLine(fund + "fund 123123");
+
+                XmlNodeList staff_ids = node.SelectNodes("/Researchers/staff_id");
+
+                foreach (XmlNode staff_id in staff_ids) {
+                    Console.WriteLine(staff_id.InnerText);
+                    Console.WriteLine(int.Parse(staff_id.InnerText));
+                    foreach (Researcher researcher in researchers) {
+                        if (researcher.Id == int.Parse(staff_id.InnerText)) {
+                            Console.WriteLine(fund + "fund, " + researcher.Id + "id");
+                            researcher.Funding += fund;
+                        }
+                    }
+                }
+            }
+        }
+
         /**Researcher method to load all researchers and their details
          */
         public static List<Researcher> LoadAll()
@@ -129,6 +162,8 @@ namespace AT3.DataSources
                         Tenure = (int)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25)
                     });
                 }
+
+                LoadXML(researchers);
             }
             catch (Exception ex)
             {

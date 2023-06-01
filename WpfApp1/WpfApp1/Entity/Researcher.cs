@@ -50,7 +50,7 @@ namespace AT3.Entity
         public int Q1Percentage { get; set; }
         public double ThreeYearAverage { get; set; }
         public int Funding { get; set; }
-        public int performancePublication { get; set; }
+        public double performancePublication { get; set; }
         public int performanceFunding { get; set; }
         public string Supervisions { get; set; }
         public string Degree { get; set; }
