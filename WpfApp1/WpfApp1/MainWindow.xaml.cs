@@ -48,8 +48,8 @@ namespace WpfApp1
         {
             get
             {
-                publications = PublicationControllers.LoadPublications();
-                return publications;
+                //publications = PublicationControllers.LoadPublications();
+                return null;
             }
         }
 
@@ -96,14 +96,20 @@ namespace WpfApp1
                 if (e.AddedItems[0].ToString().EndsWith("Student"))
                 {
                     ResearcherListView.ItemsSource = ResearcherController.FilterByType(true, Researcher);
+                    PublicationListView.ItemsSource = null;
+                    ResearcherDetails.DataContext = null;
                 }
                 else if (e.AddedItems[0].ToString().EndsWith("Staff"))
                 {
                     ResearcherListView.ItemsSource = ResearcherController.FilterByType(false, Researcher);
+                    PublicationListView.ItemsSource = null;
+                    ResearcherDetails.DataContext = null;
                 }
                 else
                 {
                     ResearcherListView.ItemsSource = Researcher;
+                    PublicationListView.ItemsSource = null;
+                    ResearcherDetails.DataContext = null;
                 }
             }
         }

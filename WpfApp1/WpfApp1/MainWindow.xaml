@@ -61,7 +61,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Campus: "/>
-                <Label Content="{Binding Path=Campus}"></Label>
+                <Label Content="{Binding Path=campus}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Commenced with Institution: "/>

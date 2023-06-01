@@ -70,7 +70,8 @@ namespace AT3.DataSources
                     EmployeeLevel employeeLevel;
                     Campus campus;
 
-                    switch (Level) { 
+                    switch (Level)
+                    {
                         case 'A':
                             employeeLevel = EmployeeLevel.A;
                             break;
@@ -91,7 +92,8 @@ namespace AT3.DataSources
                             break;
                     }
 
-                    switch (reader.GetString(6)) {
+                    switch (reader.GetString(6))
+                    {
                         case "Hobart":
                             campus = Campus.Hobart;
                             break;
@@ -115,8 +117,8 @@ namespace AT3.DataSources
                         Email = reader.GetString(7),
                         Photo = new Uri(reader.GetString(8)),
                         Degree = degree,
-
-                    }) ;
+                        commenceWithInstitute = reader.GetDateTime(12),
+                    });
                 }
             }
             catch (Exception ex)
@@ -165,7 +167,8 @@ namespace AT3.DataSources
                     OutputRanking outputRanking;
                     OutputType outputType;
 
-                    switch (reader.GetString(2)) {
+                    switch (reader.GetString(2))
+                    {
                         case "Q1":
                             outputRanking = OutputRanking.Q1;
                             break;
@@ -183,7 +186,8 @@ namespace AT3.DataSources
                             break;
                     }
 
-                    switch (reader.GetString(5)) {
+                    switch (reader.GetString(5))
+                    {
                         case "Conference":
                             outputType = OutputType.Conference;
                             break;
@@ -234,8 +238,8 @@ namespace AT3.DataSources
             return publications;
         }
 
-       /* Function for looking for a specific researcher depending on their 'id' 
-        */
+        /* Function for looking for a specific researcher depending on their 'id' 
+         */
         public static Researcher ResearcherId(int id)
         {
 
@@ -248,38 +252,68 @@ namespace AT3.DataSources
                 cmd.Parameters.AddWithValue("@id", id);
                 reader = cmd.ExecuteReader();
 
-               
+
                 if (reader.Read())
                 {
                     //Conversions
                     int? supervisor_id = reader.IsDBNull(10) ? null : (int?)reader.GetInt32(10);
                     string degree = reader.IsDBNull(9) ? "N/A " : reader.GetString(9);
                     char? Level = reader.IsDBNull(11) ? null : (char?)reader.GetChar(11);
+                    EmployeeLevel employeeLevel;
+                    Campus campus;
 
-                    Researcher researcher = new Researcher
+                    switch (Level)
                     {
-                        Name =
-                    reader.GetString(0) + " " +// ID
-                    reader.GetString(1) + " " +// Type
-                    reader.GetString(2) + " " +// given_name
-                    reader.GetString(3) + " " +// family_name
-                    reader.GetString(4) + " " +// Title
-                    reader.GetString(5) + " " +// Unit
-                    reader.GetString(6) + " " +// Campus
-                    reader.GetString(7) + " " +// Email
-                    reader.GetString(8) + " " +//Photo
-                    degree + " " +             // Degree 
-                    (supervisor_id.HasValue ? supervisor_id.Value.ToString() : "N/A " +
-                    (Level.HasValue ? Level.Value.ToString() : "N/A ")) + " " +
-                    reader.GetString(12) + " " + //utas_start
-                    reader.GetString(13) // Current_start
+                        case 'A':
+                            employeeLevel = EmployeeLevel.A;
+                            break;
+                        case 'B':
+                            employeeLevel = EmployeeLevel.B;
+                            break;
+                        case 'C':
+                            employeeLevel = EmployeeLevel.C;
+                            break;
+                        case 'D':
+                            employeeLevel = EmployeeLevel.D;
+                            break;
+                        case 'E':
+                            employeeLevel = EmployeeLevel.E;
+                            break;
+                        default:
+                            employeeLevel = EmployeeLevel.Student;
+                            break;
+                    }
 
+                    switch (reader.GetString(6))
+                    {
+                        case "Hobart":
+                            campus = Campus.Hobart;
+                            break;
+                        case "Launceston":
+                            campus = Campus.Launceston;
+                            break;
+                        default:
+                            campus = Campus.Cradle;
+                            break;
+                    }
 
+                    Researcher r = new Researcher
+                    {
+                        Id = reader.GetInt32(0),
+                        Name = reader.GetString(2) + " " + reader.GetString(3),// given_name + family_name
+                        Level = employeeLevel,
+                        Title = reader.GetString(4),
+                        Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
+                        Unit = reader.GetString(5),
+                        campus = campus,
+                        Email = reader.GetString(7),
+                        Photo = new Uri(reader.GetString(8)),
+                        Degree = degree,
+                        commenceWithInstitute = reader.GetDateTime(12),
                     };
                     Console.WriteLine("\nResearcher Found\n");
-                    Console.WriteLine(researcher.Name);
-                    return researcher;
-                    
+                    Console.WriteLine(r.Name);
+                    return r;
                 }
                 else
                 {
@@ -289,10 +323,10 @@ namespace AT3.DataSources
             }
             finally
             {
-               
+
                 if (reader != null) reader.Close();
                 conn.Close();
-            } 
+            }
         }
         public static Publication FindPublication(string doi)
         {
@@ -311,7 +345,8 @@ namespace AT3.DataSources
                     OutputRanking outputRanking;
                     OutputType outputType;
 
-                    switch (reader.GetString(2)) {
+                    switch (reader.GetString(2))
+                    {
                         case "Q1":
                             outputRanking = OutputRanking.Q1;
                             break;
@@ -329,7 +364,8 @@ namespace AT3.DataSources
                             break;
                     }
 
-                    switch (reader.GetString(5)) {
+                    switch (reader.GetString(5))
+                    {
                         case "Conference":
                             outputType = OutputType.Conference;
                             break;
@@ -393,7 +429,8 @@ namespace AT3.DataSources
                     OutputRanking outputRanking;
                     OutputType outputType;
 
-                    switch (reader.GetString(2)) {
+                    switch (reader.GetString(2))
+                    {
                         case "Q1":
                             outputRanking = OutputRanking.Q1;
                             break;
@@ -411,7 +448,8 @@ namespace AT3.DataSources
                             break;
                     }
 
-                    switch (reader.GetString(5)) {
+                    switch (reader.GetString(5))
+                    {
                         case "Conference":
                             outputType = OutputType.Conference;
                             break;
@@ -461,9 +499,10 @@ namespace AT3.DataSources
                 conn.Close();
             }
         }
-            
+
         // white box test for uc16
-        public static bool testResearchSelect() {
+        public static bool testResearchSelect()
+        {
             Researcher researcher;
             // some 
             //researcher = ResearcherId(id);
@@ -473,7 +512,7 @@ namespace AT3.DataSources
             //researcher = ResearcherId(id);
             return true;
         }
-        
+
         /**Add researcher function
          * 
          * 
