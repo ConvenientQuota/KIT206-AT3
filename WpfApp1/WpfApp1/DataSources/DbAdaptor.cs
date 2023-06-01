@@ -125,6 +125,7 @@ namespace AT3.DataSources
                         Degree = degree,
                         commenceWithInstitute = reader.GetDateTime(12),
                         employeeLevelString = employeeLevelString,
+                        commenceCurrentPosition = reader.GetDateTime(13),
                     });
                 }
             }
@@ -322,7 +323,7 @@ namespace AT3.DataSources
                     Researcher r = new Researcher
                     {
                         Id = reader.GetInt32(0),
-                        Name = reader.GetString(2) + " " + reader.GetString(3),// given_name + family_name
+                        Name = reader.GetString(2) + " " + reader.GetString(3) + "(" + reader.GetString(4) + ")",// given_name + family_name
                         Level = employeeLevel,
                         Title = reader.GetString(4),
                         Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
@@ -333,6 +334,7 @@ namespace AT3.DataSources
                         Degree = degree,
                         commenceWithInstitute = reader.GetDateTime(12),
                         employeeLevelString = employeeLevelString,
+                        commenceCurrentPosition = reader.GetDateTime(13),
                     };
                     Console.WriteLine("\nResearcher Found\n");
                     Console.WriteLine(r.Name);

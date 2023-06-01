@@ -62,10 +62,11 @@ namespace WpfApp1
         {
             get
             {
-                if(ResearcherListView.SelectedItem != null)
+                if (ResearcherListView.SelectedItem != null)
                 {
                     List<Publication> publications = (List<Publication>)PublicationControllers.SearchByResearcher((Researcher)ResearcherListView.SelectedItem);
-                    ObservableCollection<Publication> publist = new ObservableCollection<Publication>(publications);
+                    List<Publication> sortedPublications = SortPublicationsByRecentFirst(publications);
+                    ObservableCollection<Publication> publist = new ObservableCollection<Publication>(sortedPublications);
                     return publist;
                 }
                 else
@@ -75,16 +76,34 @@ namespace WpfApp1
             }
         }
 
+        public static List<Publication> SortPublicationsByRecentFirst(List<Publication> publications)
+        {
+            if (publications == null || publications.Count == 0)
+            {
+                return publications;
+            }
+
+            List<Publication> sortedPublications = publications.OrderByDescending(pub => pub.Year).ThenBy(pub => pub.Title).ToList();
+
+            return sortedPublications;
+        }
+
 
         private void ResearcherListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.AddedItems.Count > 0)
+            if (e.AddedItems.Count > 0)
             {
                 ResearcherDetails.DataContext = e.AddedItems[0];
-                String name = ((Researcher)e.AddedItems[0]).Name;
-                // get the publications for the researcher
+                string name = ((Researcher)e.AddedItems[0]).Name;
+
+                // Get the publications for the researcher
                 List<Publication> publications = PublicationControllers.ResearchersPublications(name);
-                PublicationListView.ItemsSource = publications;
+
+                // Sort the publications by year and title
+                List<Publication> sortedPublications = SortPublicationsByRecentFirst(publications);
+
+                // Set the sorted publications as the item source
+                PublicationListView.ItemsSource = sortedPublications;
 
                 var photo = new Image();
 
