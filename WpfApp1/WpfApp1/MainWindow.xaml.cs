@@ -95,23 +95,11 @@ namespace WpfApp1
             {
                 ResearcherDetails.DataContext = e.AddedItems[0];
                 Researcher selectedResearcher = (Researcher)e.AddedItems[0];
-                CalculateTenure(selectedResearcher);
                 string name = selectedResearcher.Name;
 
                 // Get the publications for the researcher
                 List<Publication> publications = PublicationControllers.ResearchersPublications(name);
-
-                // count the avg number of publications in 3 year
-                int count = 0;
-                foreach (Publication publication in publications)
-                {
-                    if (publication.Year >= DateTime.Now.Year - 3)
-                    {
-                        count++;
-                    }
-                }
-
-                selectedResearcher.ThreeYearAverage = Math.Round((double)count / 3.0, 2);
+                UpdateResearcher(selectedResearcher, publications);
 
                 // Sort the publications by year and title
                 List<Publication> sortedPublications = SortPublicationsByRecentFirst(publications);
@@ -196,10 +184,21 @@ namespace WpfApp1
             }
         }
 
-        private void CalculateTenure(Researcher researcher)
+        private void UpdateResearcher(Researcher selectedResearcher, List<Publication> publications)
         {
-            TimeSpan tenure = DateTime.Now - researcher.commenceWithInstitute;
-            researcher.Tenure = tenure;
+            // count the avg number of publications in 3 year
+            int count = 0;
+            foreach (Publication publication in publications)
+            {
+                if (publication.Year >= DateTime.Now.Year - 3)
+                {
+                    count++;
+                }
+            }
+
+            selectedResearcher.ThreeYearAverage = Math.Round((double)count / 3.0, 2);
+
+            // TODO: other stuff
         }
     }
 }
