@@ -106,6 +106,10 @@
                 <Label Content="Supervisions: "/>
                 <Label Content="{Binding Path=Supervisions}"></Label>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Degree: "/>
+                <Label Content="{Binding Path=Degree}"></Label>
+            </StackPanel>
         </StackPanel>
         <StackPanel Name="PublicationDetails" Orientation="Vertical" Grid.Column="2" Grid.Row="1" Margin="0,20,0,294">
             <StackPanel Orientation="Horizontal">
