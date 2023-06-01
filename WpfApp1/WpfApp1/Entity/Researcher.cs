@@ -29,7 +29,7 @@ namespace AT3.Entity
         public string Email { get; set; }
         public EmployeeLevel Level { get; set; }
         public string commenceWithInstitute { get; set; }
-        public string commenceCurrentPosition { get; set; }
+        public string CurrentPosition { get; set; }
         public int Tenure { get; set; }
         public int Publications { get; set; }
         public int Q1Percentage { get; set; }

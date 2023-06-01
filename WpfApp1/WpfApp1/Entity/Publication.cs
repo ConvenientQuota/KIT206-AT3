@@ -17,7 +17,7 @@ namespace AT3.Entity
         public int PublicationYear { get; set; }
         public OutputRanking Ranking { get; set; }
         public OutputType Type { get; set; }
-        public int CiteAs { get; set; }
+        //public int CiteAs { get; set; }
         public int AvailabilityDate { get; set; }
         public int Age { get; set; }
         public string Cite { get; set; }
@@ -26,7 +26,7 @@ namespace AT3.Entity
 
         public override string ToString()
         {
-            return Doi + " " + Publications + " " + Title + " " + Authors + " " + PublicationYear + " " + Ranking + " " + Type + " " + CiteAs + " " + AvailabilityDate + " " + Age + " " + Cite;
+            return Doi + " " + Publications + " " + Title + " " + Authors + " " + PublicationYear + " " + Ranking + " " + Type + " "  + AvailabilityDate + " " + Age + " " + Cite;
         }
 
         public Publication()

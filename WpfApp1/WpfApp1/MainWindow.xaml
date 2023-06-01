@@ -37,7 +37,7 @@
         </ListView>
         <Rectangle Height="471" Grid.Row="1" Stroke="Black" VerticalAlignment="Center" Margin="6,0,6,0"/>
         <Label Content="Show By:" HorizontalAlignment="Left" Height="25" Margin="12,49,0,0" Grid.Row="1" VerticalAlignment="Top" Width="56"/>
-        <Label Content="Filter By Name:" Margin="12,19,0,447" Grid.Row="1" HorizontalAlignment="Left" Width="88"/>
+        <Label Content="Filter By Name:" Margin="16,19,0,447" Grid.Row="1" HorizontalAlignment="Left" Width="88"/>
         <StackPanel Name="ResearcherDetails" Orientation="Vertical" Grid.Column="1" Grid.Row="2">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Name: "></Label>
@@ -62,6 +62,24 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="Campus: "/>
                 <Label Content="{Binding Path=Campus}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Commenced with Institution: "/>
+                <Label Content="{Binding Path=commenceWithInstitute}"></Label>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Name="PublicationDetails" Orientation="Vertical" Grid.Column="2" Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Title: "></Label>
+                <Label Content="{Binding Path=Title}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="DOI: "></Label>
+                <Label Content="{Binding Path=Doi}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Year: "></Label>
+                <Label Content="{Binding Path=Year}"></Label>
             </StackPanel>
         </StackPanel>
     </Grid>
