@@ -132,6 +132,18 @@ namespace AT3.Controllers
             return tempResearcherList;
         }
 
+        public static List<Researcher> awilterByType(ObservableCollection<Researcher> researchers)
+        {
+            var filtered = from Researcher re in researchers
+                           where re.Level == EmployeeLevel.A 
+                        
+                           select re;
+            return filtered.ToList();
+        }
+
+
+
+
         public static List<Researcher> LoadResearchers()
         {
             return DbAdaptor.LoadAll();

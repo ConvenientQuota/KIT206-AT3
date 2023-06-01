@@ -48,7 +48,7 @@ namespace WpfApp1
         {
             get
             {
-                //publications = PublicationControllers.LoadPublications();
+                publications = PublicationControllers.LoadPublications();
                 return null;
             }
         }
@@ -100,22 +100,14 @@ namespace WpfApp1
                     ResearcherDetails.DataContext = null;
                     PublicationDetails.DataContext = null;
                 }
-                else if (e.AddedItems[0].ToString().EndsWith("Staff"))
-                {
-                    ResearcherListView.ItemsSource = ResearcherController.FilterByType(false, Researcher);
-                    PublicationListView.ItemsSource = null;
-                    ResearcherDetails.DataContext = null;
-                    PublicationDetails.DataContext = null;
-                }
-                /*
                 else if (e.AddedItems[0].ToString().EndsWith("A"))
                 {
-                    ResearcherListView.ItemsSource = ResearcherController.FilterByLevel(EmployeeLevel.A);
+                    ResearcherListView.ItemsSource = ResearcherController.awilterByType(Researcher);
                     PublicationListView.ItemsSource = null;
                     ResearcherDetails.DataContext = null;
                     PublicationDetails.DataContext = null;
                 }
-                else if(e.AddedItems[0].ToString().EndsWith("B"))
+                else if(e.AddedItems[0].Equals(EmployeeLevel.B))
                 {
                     ResearcherListView.ItemsSource = ResearcherController.FilterByLevel(EmployeeLevel.B);
                     PublicationListView.ItemsSource = null;
