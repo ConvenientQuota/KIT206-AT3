@@ -184,10 +184,13 @@ namespace WpfApp1
             }
         }
 
-        private void UpdateResearcher(Researcher selectedResearcher, List<Publication> publications)
+        public void UpdateResearcher(Researcher selectedResearcher, List<Publication> publications)
         {
             int ThreeYearCount = 0;
             int Q1Count = 0;
+            double ThreeYA;
+            double Q1P;
+            double PP; 
             foreach (Publication publication in publications)
             {
                 // count the avg number of publications in 3 year
@@ -202,9 +205,9 @@ namespace WpfApp1
                 }
             }
 
-            selectedResearcher.ThreeYearAverage = Math.Round((double)ThreeYearCount / 3.0, 2);
-            selectedResearcher.Q1Percentage = (int)(double)Q1Count / publications.Count * 100;
-            selectedResearcher.performancePublication = Math.Round((double)publications.Count / selectedResearcher.Tenure, 2);
+            ThreeYA = selectedResearcher.ThreeYearAverage = Math.Round((double)ThreeYearCount / 3.0, 2);
+            Q1P = selectedResearcher.Q1Percentage = Math.Round((double)Q1Count / publications.Count * 100, 0);
+            PP = selectedResearcher.performancePublication = Math.Round((double)publications.Count / selectedResearcher.Tenure, 2);
 
             // TODO: other stuff
 
