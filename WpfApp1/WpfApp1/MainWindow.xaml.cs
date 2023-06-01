@@ -100,9 +100,37 @@ namespace WpfApp1
                     ResearcherDetails.DataContext = null;
                     PublicationDetails.DataContext = null;
                 }
-                else if (e.AddedItems[0].ToString().EndsWith("Staff"))
+                else if (e.AddedItems[0].Equals(EmployeeLevel.A))
                 {
-                    ResearcherListView.ItemsSource = ResearcherController.FilterByType(false, Researcher);
+                    ResearcherListView.ItemsSource = ResearcherController.FilterByLevel(EmployeeLevel.A);
+                    PublicationListView.ItemsSource = null;
+                    ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
+                }
+                else if(e.AddedItems[0].ToString().EndsWith("B"))
+                {
+                    ResearcherListView.ItemsSource = ResearcherController.FilterByLevel(EmployeeLevel.B);
+                    PublicationListView.ItemsSource = null;
+                    ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
+                }
+                else if (e.AddedItems[0].ToString().EndsWith("C"))
+                {
+                    ResearcherListView.ItemsSource = ResearcherController.FilterByLevel(EmployeeLevel.C);
+                    PublicationListView.ItemsSource = null;
+                    ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
+                }
+                else if (e.AddedItems[0].ToString().EndsWith("D"))
+                {
+                    ResearcherListView.ItemsSource = ResearcherController.FilterByLevel(EmployeeLevel.D);
+                    PublicationListView.ItemsSource = null;
+                    ResearcherDetails.DataContext = null;
+                    PublicationDetails.DataContext = null;
+                }
+                else if (e.AddedItems[0].ToString().EndsWith("E"))
+                {
+                    ResearcherListView.ItemsSource = ResearcherController.FilterByLevel(EmployeeLevel.E);
                     PublicationListView.ItemsSource = null;
                     ResearcherDetails.DataContext = null;
                     PublicationDetails.DataContext = null;

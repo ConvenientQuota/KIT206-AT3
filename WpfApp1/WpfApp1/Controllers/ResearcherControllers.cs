@@ -12,6 +12,7 @@ namespace AT3.Controllers
     public class ResearcherController
     {
         public List<Researcher> researchers { get; }
+        private static List<Researcher> researcher;
 
         private static List<Researcher> tempResearcherList;
 
@@ -42,6 +43,11 @@ namespace AT3.Controllers
         public List<Researcher> filterByLevel(EmployeeLevel level)
         {
             return researchers.Where(re => re.Level == level).ToList();
+        }
+
+        public static List<Researcher> FilterByLevel(EmployeeLevel level)
+        {
+            return researcher.Where(re => re.Level == level).ToList();
         }
 
         //Displays the selected Researcher's details e
