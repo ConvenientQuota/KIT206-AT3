@@ -111,7 +111,7 @@ namespace WpfApp1
                     }
                 }
 
-                r.ThreeYearAverage = Math.Round((double)count / 3.0, 2);
+                selectedResearcher.ThreeYearAverage = Math.Round((double)count / 3.0, 2);
 
                 // Sort the publications by year and title
                 List<Publication> sortedPublications = SortPublicationsByRecentFirst(publications);
