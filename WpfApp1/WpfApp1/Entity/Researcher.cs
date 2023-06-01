@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,8 +10,20 @@ namespace AT3.Entity
 {
     public enum EmployeeLevel
     {
-        A, B, C, D, E, Student
+        [Description("Research Associate")]
+        A,
+        [Description("Lecturer")]
+        B,
+        [Description("Assistant Professor")]
+        C,
+        [Description("Associate Professor")]
+        D,
+        [Description("Professor")]
+        E,
+        [Description("Student")]
+        Student
     }
+
     public enum Campus
     {
         Hobart, Launceston, Cradle
@@ -19,6 +33,7 @@ namespace AT3.Entity
     {
         /*   Researcher Details    */
         public string Name { get; set; }
+        public string employeeLevelString {get; set;}
         public int Id { get; set; }
         public int Supervisor_id { get; set; }
         public string Title { get; set; }
