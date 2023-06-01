@@ -18,6 +18,7 @@
         </Grid.ColumnDefinitions>
         <ComboBox Name="ResearcherComboBox" HorizontalAlignment="Left" Margin="152,120,0,0" VerticalAlignment="Top" Width="122" RenderTransformOrigin="0.5, 0.5" Height="25" SelectionChanged="ResearcherComboBox_SelectionChanged" Grid.Row="1">
             <ComboBoxItem>Student</ComboBoxItem>
+            <ComboBoxItem>Staff</ComboBoxItem>
             <ComboBoxItem>A</ComboBoxItem>
             <ComboBoxItem>B</ComboBoxItem>
             <ComboBoxItem>C</ComboBoxItem>
