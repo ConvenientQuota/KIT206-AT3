@@ -166,6 +166,12 @@ namespace AT3.DataSources
                 {
                     OutputRanking outputRanking;
                     OutputType outputType;
+                    List<String> authors = reader.GetString(3).Split(',').ToList();
+
+                    for (int i = 0; i < authors.Count; i++)
+                    {
+                        authors[i] = authors[i].Trim();
+                    }
 
                     switch (reader.GetString(2))
                     {
@@ -205,11 +211,12 @@ namespace AT3.DataSources
                         Title = reader.GetString(1),
                         Ranking = outputRanking,
                         // the authors may contains space in the name
-                        Authors = reader.GetString(3).Split(',').ToList(),
+                        Authors = authors,
                         Year = reader.GetInt32(4),
                         Type = outputType,
                         Cite = reader.GetString(6),
-                        AvailableFrom = reader.GetDateTime(7)
+                        AvailableFrom = reader.GetDateTime(7),
+                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25)
                     });
                 }
             }
@@ -344,6 +351,12 @@ namespace AT3.DataSources
                 {
                     OutputRanking outputRanking;
                     OutputType outputType;
+                    List<String> authors = reader.GetString(3).Split(',').ToList();
+
+                    for (int i = 0; i < authors.Count; i++)
+                    {
+                        authors[i] = authors[i].Trim();
+                    }
 
                     switch (reader.GetString(2))
                     {
@@ -383,11 +396,12 @@ namespace AT3.DataSources
                         Title = reader.GetString(1),
                         Ranking = outputRanking,
                         // the authors may contains space in the name
-                        Authors = reader.GetString(3).Split(',').ToList(),
+                        Authors = authors,
                         Year = reader.GetInt32(4),
                         Type = outputType,
                         Cite = reader.GetString(6),
-                        AvailableFrom = reader.GetDateTime(7)
+                        AvailableFrom = reader.GetDateTime(7),
+                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25)
                     };
 
                     Console.WriteLine("\nPublication Found\n");
@@ -428,6 +442,12 @@ namespace AT3.DataSources
                 {
                     OutputRanking outputRanking;
                     OutputType outputType;
+                    List<String> authors = reader.GetString(3).Split(',').ToList();
+
+                    for (int i = 0; i < authors.Count; i++)
+                    {
+                        authors[i] = authors[i].Trim();
+                    }
 
                     switch (reader.GetString(2))
                     {
@@ -467,11 +487,12 @@ namespace AT3.DataSources
                         Title = reader.GetString(1),
                         Ranking = outputRanking,
                         // the authors may contains space in the name
-                        Authors = reader.GetString(3).Split(',').ToList(),
+                        Authors = authors,
                         Year = reader.GetInt32(4),
                         Type = outputType,
                         Cite = reader.GetString(6),
-                        AvailableFrom = reader.GetDateTime(7)
+                        AvailableFrom = reader.GetDateTime(7),
+                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25)
                     });
                 }
 

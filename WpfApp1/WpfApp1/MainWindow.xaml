@@ -87,7 +87,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Publication Year: "></Label>
-                <Label Content="{Binding Path=PublicationYear}"></Label>
+                <Label Content="{Binding Path=Year}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Type: "></Label>
@@ -99,7 +99,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="AvailabilityDate: "></Label>
-                <Label Content="{Binding Path=AvailabilityDate}"></Label>
+                <Label Content="{Binding Path=AvailableFrom}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Age: "></Label>

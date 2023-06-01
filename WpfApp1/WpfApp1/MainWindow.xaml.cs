@@ -116,13 +116,11 @@ namespace WpfApp1
 
         private void PublicationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ResearcherComboBox.SelectedItem is Researcher selectedResearcher)
+            if (e.AddedItems.Count > 0)
             {
-                string researcherName = selectedResearcher.Name; // Name of selected researcher 
-
-                 List<Publication> researcherPublications = PublicationControllers.ResearchersPublications(researcherName); // Prints out publications of the selected researcher
-
-             } 
+                PublicationDetails.DataContext = e.AddedItems[0];
+                Console.WriteLine(((Publication)e.AddedItems[0]).Title);
+             }
         }
     }
 }

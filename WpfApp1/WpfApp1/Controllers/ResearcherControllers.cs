@@ -56,7 +56,6 @@ namespace AT3.Controllers
             Console.WriteLine(researcher.Email);
             Console.WriteLine(researcher.Level);
             Console.WriteLine(researcher.commenceWithInstitute);
-            Console.WriteLine(researcher.CurrentPosition);
             Console.WriteLine(researcher.Tenure);
             Console.WriteLine(researcher.Publications);
             Console.WriteLine(researcher.Q1Percentage);
