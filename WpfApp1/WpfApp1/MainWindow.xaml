@@ -71,7 +71,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Current Position: "/>
-                <Label Content="{Binding Path=commenceCurrentPosition}"></Label>
+                <Label Content="{Binding Path=employeeLevelString}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Commenced with Institution: "/>
@@ -80,8 +80,6 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="Commenced with Current Position: "/>
                 <Label Content="{Binding Path=commenceCurrentPosition}"></Label>
-                <Label Content="Current Position: "/>
-                <Label Content="{Binding Path=employeeLevelString}"></Label>
             </StackPanel>
         </StackPanel>
         <StackPanel Name="PublicationDetails" Orientation="Vertical" Grid.Column="2" Grid.Row="1" Margin="0,20,0,294">

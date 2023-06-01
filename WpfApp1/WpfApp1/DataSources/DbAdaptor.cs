@@ -115,7 +115,7 @@ namespace AT3.DataSources
                     researchers.Add(new Researcher
                     {
                         Id = reader.GetInt32(0),
-                        Name = reader.GetString(2) + " " + reader.GetString(3),// given_name + family_name
+                        Name = reader.GetString(2) + " " + reader.GetString(3) + " (" + reader.GetString(4) + ") ",// given_name + family_name
                         Level = employeeLevel,
                         Title = reader.GetString(4),
                         Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
