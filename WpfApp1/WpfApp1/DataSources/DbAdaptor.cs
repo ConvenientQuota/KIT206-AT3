@@ -115,7 +115,7 @@ namespace AT3.DataSources
                     researchers.Add(new Researcher
                     {
                         Id = reader.GetInt32(0),
-                        Name = reader.GetString(2) + " " + reader.GetString(3) + " (" + reader.GetString(4) + ") ",// given_name + family_name
+                        Name = reader.GetString(2) + " " + reader.GetString(3) + "(" + reader.GetString(4) + ") ",// given_name + family_name
                         Level = employeeLevel,
                         Title = reader.GetString(4),
                         Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
@@ -323,7 +323,7 @@ namespace AT3.DataSources
                     Researcher r = new Researcher
                     {
                         Id = reader.GetInt32(0),
-                        Name = reader.GetString(2) + " " + reader.GetString(3),// given_name + family_name
+                        Name = reader.GetString(2) + " " + reader.GetString(3) + "(" + reader.GetString(4) + ")",// given_name + family_name
                         Level = employeeLevel,
                         Title = reader.GetString(4),
                         Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
@@ -453,7 +453,7 @@ namespace AT3.DataSources
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE authors LIKE CONCAT('%', @authors, '%');", conn);
-                cmd.Parameters.AddWithValue("@authors", researcherName);
+                cmd.Parameters.AddWithValue("@authors", researcherName.Split('(')[0]);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
