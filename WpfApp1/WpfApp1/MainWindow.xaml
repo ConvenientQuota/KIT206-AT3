@@ -70,6 +70,10 @@
                 <Label Content="{Binding Path=campus}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <Label Content="Current Position: "/>
+                <Label Content="{Binding Path=commenceCurrentPosition}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Label Content="Commenced with Institution: "/>
                 <Label Content="{Binding Path=commenceWithInstitute}"></Label>
             </StackPanel>
