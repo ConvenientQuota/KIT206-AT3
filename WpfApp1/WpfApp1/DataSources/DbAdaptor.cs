@@ -68,27 +68,34 @@ namespace AT3.DataSources
                     string degree = reader.IsDBNull(9) ? "N/A " : reader.GetString(9);
                     char? Level = reader.IsDBNull(11) ? null : (char?)reader.GetChar(11);
                     EmployeeLevel employeeLevel;
+                    String employeeLevelString;
                     Campus campus;
 
                     switch (Level)
                     {
                         case 'A':
                             employeeLevel = EmployeeLevel.A;
+                            employeeLevelString = "Research Associate";
                             break;
                         case 'B':
                             employeeLevel = EmployeeLevel.B;
+                            employeeLevelString = "Lecturer";
                             break;
                         case 'C':
                             employeeLevel = EmployeeLevel.C;
+                            employeeLevelString = "Assistant Professor";
                             break;
                         case 'D':
                             employeeLevel = EmployeeLevel.D;
+                            employeeLevelString = "Associate Professor";
                             break;
                         case 'E':
                             employeeLevel = EmployeeLevel.E;
+                            employeeLevelString = "Professor";
                             break;
                         default:
                             employeeLevel = EmployeeLevel.Student;
+                            employeeLevelString = "Student";
                             break;
                     }
 
@@ -118,6 +125,7 @@ namespace AT3.DataSources
                         Photo = new Uri(reader.GetString(8)),
                         Degree = degree,
                         commenceWithInstitute = reader.GetDateTime(12),
+                        employeeLevelString = employeeLevelString,
                         commenceCurrentPosition = reader.GetDateTime(13),
                     });
                 }
@@ -268,27 +276,34 @@ namespace AT3.DataSources
                     string degree = reader.IsDBNull(9) ? "N/A " : reader.GetString(9);
                     char? Level = reader.IsDBNull(11) ? null : (char?)reader.GetChar(11);
                     EmployeeLevel employeeLevel;
+                    String employeeLevelString;
                     Campus campus;
 
                     switch (Level)
                     {
                         case 'A':
                             employeeLevel = EmployeeLevel.A;
+                            employeeLevelString = "Research Associate";
                             break;
                         case 'B':
                             employeeLevel = EmployeeLevel.B;
+                            employeeLevelString = "Lecturer";
                             break;
                         case 'C':
                             employeeLevel = EmployeeLevel.C;
+                            employeeLevelString = "Assistant Professor";
                             break;
                         case 'D':
                             employeeLevel = EmployeeLevel.D;
+                            employeeLevelString = "Associate Professor";
                             break;
                         case 'E':
                             employeeLevel = EmployeeLevel.E;
+                            employeeLevelString = "Professor";
                             break;
                         default:
                             employeeLevel = EmployeeLevel.Student;
+                            employeeLevelString = "Student";
                             break;
                     }
 
@@ -318,6 +333,7 @@ namespace AT3.DataSources
                         Photo = new Uri(reader.GetString(8)),
                         Degree = degree,
                         commenceWithInstitute = reader.GetDateTime(12),
+                        employeeLevelString = employeeLevelString,
                         commenceCurrentPosition = reader.GetDateTime(13),
                     };
                     Console.WriteLine("\nResearcher Found\n");
