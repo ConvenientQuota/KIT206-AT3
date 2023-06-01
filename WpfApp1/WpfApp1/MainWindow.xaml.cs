@@ -184,10 +184,13 @@ namespace WpfApp1
             }
         }
 
-        private void UpdateResearcher(Researcher selectedResearcher, List<Publication> publications)
+        public void UpdateResearcher(Researcher selectedResearcher, List<Publication> publications)
         {
             int ThreeYearCount = 0;
             int Q1Count = 0;
+            double ThreeYA;
+            double Q1P;
+            double PP; 
             foreach (Publication publication in publications)
             {
                 // count the avg number of publications in 3 year
