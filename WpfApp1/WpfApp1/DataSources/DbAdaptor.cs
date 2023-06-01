@@ -53,7 +53,7 @@ namespace AT3.DataSources
         // load xml data from the Fundings_Rankings.xml
         public static void LoadXML(List<Researcher> researchers) {
             XmlDocument xml = new XmlDocument();
-            xml.Load("./Fundings_Rankings.xml");
+            xml.Load("./DataSources/Fundings_Rankings.xml");
 
             XmlNodeList projectNode = xml.SelectNodes("/Projects/Project");
 
@@ -167,8 +167,23 @@ namespace AT3.DataSources
                         Tenure = (int)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25),
                         Funding = 0,
                         FundingCount = 0,
-                        performanceFunding = 0
-                    }) ;
+                        performanceFunding = 0,
+                        Supervisions = 0
+                    });
+                }
+
+                // update the supervisions count
+                foreach (var researcher in researchers) { 
+                    if (researcher.Supervisor_id == 0) {
+                        continue;
+                    }
+
+                    foreach (var supervisor in researchers) {
+                        if (supervisor.Id == researcher.Supervisor_id) {
+                            supervisor.Supervisions += 1;
+                            break;
+                        }
+                    }
                 }
 
                 LoadXML(researchers);
