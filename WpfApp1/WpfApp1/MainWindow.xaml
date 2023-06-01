@@ -37,7 +37,7 @@
         <ListView Name="PublicationListView" ItemsSource="{Binding Publications}" Margin="10,343,10,10" Grid.Row="1" SelectionChanged="PublicationListView_SelectionChanged" Grid.Column="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DisplayName}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -60,7 +60,6 @@ namespace AT3.DataSources
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM researcher;", conn);
                 reader = cmd.ExecuteReader();
 
-
                 while (reader.Read())
                 {
                     //Conversions
@@ -115,7 +114,7 @@ namespace AT3.DataSources
                     researchers.Add(new Researcher
                     {
                         Id = reader.GetInt32(0),
-                        Name = reader.GetString(2) + " " + reader.GetString(3),// given_name + family_name
+                        Name = reader.GetString(2) + " " + reader.GetString(3) + "(" + reader.GetString(4) + ")",// given_name + family_name
                         Level = employeeLevel,
                         Title = reader.GetString(4),
                         Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
@@ -175,6 +174,7 @@ namespace AT3.DataSources
                     OutputRanking outputRanking;
                     OutputType outputType;
                     List<String> authors = reader.GetString(3).Split(',').ToList();
+                    string displayName = reader.GetInt32(4) + " " + reader.GetString(1);
 
                     for (int i = 0; i < authors.Count; i++)
                     {
@@ -218,13 +218,13 @@ namespace AT3.DataSources
                         Doi = reader.GetString(0),
                         Title = reader.GetString(1),
                         Ranking = outputRanking,
-                        // the authors may contains space in the name
                         Authors = authors,
                         Year = reader.GetInt32(4),
                         Type = outputType,
                         Cite = reader.GetString(6),
                         AvailableFrom = reader.GetDateTime(7),
-                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25)
+                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25),
+                        DisplayName = displayName
                     });
                 }
             }
@@ -368,6 +368,7 @@ namespace AT3.DataSources
                     OutputRanking outputRanking;
                     OutputType outputType;
                     List<String> authors = reader.GetString(3).Split(',').ToList();
+                    string displayName = reader.GetInt32(4) + " " + reader.GetString(1);
 
                     for (int i = 0; i < authors.Count; i++)
                     {
@@ -411,13 +412,13 @@ namespace AT3.DataSources
                         Doi = reader.GetString(0),
                         Title = reader.GetString(1),
                         Ranking = outputRanking,
-                        // the authors may contains space in the name
                         Authors = authors,
                         Year = reader.GetInt32(4),
                         Type = outputType,
                         Cite = reader.GetString(6),
                         AvailableFrom = reader.GetDateTime(7),
-                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25)
+                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25),
+                        DisplayName = displayName
                     };
 
                     Console.WriteLine("\nPublication Found\n");
@@ -451,7 +452,7 @@ namespace AT3.DataSources
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE authors LIKE CONCAT('%', @authors, '%');", conn);
-                cmd.Parameters.AddWithValue("@authors", researcherName);
+                cmd.Parameters.AddWithValue("@authors", researcherName.Split('(')[0]);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -459,6 +460,7 @@ namespace AT3.DataSources
                     OutputRanking outputRanking;
                     OutputType outputType;
                     List<String> authors = reader.GetString(3).Split(',').ToList();
+                    string displayName = reader.GetInt32(4) + " " + reader.GetString(1);
 
                     for (int i = 0; i < authors.Count; i++)
                     {
@@ -502,13 +504,13 @@ namespace AT3.DataSources
                         Doi = reader.GetString(0),
                         Title = reader.GetString(1),
                         Ranking = outputRanking,
-                        // the authors may contains space in the name
                         Authors = authors,
                         Year = reader.GetInt32(4),
                         Type = outputType,
                         Cite = reader.GetString(6),
                         AvailableFrom = reader.GetDateTime(7),
-                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25)
+                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25),
+                        DisplayName = displayName
                     });
                 }
 

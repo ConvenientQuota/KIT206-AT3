@@ -173,9 +173,6 @@ namespace AT3.Controllers
             return tempList;
         }
 
-
-
-
         public static List<Researcher> LoadResearchers()
         {
             return DbAdaptor.LoadAll();

@@ -22,6 +22,7 @@ namespace AT3.Entity
         public int Age { get; set; }
         public string Cite { get; set; }
         public DateTime AvailableFrom { get; set; }
+        public String DisplayName { get; set; }
 
 
         public override string ToString()

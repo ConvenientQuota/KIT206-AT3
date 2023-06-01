@@ -33,27 +33,6 @@ namespace WpfApp1
 
         private List<Researcher> researchers;
 
-        public static string ToString(EmployeeLevel level)
-        {
-            switch (level)
-            {
-                case EmployeeLevel.A:
-                    return "A123";
-                case EmployeeLevel.B:
-                    return "B123";
-                case EmployeeLevel.C:
-                    return "C123";
-                case EmployeeLevel.D:
-                    return "12D";
-                case EmployeeLevel.E:
-                    return "E123";
-                case EmployeeLevel.Student:
-                    return "Student";
-                default:
-                    return "Unknown";
-            }
-        }
-
         public List<Researcher> Researchers
         {
             get
