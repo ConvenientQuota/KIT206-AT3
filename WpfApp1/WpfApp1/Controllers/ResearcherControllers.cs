@@ -12,7 +12,7 @@ namespace AT3.Controllers
     public class ResearcherController
     {
         public List<Researcher> researchers { get; }
-        public static List<Researcher> researcher { get; set; }
+        private static List<Researcher> researcher { get; }
 
         private static List<Researcher> tempResearcherList;
 
@@ -175,8 +175,7 @@ namespace AT3.Controllers
 
         public static List<Researcher> LoadResearchers()
         {
-            researcher = DbAdaptor.LoadAll();
-            return researcher;
+            return DbAdaptor.LoadAll();
         }
     }
 }

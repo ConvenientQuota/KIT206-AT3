@@ -53,28 +53,33 @@ namespace AT3.DataSources
         // load xml data from the Fundings_Rankings.xml
         public static void LoadXML(List<Researcher> researchers) {
             XmlDocument xml = new XmlDocument();
-            xml.Load("C:\\Users\\Desktop\\student\\KIT206-AT3\\WpfApp1\\WpfApp1\\DataSources\\Fundings_Rankings.xml");
-            //Console.WriteLine(xml.ToString());
+            xml.Load("./Fundings_Rankings.xml");
 
             XmlNodeList projectNode = xml.SelectNodes("/Projects/Project");
 
             foreach (XmlNode node in projectNode)
             {
                 int fund = int.Parse(node["Funding"].InnerText);
-                Console.WriteLine(fund + "fund 123123");
+                XmlNode Researchers = node["Researchers"];
 
-                XmlNodeList staff_ids = node.SelectNodes("/Researchers/staff_id");
 
-                foreach (XmlNode staff_id in staff_ids) {
-                    Console.WriteLine(staff_id.InnerText);
-                    Console.WriteLine(int.Parse(staff_id.InnerText));
+                foreach (XmlNode staff_id in Researchers.ChildNodes) {
                     foreach (Researcher researcher in researchers) {
                         if (researcher.Id == int.Parse(staff_id.InnerText)) {
-                            Console.WriteLine(fund + "fund, " + researcher.Id + "id");
                             researcher.Funding += fund;
+                            researcher.FundingCount += 1;
                         }
                     }
                 }
+            }
+
+            foreach (Researcher researcher in researchers) {
+                if (researcher.FundingCount != 0) {
+                    researcher.performanceFunding = Math.Round((double)researcher.Funding / researcher.FundingCount, 2);
+                }
+                
+
+                Console.WriteLine(researcher.performanceFunding);
             }
         }
 
@@ -159,8 +164,11 @@ namespace AT3.DataSources
                         commenceWithInstitute = reader.GetDateTime(12),
                         employeeLevelString = employeeLevelString,
                         commenceCurrentPosition = reader.GetDateTime(13),
-                        Tenure = Math.Round((double)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25), 2)
-                    });
+                        Tenure = (int)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25),
+                        Funding = 0,
+                        FundingCount = 0,
+                        performanceFunding = 0
+                    }) ;
                 }
 
                 LoadXML(researchers);
@@ -371,7 +379,7 @@ namespace AT3.DataSources
                         commenceWithInstitute = reader.GetDateTime(12),
                         employeeLevelString = employeeLevelString,
                         commenceCurrentPosition = reader.GetDateTime(13),
-                        Tenure = Math.Round((double)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25), 2)
+                        Tenure = (int)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25)
                     };
                     Console.WriteLine("\nResearcher Found\n");
                     Console.WriteLine(r.Name);
