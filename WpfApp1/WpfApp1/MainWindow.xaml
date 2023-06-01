@@ -147,7 +147,7 @@
                 <Label Content="{Binding Path=Ranking}"></Label>
             </StackPanel>
             <Label Content="Authors"></Label>
-            <ListBox Height="100" ItemsSource="{Binding Authors}" Width="380"/>
+            <ListBox Height="131" ItemsSource="{Binding Authors}" Width="416"/>
         </StackPanel>
         <TextBox HorizontalAlignment="Left" Height="25" Margin="59,118,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Researcher" VerticalAlignment="Top" Width="139"/>
     </Grid>
