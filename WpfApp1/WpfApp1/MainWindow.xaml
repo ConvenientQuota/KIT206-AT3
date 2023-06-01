@@ -67,6 +67,14 @@
                 <Label Content="Commenced with Institution: "/>
                 <Label Content="{Binding Path=commenceWithInstitute}"></Label>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Current Position: "/>
+                <Label Content="{Binding Path=CurrentPosition}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Commenced with Institution: "/>
+                <Label Content="{Binding Path=commenceWithInstitute}"></Label>
+            </StackPanel>
         </StackPanel>
         <StackPanel Name="PublicationDetails" Orientation="Vertical" Grid.Column="2" Grid.Row="1">
             <StackPanel Orientation="Horizontal">
@@ -78,9 +86,31 @@
                 <Label Content="{Binding Path=Doi}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Year: "></Label>
-                <Label Content="{Binding Path=Year}"></Label>
+                <Label Content="Publication Year: "></Label>
+                <Label Content="{Binding Path=PublicationYear}"></Label>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Type: "></Label>
+                <Label Content="{Binding Path=Type}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Ranking: "></Label>
+                <Label Content="{Binding Path=Ranking}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="AvailabilityDate: "></Label>
+                <Label Content="{Binding Path=AvailabilityDate}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Age: "></Label>
+                <Label Content="{Binding Path=Age}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Cite as: "></Label>
+                <Label Content="{Binding Path=Cite}"></Label>
+            </StackPanel>
+            <Label Content="Authors"></Label>
+            <ListBox Height="100" ItemsSource="{Binding Path=Authors}"></ListBox>
         </StackPanel>
     </Grid>
 </Window>
