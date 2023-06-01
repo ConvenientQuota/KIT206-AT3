@@ -115,7 +115,6 @@ namespace AT3.DataSources
                         Email = reader.GetString(7),
                         Photo = new Uri(reader.GetString(8)),
                         Degree = degree,
-
                     }) ;
                 }
             }
