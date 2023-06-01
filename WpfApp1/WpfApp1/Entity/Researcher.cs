@@ -45,7 +45,7 @@ namespace AT3.Entity
         public EmployeeLevel Level { get; set; }
         public DateTime commenceWithInstitute { get; set; }
         public DateTime commenceCurrentPosition { get; set; }
-        public int Tenure { get; set; }
+        public TimeSpan Tenure { get; set; }
         public int Publications { get; set; }
         public int Q1Percentage { get; set; }
         public int ThreeYearAverage { get; set; }

@@ -94,6 +94,8 @@ namespace WpfApp1
             if (e.AddedItems.Count > 0)
             {
                 ResearcherDetails.DataContext = e.AddedItems[0];
+                Researcher selectedResearcher = (Researcher)e.AddedItems[0];
+                CalculateTenure(selectedResearcher);
                 string name = ((Researcher)e.AddedItems[0]).Name;
 
                 // Get the publications for the researcher
@@ -180,6 +182,12 @@ namespace WpfApp1
                 PublicationDetails.DataContext = e.AddedItems[0];
                 Console.WriteLine(((Publication)e.AddedItems[0]).Title);
             }
+        }
+
+        private void CalculateTenure(Researcher researcher)
+        {
+            TimeSpan tenure = DateTime.Now - researcher.commenceWithInstitute;
+            researcher.Tenure = tenure;
         }
     }
 }
