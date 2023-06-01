@@ -92,7 +92,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="3 Year Average: "/>
-                <Label Content="{Binding Path=Q1Percentage}"></Label>
+                <Label Content="{Binding Path=ThreeYearAverage}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Performance By Publication: "/>
@@ -105,6 +105,10 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="Supervisions: "/>
                 <Label x:Name="supervisions" Content="{Binding Path=Supervisions}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Degree: "/>
+                <Label Content="{Binding Path=Degree}"></Label>
             </StackPanel>
         </StackPanel>
         <StackPanel Name="PublicationDetails" Orientation="Vertical" Grid.Column="2" Grid.Row="1" Margin="0,20,0,294">
