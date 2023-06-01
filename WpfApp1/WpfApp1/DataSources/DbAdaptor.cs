@@ -53,7 +53,7 @@ namespace AT3.DataSources
         // load xml data from the Fundings_Rankings.xml
         public static void LoadXML(List<Researcher> researchers) {
             XmlDocument xml = new XmlDocument();
-            xml.Load("./Fundings_Rankings.xml");
+            xml.Load("./DataSources/Fundings_Rankings.xml");
 
             XmlNodeList projectNode = xml.SelectNodes("/Projects/Project");
 
