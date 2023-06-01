@@ -125,6 +125,10 @@ namespace AT3.Controllers
             return (List<Publication>) pubsByAuthor.ToList();
 
         }
+
+        /* Publications within the same year shall be sorted alphabetically based on title.
+         */
+
     }
 }
 
