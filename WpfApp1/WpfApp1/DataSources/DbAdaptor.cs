@@ -126,7 +126,7 @@ namespace AT3.DataSources
                         commenceWithInstitute = reader.GetDateTime(12),
                         employeeLevelString = employeeLevelString,
                         commenceCurrentPosition = reader.GetDateTime(13),
-                        Tenure = (int)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25)
+                        Tenure = Math.Round((double)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25), 2)
                     });
                 }
             }
@@ -336,7 +336,7 @@ namespace AT3.DataSources
                         commenceWithInstitute = reader.GetDateTime(12),
                         employeeLevelString = employeeLevelString,
                         commenceCurrentPosition = reader.GetDateTime(13),
-                        Tenure = (int)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25)
+                        Tenure = Math.Round((double)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25), 2)
                     };
                     Console.WriteLine("\nResearcher Found\n");
                     Console.WriteLine(r.Name);
