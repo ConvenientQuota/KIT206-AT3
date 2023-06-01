@@ -206,7 +206,7 @@ namespace WpfApp1
             }
 
             ThreeYA = selectedResearcher.ThreeYearAverage = Math.Round((double)ThreeYearCount / 3.0, 2);
-            Q1P = selectedResearcher.Q1Percentage = Math.Round((double)Q1Count / publications.Count * 100, 0);
+            Q1P = selectedResearcher.Q1Percentage = (double)Q1Count / publications.Count * 100;
             PP = selectedResearcher.performancePublication = Math.Round((double)publications.Count / selectedResearcher.Tenure, 2);
 
             // TODO: other stuff
