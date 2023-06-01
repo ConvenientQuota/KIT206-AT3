@@ -107,6 +107,17 @@ namespace WpfApp1
                 // Set the sorted publications as the item source
                 PublicationListView.ItemsSource = sortedPublications;
 
+                // empty funding and supervisions for student
+                if (selectedResearcher.Level == EmployeeLevel.Student) {
+                    funding.Content = "";
+                    supervisions.Content = "";
+                } else {
+                    // empty degree and supervisor for staff
+                    funding.Content = selectedResearcher.performanceFunding;
+                    supervisions.Content = selectedResearcher.Supervisions;
+                    // degree.Content = "";
+                }
+
                 var photo = new Image();
 
                 BitmapImage bitmap = new BitmapImage();
@@ -205,10 +216,6 @@ namespace WpfApp1
             selectedResearcher.ThreeYearAverage = Math.Round((double)ThreeYearCount / 3.0, 2);
             selectedResearcher.Q1Percentage = (double)Q1Count / publications.Count * 100;
             selectedResearcher.performancePublication = Math.Round((double)publications.Count / selectedResearcher.Tenure, 2);
-
-            // TODO: other stuff
-
-
         }
     }
 }
