@@ -52,7 +52,7 @@ namespace AT3.Entity
         public int Funding { get; set; }
         public int performancePublication { get; set; }
         public int performanceFunding { get; set; }
-        public string Supervisions { get; set; }
+        public int Supervisions { get; set; }
         public string Degree { get; set; }
         public string Supervisor { get; set; }
 
