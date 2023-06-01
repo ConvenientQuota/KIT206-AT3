@@ -132,13 +132,45 @@ namespace AT3.Controllers
             return tempResearcherList;
         }
 
-        public static List<Researcher> awilterByType(ObservableCollection<Researcher> researchers)
+        public static List<Researcher> awilterByType(EmployeeLevel level, ObservableCollection<Researcher> researchers)
         {
-            var filtered = from Researcher re in researchers
-                           where re.Level == EmployeeLevel.A 
-                        
-                           select re;
-            return filtered.ToList();
+            List<Researcher> tempList;
+            if (level == EmployeeLevel.A)
+            {
+                var filtered = from Researcher re in researchers
+                               where re.Level == EmployeeLevel.A
+                               select re;
+                tempList = filtered.ToList();
+            }
+            else if (level == EmployeeLevel.B)
+            {
+                var filtered = from Researcher re in researchers
+                               where re.Level == EmployeeLevel.B
+                               select re;
+                tempList = filtered.ToList();
+            }
+            else if(level == EmployeeLevel.C)
+            {
+                var filtered = from Researcher re in researchers
+                               where re.Level == EmployeeLevel.C
+                               select re;
+                tempList = filtered.ToList();
+            }
+            else if(level == EmployeeLevel.D)
+            {
+                var filtered = from Researcher re in researchers
+                               where re.Level == EmployeeLevel.D
+                               select re;
+                tempList = filtered.ToList();
+            }
+            else
+            {
+                var filtered = from Researcher re in researchers
+                               where re.Level == EmployeeLevel.E
+                               select re;
+                tempList = filtered.ToList();
+            }
+            return tempList;
         }
 
 
