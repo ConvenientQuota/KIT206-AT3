@@ -96,14 +96,26 @@ namespace WpfApp1
                 ResearcherDetails.DataContext = e.AddedItems[0];
                 Researcher selectedResearcher = (Researcher)e.AddedItems[0];
                 CalculateTenure(selectedResearcher);
-                string name = ((Researcher)e.AddedItems[0]).Name;
+                string name = selectedResearcher.Name;
 
                 // Get the publications for the researcher
                 List<Publication> publications = PublicationControllers.ResearchersPublications(name);
 
+                // count the avg number of publications in 3 year
+                int count = 0;
+                foreach (Publication publication in publications)
+                {
+                    if (publication.Year >= DateTime.Now.Year - 3)
+                    {
+                        count++;
+                    }
+                }
+
+                selectedResearcher.ThreeYearAverage = Math.Round((double)count / 3.0, 2);
+
                 // Sort the publications by year and title
                 List<Publication> sortedPublications = SortPublicationsByRecentFirst(publications);
-
+            
                 // Set the sorted publications as the item source
                 PublicationListView.ItemsSource = sortedPublications;
 

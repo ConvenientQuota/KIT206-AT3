@@ -125,7 +125,7 @@ namespace AT3.DataSources
                         Degree = degree,
                         commenceWithInstitute = reader.GetDateTime(12),
                         employeeLevelString = employeeLevelString,
-                        commenceCurrentPosition = reader.GetDateTime(13),
+                        commenceCurrentPosition = reader.GetDateTime(13)
                     });
                 }
             }
@@ -432,6 +432,38 @@ namespace AT3.DataSources
                     Console.WriteLine("\nPublication Not Found\n");
                     return null;
                 }
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+                conn.Close();
+            }
+        }
+
+        public static double Researchers3YearAvgPublicCount(string researcherName) {
+            MySqlConnection conn = dbAdaptor();
+            MySqlDataReader reader = null;
+
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE authors LIKE CONCAT('%', @authors, '%');", conn);
+                cmd.Parameters.AddWithValue("@authors", researcherName.Split('(')[0]);
+                reader = cmd.ExecuteReader();
+
+                double count = 0;
+
+                while (reader.Read()) {
+
+                    if (reader.GetInt32(4) < DateTime.Now.Year - 3) {
+                        count += 1;
+                    }
+                }
+
+                return count / 3;
             }
             finally
             {
