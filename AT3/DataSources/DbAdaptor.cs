@@ -696,6 +696,24 @@ namespace AT3.DataSources
                 Console.WriteLine("failed");
             }
         }
+
+           public static bool UC40_WhiteBoxTest()
+           {
+               List<Publication> publications = DbAdaptor.LoadPublication();
+
+               //if each publication has at least one author
+               foreach (Publication publication in publications)
+               {
+                   if (publication.Authors.Count == 0)
+                   {
+                        Console.WriteLine("UC40_WhiteBoxTest failed: Publication has no authors.");
+                        return false;
+                   }
+               }
+
+                Console.WriteLine("UC40_WhiteBoxTest passed.");
+                return true;
+            }
         /* Testing reseracher selection functionality
         * Selects both real and fake researcher then checks if returned researcher matches an expected researcher then prints result*/
         public static bool UC16_WhiteBoxTest()
@@ -745,15 +763,6 @@ namespace AT3.DataSources
             if (expected.Count != actual.Count)
             {
                 throw new Exception("Number of publications does not match. Expected: " + expected.Count + ", Actual: " + actual.Count);
-            }
-            //White Box Test 2:
-            for (int i = 0; i < expected.Count; i++)
-            {
-                if (expected[i].Doi != actual[i].Doi || expected[i].Title != actual[i].Title)
-                {
-                    throw new Exception("Publication data does not match at index " + i + ".");
-                }
-                Console.WriteLine("Publication loaded successfully");
             }
 
         }

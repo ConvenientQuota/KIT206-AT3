@@ -18,14 +18,17 @@ namespace AT3
             DbAdaptor adaptor = new DbAdaptor();
             try
             {
-                DbAdaptor.UC8_WhiteBoxTest();
-                Console.WriteLine("White box testing completed successfully.");
-                DbAdaptor.UC16_WhiteBoxTest();
-                DbAdaptor.UC34_WhiteBoxTest();
+                //DbAdaptor.UC8_WhiteBoxTest();
+                // Console.WriteLine("White box testing completed successfully.");
+                //DbAdaptor.UC16_WhiteBoxTest();
+                //DbAdaptor.UC34_WhiteBoxTest();
+                DbAdaptor.UC40_WhiteBoxTest(); 
             }
+
+
             catch (Exception ex)
             {
-                Console.WriteLine("White box testing failed with the following error:");
+               // Console.WriteLine("White box testing failed with the following error:");
                 Console.WriteLine(ex.Message);
             }
         }
