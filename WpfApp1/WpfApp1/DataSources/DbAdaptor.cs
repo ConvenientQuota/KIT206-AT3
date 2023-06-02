@@ -14,7 +14,7 @@ using AT3.Controllers;
 
 namespace AT3.DataSources
 {
-    public static class DbAdaptor
+    public class DbAdaptor
     {
         /*   private static bool localDB = true;
            private const string localUser = "root";
