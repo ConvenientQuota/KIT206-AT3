@@ -721,7 +721,7 @@ namespace AT3.DataSources
             Console.WriteLine("WhiteBoxTest passed.");
             return true;
         }
-        /** Testing for total amound of publications and testing for doi content in publications */
+        /** Testing for total amount of publications and testing for doi content in publications */
         public static void UC34_WhiteBoxTest()
         {
 
@@ -753,6 +753,7 @@ namespace AT3.DataSources
                 {
                     throw new Exception("Publication data does not match at index " + i + ".");
                 }
+                Console.WriteLine("Publication loaded successfully");
             }
 
         }
