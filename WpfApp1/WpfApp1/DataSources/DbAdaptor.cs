@@ -645,6 +645,68 @@ namespace AT3.DataSources
             //researcher = ResearcherId(id);
             return true;
         }
+      
+
+        public static void WhiteBoxTest_UC8_User_views_ResearcherList()
+        {
+            Console.WriteLine("White Box Testing - UC8_User_views_ResearcherList\n");
+
+            // White Box Test 1: Verify if the researcher list is loaded correctly
+            List<Researcher> researchers = LoadAll();
+            Console.WriteLine("Test Case 1: Researchers loaded successfully");
+
+            // Test Case 2: Verify if each researcher has the required attributes populated
+            bool allAttributesPopulated = researchers.All(researcher =>
+                !string.IsNullOrEmpty(researcher.Name) &&
+                researcher.Level != EmployeeLevel.Student &&
+                !string.IsNullOrEmpty(researcher.Unit) &&
+                !string.IsNullOrEmpty(researcher.Email) &&
+                researcher.Photo != null &&
+                !string.IsNullOrEmpty(researcher.Degree) &&
+                researcher.commenceWithInstitute != DateTime.MinValue &&
+                researcher.commenceCurrentPosition != DateTime.MinValue &&
+                researcher.Tenure != 0 &&
+                researcher.Funding != 0 &&
+                researcher.FundingCount != 0 &&
+                researcher.Supervisions != 0
+            );
+            Console.WriteLine("Test Case 2: All researchers have the required attributes populated");
+
+            // Display overall test results
+            if (allAttributesPopulated)
+            {
+                Console.WriteLine("\npassed");
+            }
+            else
+            {
+                Console.WriteLine("failed");
+            }
+        }
+        /* Testing reseracher selection functionality
+        * Selects both real and fake researcher then checks if returned researcher matches an expected researcher then prints result*/
+        public static bool UC16_WhiteBoxTest()
+        {
+           
+            int existingResearcherId = 123463; //Real researcher Id
+            Researcher existingResearcher = ResearcherId(existingResearcherId);
+            if (existingResearcher == null || existingResearcher.Id != existingResearcherId)
+            {
+                Console.WriteLine("WhiteBoxTest failed: Existing researcher selection failed.");
+                return false;
+            }
+
+            // Test researcher selection with a fake researcher ID
+            int nonExistingResearcherId = 1000;
+            Researcher nonExistingResearcher = ResearcherId(nonExistingResearcherId);
+            if (nonExistingResearcher != null)
+            {
+                Console.WriteLine("WhiteBoxTest failed: Fake researcher selection failed.");
+                return false;
+            }
+
+            Console.WriteLine("WhiteBoxTest passed.");
+            return true;
+        }
 
         /**Add researcher function
          * 
