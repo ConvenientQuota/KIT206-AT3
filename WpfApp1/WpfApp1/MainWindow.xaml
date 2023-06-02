@@ -104,11 +104,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Performance By Funding: "/>
-                <Label Content="{Binding Path=performanceFunding}"></Label>
+                <Label x:Name="funding" Content="{Binding Path=performanceFunding}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Supervisions: "/>
-                <Label Content="{Binding Path=Supervisions}"></Label>
+                <Label x:Name="supervisions" Content="{Binding Path=Supervisions}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Degree: "/>
