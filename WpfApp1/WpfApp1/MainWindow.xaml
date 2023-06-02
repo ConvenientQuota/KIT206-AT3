@@ -41,9 +41,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Rectangle Height="829" Grid.Row="1" Stroke="Black" VerticalAlignment="Center" Margin="2,0,10,0"/>
         <Label Content="Show By:" HorizontalAlignment="Left" Height="25" Margin="25,180,0,0" Grid.Row="1" VerticalAlignment="Top" Width="68"/>
-        <Label Content="Filter By Name:" Margin="62,84,0,740" Grid.Row="1" HorizontalAlignment="Left" Width="94"/>
+        <Label Content="Filter By Name:" Margin="25,58,0,765" Grid.Row="1" HorizontalAlignment="Left" Width="94"/>
         <StackPanel Name="ResearcherDetails" Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="0,20,0,0">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Name: "></Label>
@@ -158,6 +157,6 @@
             <Label Content="Authors"></Label>
             <ListBox Height="131" ItemsSource="{Binding Authors}" Width="416"/>
         </StackPanel>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="59,118,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Researcher" VerticalAlignment="Top" Width="139"/>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="59,89,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Researcher" VerticalAlignment="Top" Width="139"/>
     </Grid>
 </Window>
