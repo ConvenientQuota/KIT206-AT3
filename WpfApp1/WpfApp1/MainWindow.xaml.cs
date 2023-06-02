@@ -93,13 +93,13 @@ namespace WpfApp1
         {
             if (e.AddedItems.Count > 0)
             {
-                ResearcherDetails.DataContext = e.AddedItems[0];
                 Researcher selectedResearcher = (Researcher)e.AddedItems[0];
                 string name = selectedResearcher.Name;
 
                 // Get the publications for the researcher
                 List<Publication> publications = PublicationControllers.ResearchersPublications(name);
                 UpdateResearcher(selectedResearcher, publications);
+                ResearcherDetails.DataContext = selectedResearcher;
 
                 // Sort the publications by year and title
                 List<Publication> sortedPublications = SortPublicationsByRecentFirst(publications);
@@ -109,13 +109,24 @@ namespace WpfApp1
 
                 // empty funding and supervisions for student
                 if (selectedResearcher.Level == EmployeeLevel.Student) {
+                    performanceFunding.Content = "";
+                    performancePublication.Content = "";
+                    threeYearAvg.Content = "";
                     funding.Content = "";
                     supervisions.Content = "";
+
+                    degree.Content = selectedResearcher.Degree;
+                    supervisor.Content = selectedResearcher.Supervisor;
                 } else {
                     // empty degree and supervisor for staff
-                    funding.Content = selectedResearcher.performanceFunding;
+                    performanceFunding.Content = selectedResearcher.performanceFunding;
+                    performancePublication.Content = selectedResearcher.performancePublication;
+                    threeYearAvg.Content = selectedResearcher.ThreeYearAverage;
+                    funding.Content = selectedResearcher.Funding;
                     supervisions.Content = selectedResearcher.Supervisions;
-                    // degree.Content = "";
+
+                    degree.Content = "";
+                    supervisor.Content = "";
                 }
 
                 var photo = new Image();
@@ -197,8 +208,8 @@ namespace WpfApp1
 
         public void UpdateResearcher(Researcher selectedResearcher, List<Publication> publications)
         {
-            int ThreeYearCount = 0;
-            int Q1Count = 0; 
+            double ThreeYearCount = 0;
+            double Q1Count = 0; 
             foreach (Publication publication in publications)
             {
                 // count the avg number of publications in 3 year
@@ -213,8 +224,8 @@ namespace WpfApp1
                 }
             }
 
-            selectedResearcher.ThreeYearAverage = Math.Round((double)ThreeYearCount / 3.0, 1);
-            selectedResearcher.Q1Percentage = Math.Round((double)Q1Count / publications.Count * 100, 0);
+            selectedResearcher.ThreeYearAverage = Math.Round(ThreeYearCount / 3.0, 1);
+            selectedResearcher.Q1Percentage = Math.Round(Q1Count / publications.Count * 100);
             selectedResearcher.performancePublication = Math.Round((double)publications.Count / selectedResearcher.Tenure, 2);
         }
     }
