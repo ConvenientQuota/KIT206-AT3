@@ -647,7 +647,7 @@ namespace AT3.DataSources
         }
       
 
-        public static void WhiteBoxTest_UC8_User_views_ResearcherList()
+        public static void UC8_WhiteBoxTest()
         {
             Console.WriteLine("White Box Testing - UC8_User_views_ResearcherList\n");
 
