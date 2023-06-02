@@ -99,6 +99,10 @@
                 <Label Content="{Binding Path=performancePublication}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <Label Content="Funding Received: "/>
+                <Label Content="{Binding Path=Funding}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Label Content="Performance By Funding: "/>
                 <Label Content="{Binding Path=performanceFunding}"></Label>
             </StackPanel>
