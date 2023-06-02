@@ -181,6 +181,7 @@ namespace AT3.DataSources
                     foreach (var supervisor in researchers) {
                         if (supervisor.Id == researcher.Supervisor_id) {
                             supervisor.Supervisions += 1;
+                            researcher.Supervisor = supervisor.Name;
                             break;
                         }
                     }

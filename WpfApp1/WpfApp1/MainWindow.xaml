@@ -92,19 +92,19 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="3 Year Average: "/>
-                <Label Content="{Binding Path=ThreeYearAverage}"></Label>
+                <Label x:Name="threeYearAvg" Content="{Binding Path=ThreeYearAverage}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Performance By Publication: "/>
-                <Label Content="{Binding Path=performancePublication}"></Label>
+                <Label x:Name="performancePublication" Content="{Binding Path=performancePublication}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Funding Received: "/>
-                <Label Content="{Binding Path=Funding}"></Label>
+                <Label x:Name="funding" Content="{Binding Path=Funding}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Performance By Funding: "/>
-                <Label x:Name="funding" Content="{Binding Path=performanceFunding}"></Label>
+                <Label x:Name="performanceFunding" Content="{Binding Path=performanceFunding}"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Supervisions: "/>
@@ -112,7 +112,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Degree: "/>
-                <Label Content="{Binding Path=Degree}"></Label>
+                <Label x:Name="degree" Content="{Binding Path=Degree}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Supervisor: "/>
+                <Label x:Name="supervisor" Content="{Binding Path=Supervisor}"></Label>
             </StackPanel>
         </StackPanel>
         <StackPanel Name="PublicationDetails" Orientation="Vertical" Grid.Column="2" Grid.Row="1" Margin="0,20,0,294">
