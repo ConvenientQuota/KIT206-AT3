@@ -6,15 +6,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using AT3.Entity;
-using System.Xml.Linq;
-using System.Windows.Controls;
-using System.Xml;
-using AT3.Controllers;
 
 namespace AT3.DataSources
 {
-    public class DbAdaptor
+    internal class DbAdaptor
     {
         /*   private static bool localDB = true;
            private const string localUser = "root";
@@ -32,6 +27,9 @@ namespace AT3.DataSources
         {
             return (T)Enum.Parse(typeof(T), str);
         }
+
+
+
         public static MySqlConnection dbAdaptor()
         {
             if (conn == null)
@@ -49,47 +47,8 @@ namespace AT3.DataSources
             }
             return conn;
         }
-
-        // load xml data from the Fundings_Rankings.xml
-  /*      public static void LoadXML(List<Researcher> researchers)
-        {
-            XmlDocument xml = new XmlDocument();
-            xml.Load("./DataSources/Fundings_Rankings.xml");
-
-            XmlNodeList projectNode = xml.SelectNodes("/Projects/Project");
-
-            foreach (XmlNode node in projectNode)
-            {
-                int fund = int.Parse(node["Funding"].InnerText);
-                XmlNode Researchers = node["Researchers"];
-
-
-                foreach (XmlNode staff_id in Researchers.ChildNodes)
-                {
-                    foreach (Researcher researcher in researchers)
-                    {
-                        if (researcher.Id == int.Parse(staff_id.InnerText))
-                        {
-                            researcher.Funding += fund;
-                            researcher.FundingCount += 1;
-                        }
-                    }
-                }
-            } 
-            foreach (Researcher researcher in researchers)
-            {
-                if (researcher.FundingCount != 0)
-                {
-                    researcher.performanceFunding = Math.Round((double)researcher.Funding / researcher.FundingCount, 2);
-                }
-
-
-                Console.WriteLine(researcher.performanceFunding);
-            }
-        }*/
-
-
-        /**Researcher method to load all researchers and their details
+        /**
+         * Researcher method to load all researchers and their details
          */
         public static List<Researcher> LoadAll()
         {
@@ -104,100 +63,35 @@ namespace AT3.DataSources
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM researcher;", conn);
                 reader = cmd.ExecuteReader();
 
+
                 while (reader.Read())
                 {
                     //Conversions
                     int? supervisor_id = reader.IsDBNull(10) ? null : (int?)reader.GetInt32(10);
                     string degree = reader.IsDBNull(9) ? "N/A " : reader.GetString(9);
                     char? Level = reader.IsDBNull(11) ? null : (char?)reader.GetChar(11);
-                    EmployeeLevel employeeLevel;
-                    String employeeLevelString;
-                    Campus campus;
-
-                    switch (Level)
-                    {
-                        case 'A':
-                            employeeLevel = EmployeeLevel.A;
-                            employeeLevelString = "Research Associate";
-                            break;
-                        case 'B':
-                            employeeLevel = EmployeeLevel.B;
-                            employeeLevelString = "Lecturer";
-                            break;
-                        case 'C':
-                            employeeLevel = EmployeeLevel.C;
-                            employeeLevelString = "Assistant Professor";
-                            break;
-                        case 'D':
-                            employeeLevel = EmployeeLevel.D;
-                            employeeLevelString = "Associate Professor";
-                            break;
-                        case 'E':
-                            employeeLevel = EmployeeLevel.E;
-                            employeeLevelString = "Professor";
-                            break;
-                        default:
-                            employeeLevel = EmployeeLevel.Student;
-                            employeeLevelString = "Student";
-                            break;
-                    }
-
-                    switch (reader.GetString(6))
-                    {
-                        case "Hobart":
-                            campus = Campus.Hobart;
-                            break;
-                        case "Launceston":
-                            campus = Campus.Launceston;
-                            break;
-                        default:
-                            campus = Campus.Cradle;
-                            break;
-                    }
 
                     researchers.Add(new Researcher
                     {
-                        Id = reader.GetInt32(0),
-                        Name = reader.GetString(2) + " " + reader.GetString(3) + "(" + reader.GetString(4) + ")",// given_name + family_name
-                        Level = employeeLevel,
-                        Title = reader.GetString(4),
-                        Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
-                        Unit = reader.GetString(5),
-                        campus = campus,
-                        Email = reader.GetString(7),
-                        Photo = new Uri(reader.GetString(8)),
-                        Degree = degree,
-                        commenceWithInstitute = reader.GetDateTime(12),
-                        employeeLevelString = employeeLevelString,
-                        commenceCurrentPosition = reader.GetDateTime(13),
-                        Tenure = (int)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25),
-                        Funding = 0,
-                        FundingCount = 0,
-                        performanceFunding = 0,
-                        Supervisions = 0
+                        Name =
+                    reader.GetString(0) + " " +// ID
+                    reader.GetString(1) + " " +// Type
+                    reader.GetString(2) + " " +// given_name
+                    reader.GetString(3) + " " +// family_name
+                    reader.GetString(4) + " " +// Title
+                    reader.GetString(5) + " " +// Unit
+                    reader.GetString(6) + " " +// Campus
+                    reader.GetString(7) + " " +// Email
+                    reader.GetString(8) + " " +//Photo
+                    degree + " " +
+                    (supervisor_id.HasValue ? supervisor_id.Value.ToString() : "N/A " +
+                    (Level.HasValue ? Level.Value.ToString() : "N/A ")) + " " +
+                    reader.GetString(12) + " " + //utas_start
+                    reader.GetString(13) // Current_start
+
+
                     });
                 }
-
-                // update the supervisions count
-                foreach (var researcher in researchers)
-                {
-                    if (researcher.Supervisor_id == 0)
-                    {
-                        continue;
-                    }
-
-                    foreach (var supervisor in researchers)
-                    {
-                        if (supervisor.Id == researcher.Supervisor_id)
-                        {
-                            supervisor.Supervisions += 1;
-                            researcher.Supervisor = supervisor.Name;
-                            break;
-                        }
-                    }
-                }
-
-            //    LoadXML(researchers);
             }
             catch (Exception ex)
             {
@@ -224,7 +118,8 @@ namespace AT3.DataSources
             return researchers;
         }
 
-        /**Publication method to print all publications and their details
+        /**
+         * Publication method to print all publications and their details
          */
         public static List<Publication> LoadPublication()
         {
@@ -242,60 +137,27 @@ namespace AT3.DataSources
 
                 while (reader.Read())
                 {
-                    OutputRanking outputRanking;
-                    OutputType outputType;
-                    List<String> authors = reader.GetString(3).Split(',').ToList();
-                    string displayName = reader.GetInt32(4) + " " + reader.GetString(1);
-
-                    for (int i = 0; i < authors.Count; i++)
-                    {
-                        authors[i] = authors[i].Trim();
-                    }
-
-                    switch (reader.GetString(2))
-                    {
-                        case "Q1":
-                            outputRanking = OutputRanking.Q1;
-                            break;
-                        case "Q2":
-                            outputRanking = OutputRanking.Q2;
-                            break;
-                        case "Q3":
-                            outputRanking = OutputRanking.Q3;
-                            break;
-                        case "Q4":
-                            outputRanking = OutputRanking.Q4;
-                            break;
-                        default:
-                            outputRanking = OutputRanking.NA;
-                            break;
-                    }
-
-                    switch (reader.GetString(5))
-                    {
-                        case "Conference":
-                            outputType = OutputType.Conference;
-                            break;
-                        case "Workshop":
-                            outputType = OutputType.Workshop;
-                            break;
-                        default:
-                            outputType = OutputType.Other;
-                            break;
-                    }
                     //You have specified an invalid column ordinal. Error
                     publications.Add(new Publication
                     {
-                        Doi = reader.GetString(0),
-                        Title = reader.GetString(1),
-                        Ranking = outputRanking,
-                        Authors = authors,
-                        Year = reader.GetInt32(4),
-                        Type = outputType,
-                        Cite = reader.GetString(6),
-                        AvailableFrom = reader.GetDateTime(7),
-                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25),
-                        DisplayName = displayName
+                        /*     DOI = reader.GetString(0),
+                             Title = reader.GetString(1),
+                             Ranking = reader.GetInt32(2),
+                             Authors = reader.GetInt32(3),          Doesnt work
+                             Year = reader.GetInt32(4),
+                             Type = reader.GetInt32(5),
+                             CiteAs = reader.GetInt32(6),
+                             AvailableFrom = reader.GetDateTime(7) */
+
+                        Doi =
+                        reader.GetString(0) + " " + //DOI
+                        reader.GetString(1) + " " + //Title
+                        reader.GetString(2) + " " + //Ranking
+                        reader.GetString(3) + " " + //Authors
+                        reader.GetString(4) + " " +//Year 
+                        reader.GetString(5) + " " + //Type
+                        reader.GetString(6) + " " + //cite_as
+                        reader.GetString(7) //Avaliable
                     });
                 }
             }
@@ -324,8 +186,10 @@ namespace AT3.DataSources
             return publications;
         }
 
-        /* Function for looking for a specific researcher depending on their 'id' 
-         */
+       /*
+        * 
+        * Function for looking for a specific researcher depending on their 'id' 
+        */
         public static Researcher ResearcherId(int id)
         {
 
@@ -338,78 +202,34 @@ namespace AT3.DataSources
                 cmd.Parameters.AddWithValue("@id", id);
                 reader = cmd.ExecuteReader();
 
-
                 if (reader.Read())
                 {
                     //Conversions
                     int? supervisor_id = reader.IsDBNull(10) ? null : (int?)reader.GetInt32(10);
                     string degree = reader.IsDBNull(9) ? "N/A " : reader.GetString(9);
                     char? Level = reader.IsDBNull(11) ? null : (char?)reader.GetChar(11);
-                    EmployeeLevel employeeLevel;
-                    String employeeLevelString;
-                    Campus campus;
 
-                    switch (Level)
+                    Researcher researcher = new Researcher
                     {
-                        case 'A':
-                            employeeLevel = EmployeeLevel.A;
-                            employeeLevelString = "Research Associate";
-                            break;
-                        case 'B':
-                            employeeLevel = EmployeeLevel.B;
-                            employeeLevelString = "Lecturer";
-                            break;
-                        case 'C':
-                            employeeLevel = EmployeeLevel.C;
-                            employeeLevelString = "Assistant Professor";
-                            break;
-                        case 'D':
-                            employeeLevel = EmployeeLevel.D;
-                            employeeLevelString = "Associate Professor";
-                            break;
-                        case 'E':
-                            employeeLevel = EmployeeLevel.E;
-                            employeeLevelString = "Professor";
-                            break;
-                        default:
-                            employeeLevel = EmployeeLevel.Student;
-                            employeeLevelString = "Student";
-                            break;
-                    }
-
-                    switch (reader.GetString(6))
-                    {
-                        case "Hobart":
-                            campus = Campus.Hobart;
-                            break;
-                        case "Launceston":
-                            campus = Campus.Launceston;
-                            break;
-                        default:
-                            campus = Campus.Cradle;
-                            break;
-                    }
-
-                    Researcher r = new Researcher
-                    {
-                        Id = reader.GetInt32(0),
-                        Name = reader.GetString(2) + " " + reader.GetString(3) + "(" + reader.GetString(4) + ")",// given_name + family_name
-                        Level = employeeLevel,
-                        Title = reader.GetString(4),
-                        Supervisor_id = supervisor_id == null ? 0 : supervisor_id.Value,
-                        Unit = reader.GetString(5),
-                        campus = campus,
-                        Email = reader.GetString(7),
-                        Photo = new Uri(reader.GetString(8)),
-                        Degree = degree,
-                        commenceWithInstitute = reader.GetDateTime(12),
-                        employeeLevelString = employeeLevelString,
-                        commenceCurrentPosition = reader.GetDateTime(13),
-                        Tenure = (int)((DateTime.Now - reader.GetDateTime(12)).TotalDays / 365.25)
+                    Name =
+                    reader.GetString(0) + " " +// ID
+                    reader.GetString(1) + " " +// Type
+                    reader.GetString(2) + " " +// given_name
+                    reader.GetString(3) + " " +// family_name
+                    reader.GetString(4) + " " +// Title
+                    reader.GetString(5) + " " +// Unit
+                    reader.GetString(6) + " " +// Campus
+                    reader.GetString(7) + " " +// Email
+                    reader.GetString(8) + " " +//Photo
+                    degree + " " +             // Degree 
+                    (supervisor_id.HasValue ? supervisor_id.Value.ToString() : "N/A " +
+                    (Level.HasValue ? Level.Value.ToString() : "N/A ")) + " " +
+                    reader.GetString(12) + " " + //utas_start
+                    reader.GetString(13) // Current_start
                     };
                     Console.WriteLine("\nResearcher Found\n");
-                    Console.WriteLine(r.Name);
-                    return r;
+                    Console.WriteLine(researcher.Name);
+                    return researcher;  
                 }
                 else
                 {
@@ -419,10 +239,9 @@ namespace AT3.DataSources
             }
             finally
             {
-
                 if (reader != null) reader.Close();
                 conn.Close();
-            }
+            } 
         }
         public static Publication FindPublication(string doi)
         {
@@ -438,69 +257,24 @@ namespace AT3.DataSources
 
                 if (reader.Read())
                 {
-                    OutputRanking outputRanking;
-                    OutputType outputType;
-                    List<String> authors = reader.GetString(3).Split(',').ToList();
-                    string displayName = reader.GetInt32(4) + " " + reader.GetString(1);
-
-                    for (int i = 0; i < authors.Count; i++)
-                    {
-                        authors[i] = authors[i].Trim();
-                    }
-
-                    switch (reader.GetString(2))
-                    {
-                        case "Q1":
-                            outputRanking = OutputRanking.Q1;
-                            break;
-                        case "Q2":
-                            outputRanking = OutputRanking.Q2;
-                            break;
-                        case "Q3":
-                            outputRanking = OutputRanking.Q3;
-                            break;
-                        case "Q4":
-                            outputRanking = OutputRanking.Q4;
-                            break;
-                        default:
-                            outputRanking = OutputRanking.NA;
-                            break;
-                    }
-
-                    switch (reader.GetString(5))
-                    {
-                        case "Conference":
-                            outputType = OutputType.Conference;
-                            break;
-                        case "Workshop":
-                            outputType = OutputType.Workshop;
-                            break;
-                        default:
-                            outputType = OutputType.Other;
-                            break;
-                    }
-                    //You have specified an invalid column ordinal. Error
+                    // Create a new Publication object and set its properties
                     Publication publication = new Publication
                     {
-                        Doi = reader.GetString(0),
-                        Title = reader.GetString(1),
-                        Ranking = outputRanking,
-                        Authors = authors,
-                        Year = reader.GetInt32(4),
-                        Type = outputType,
-                        Cite = reader.GetString(6),
-                        AvailableFrom = reader.GetDateTime(7),
-                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25),
-                        DisplayName = displayName
+                    Doi = reader.GetString(0) + " " + // 
+                    reader.GetString(1) + " " +// 
+                    reader.GetString(2) + " " +//
+                    reader.GetString(3) + " " +// 
+                    reader.GetString(4) + " " +// 
+                    reader.GetString(5) + " " +// 
+                    reader.GetString(6) + " " + reader.GetString(7)
                     };
-
                     Console.WriteLine("\nPublication Found\n");
                     Console.WriteLine(publication.Doi);
                     return publication;
                 }
                 else
                 {
-                    Console.WriteLine("\nPublication Not Found\n");
+                Console.WriteLine("\nPublication Not Found\n");
                     return null;
                 }
             }
@@ -513,249 +287,9 @@ namespace AT3.DataSources
                 conn.Close();
             }
         }
-
-        public static double Researchers3YearAvgPublicCount(string researcherName)
-        {
-            MySqlConnection conn = dbAdaptor();
-            MySqlDataReader reader = null;
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE authors LIKE CONCAT('%', @authors, '%');", conn);
-                cmd.Parameters.AddWithValue("@authors", researcherName.Split('(')[0]);
-                reader = cmd.ExecuteReader();
-
-                double count = 0;
-
-                while (reader.Read())
-                {
-
-                    if (reader.GetInt32(4) < DateTime.Now.Year - 3)
-                    {
-                        count += 1;
-                    }
-                }
-
-                return count / 3;
-            }
-            finally
-            {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-                conn.Close();
-            }
-        }
-
-        public static List<Publication> ResearchersPublications(string researcherName)
-        {
-            List<Publication> publications = new List<Publication>();
-
-            MySqlConnection conn = dbAdaptor();
-            MySqlDataReader reader = null;
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM publication WHERE authors LIKE CONCAT('%', @authors, '%');", conn);
-                cmd.Parameters.AddWithValue("@authors", researcherName.Split('(')[0]);
-                reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    OutputRanking outputRanking;
-                    OutputType outputType;
-                    List<String> authors = reader.GetString(3).Split(',').ToList();
-                    string displayName = reader.GetInt32(4) + " " + reader.GetString(1);
-
-                    for (int i = 0; i < authors.Count; i++)
-                    {
-                        authors[i] = authors[i].Trim();
-                    }
-
-                    switch (reader.GetString(2))
-                    {
-                        case "Q1":
-                            outputRanking = OutputRanking.Q1;
-                            break;
-                        case "Q2":
-                            outputRanking = OutputRanking.Q2;
-                            break;
-                        case "Q3":
-                            outputRanking = OutputRanking.Q3;
-                            break;
-                        case "Q4":
-                            outputRanking = OutputRanking.Q4;
-                            break;
-                        default:
-                            outputRanking = OutputRanking.NA;
-                            break;
-                    }
-
-                    switch (reader.GetString(5))
-                    {
-                        case "Conference":
-                            outputType = OutputType.Conference;
-                            break;
-                        case "Workshop":
-                            outputType = OutputType.Workshop;
-                            break;
-                        default:
-                            outputType = OutputType.Other;
-                            break;
-                    }
-                    //You have specified an invalid column ordinal. Error
-                    publications.Add(new Publication
-                    {
-                        Doi = reader.GetString(0),
-                        Title = reader.GetString(1),
-                        Ranking = outputRanking,
-                        Authors = authors,
-                        Year = reader.GetInt32(4),
-                        Type = outputType,
-                        Cite = reader.GetString(6),
-                        AvailableFrom = reader.GetDateTime(7),
-                        Age = (int)((DateTime.Now - reader.GetDateTime(7)).TotalDays / 365.25),
-                        DisplayName = displayName
-                    });
-                }
-
-                if (publications.Count > 0)
-                {
-                    Console.WriteLine("\nPublications for Researcher: " + researcherName + "\n");
-                    foreach (Publication publication in publications)
-                    {
-                        Console.WriteLine(publication.Title);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("\nPublications not found for Researcher: " + researcherName + "\n");
-                }
-
-                return publications;
-            }
-            finally
-            {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-                conn.Close();
-            }
-        }
-
-        // white box test for uc16
-        public static bool testResearchSelect()
-        {
-            Researcher researcher;
-            // some 
-            //researcher = ResearcherId(id);
-
-            //researcher = ResearcherId(id);
-
-            //researcher = ResearcherId(id);
-            return true;
-        }
-
-
-        public static void UC8_WhiteBoxTest()
-        {
-            Console.WriteLine("White Box Testing - UC8_User_views_ResearcherList\n");
-
-            // White Box Test 1: Verify if the researcher list is loaded correctly
-            List<Researcher> researchers = LoadAll();
-            Console.WriteLine("Test Case 1: Researchers loaded successfully");
-
-            // Test Case 2: Verify if each researcher has the required attributes populated
-            bool allAttributesPopulated = researchers.All(researcher =>
-                !string.IsNullOrEmpty(researcher.Name) &&
-               // researcher.Level != EmployeeLevel.Student &&
-             //   !string.IsNullOrEmpty(researcher.Unit) &&
-                !string.IsNullOrEmpty(researcher.Email) &&
-                researcher.Photo != null &&
-                !string.IsNullOrEmpty(researcher.Degree) &&
-                researcher.commenceWithInstitute != DateTime.MinValue &&
-                researcher.commenceCurrentPosition != DateTime.MinValue &&
-                researcher.Tenure != 0 
-              //  researcher.Funding != 0 &&
-             //   researcher.FundingCount != 0 &&
-             //   researcher.Supervisions != 0
-            );
-            Console.WriteLine("Test Case 2: All researchers have the required attributes populated");
-
-            // Display overall test results
-            if (allAttributesPopulated)
-            {
-                Console.WriteLine("\npassed");
-            }
-            else
-            {
-                Console.WriteLine("failed");
-            }
-        }
-        /* Testing reseracher selection functionality
-        * Selects both real and fake researcher then checks if returned researcher matches an expected researcher then prints result*/
-        public static bool UC16_WhiteBoxTest()
-        {
-
-            int existingResearcherId = 123463; //Real researcher Id
-            Researcher existingResearcher = ResearcherId(existingResearcherId);
-            if (existingResearcher == null || existingResearcher.Id != existingResearcherId)
-            {
-                Console.WriteLine("WhiteBoxTest failed: Existing researcher selection failed.");
-                return false;
-            }
-
-            // Test researcher selection with a fake researcher ID
-            int nonExistingResearcherId = 1000;
-            Researcher nonExistingResearcher = ResearcherId(nonExistingResearcherId);
-            if (nonExistingResearcher != null)
-            {
-                Console.WriteLine("WhiteBoxTest failed: Fake researcher selection failed.");
-                return false;
-            }
-
-            Console.WriteLine("WhiteBoxTest passed.");
-            return true;
-        }
-        public static void UC34_WhiteBoxTest()
-        {
-            // Arrange
-            List<Publication> expectedPublications = new List<Publication>
-            {
-                new Publication { Doi = "doi1", Title = "Publication 1" },
-                new Publication { Doi = "doi2", Title = "Publication 2" }
-            };
-
-            // Act
-            List<Publication> actualPublications = DbAdaptor.LoadPublication();
-
-            // Assert
-            AssertPublications(expectedPublications, actualPublications);
-        }
-
-        private static void AssertPublications(List<Publication> expected, List<Publication> actual)
-        {
-            if (expected.Count != actual.Count)
-            {
-                throw new Exception("Number of publications does not match. Expected: " + expected.Count + ", Actual: " + actual.Count);
-            }
-
-            for (int i = 0; i < expected.Count; i++)
-            {
-                if (expected[i].Doi != actual[i].Doi || expected[i].Title != actual[i].Title)
-                {
-                    throw new Exception("Publication data does not match at index " + i + ".");
-                }
-            }
-       
-    }
-        /**Add researcher function
+        /**
          * 
-         * 
+         * Add researcher function
          
             public static List<Researcher> AddResearcher(string id, string type, string given_name, string family_name,string title, string unit, string campus, string email, string photo, string degree, int? supervisorId, char? level, string utasStart,string currentStart)
             {

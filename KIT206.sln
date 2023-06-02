@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT4 WhiteBoxTesting", "AT3\AT4 WhiteBoxTesting.csproj", "{FAAF8965-F80F-4C44-814E-1B043870174F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT3", "AT3\AT3.csproj", "{FAAF8965-F80F-4C44-814E-1B043870174F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

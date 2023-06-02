@@ -1,20 +1,12 @@
-﻿using AT3.DataSources;
-using System;
-using AT3.Entity;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections.ObjectModel;
-using System.Windows.Documents;
-using System.Windows;
 
-namespace AT3.Controllers
+namespace AT3
 {
     public class ResearcherController
     {
         public List<Researcher> researchers { get; }
-        private static List<Researcher> researcher { get; }
-
-        private static List<Researcher> tempResearcherList;
 
         public ResearcherController()
         {
@@ -45,11 +37,6 @@ namespace AT3.Controllers
             return researchers.Where(re => re.Level == level).ToList();
         }
 
-        public static List<Researcher> FilterByLevel(EmployeeLevel level)
-        {
-            return researcher.Where(re => re.Level == level).ToList();
-        }
-
         //Displays the selected Researcher's details e
 
         public static void DisplayResearcherDetails(Researcher researcher)
@@ -71,7 +58,6 @@ namespace AT3.Controllers
             Console.WriteLine(researcher.performancePublication);
             Console.WriteLine(researcher.Supervisions);
             Console.WriteLine(researcher.Degree);
-
         }
 
         /*
@@ -110,72 +96,6 @@ namespace AT3.Controllers
                 from re in researchers
                 where re.Level == level
                 select re).ToList();
-        }
-
-        public static List<Researcher> FilterByType(bool isStudent, ObservableCollection<Researcher> researchers)
-        {
-            List<Researcher> tempResearcherList;
-            if (isStudent)
-            {
-                var filtered = from Researcher re in researchers
-                               where re.Level == EmployeeLevel.Student
-                               select re;
-                tempResearcherList = filtered.ToList();
-            }
-            else
-            {
-                var filtered = from Researcher re in researchers
-                               where re.Level != EmployeeLevel.Student
-                               select re;
-                tempResearcherList = filtered.ToList();
-            }
-            return tempResearcherList;
-        }
-
-        public static List<Researcher> awilterByType(EmployeeLevel level, ObservableCollection<Researcher> researchers)
-        {
-            List<Researcher> tempList;
-            if (level == EmployeeLevel.A)
-            {
-                var filtered = from Researcher re in researchers
-                               where re.Level == EmployeeLevel.A
-                               select re;
-                tempList = filtered.ToList();
-            }
-            else if (level == EmployeeLevel.B)
-            {
-                var filtered = from Researcher re in researchers
-                               where re.Level == EmployeeLevel.B
-                               select re;
-                tempList = filtered.ToList();
-            }
-            else if (level == EmployeeLevel.C)
-            {
-                var filtered = from Researcher re in researchers
-                               where re.Level == EmployeeLevel.C
-                               select re;
-                tempList = filtered.ToList();
-            }
-            else if (level == EmployeeLevel.D)
-            {
-                var filtered = from Researcher re in researchers
-                               where re.Level == EmployeeLevel.D
-                               select re;
-                tempList = filtered.ToList();
-            }
-            else
-            {
-                var filtered = from Researcher re in researchers
-                               where re.Level == EmployeeLevel.E
-                               select re;
-                tempList = filtered.ToList();
-            }
-            return tempList;
-        }
-
-        public static List<Researcher> LoadResearchers()
-        {
-            return DbAdaptor.LoadAll();
         }
     }
 }
